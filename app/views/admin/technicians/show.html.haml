@@ -1,0 +1,138 @@
+- content_for :title, "Technician"
+- content_for :page_title, "Technician: #{@technician.name}"
+   
+- content_for :notice do
+  - unless notice.blank?
+    .row
+      .col-md-7
+        ._msg.success
+          ._alert
+            .ds-icon._ic-info
+          = notice  
+.row
+  .col-md-7
+    ._medium
+      .row
+        .col-md-4
+          .input-container
+            %label._full-input
+              %span.name
+                User Photo
+            ._input-group
+              .focused   
+                .row
+                  .col-md-12
+                    ._image-holder
+                      - if @technician.avatar.url(:original).blank?
+                        %span.dg-icon.ic-gallery                          
+                      - else
+                        = image_tag @technician.avatar.url(:thumb)                               
+              
+      %hr 
+      .section
+        ._title
+          Primary Contact Information 
+        ._body               
+          .row
+            .col-md-6
+              .input-container
+                %label._full-input
+                  %span.name
+                    First Name
+                = @technician.firstname                
+
+            .col-md-6
+              .input-container                
+                %label._full-input
+                  %span.name
+                    Last Name        
+                = @technician.lastname             
+                  
+      %hr 
+      .section
+        ._title
+          Laboratory Contact Information 
+        ._body              
+          .row
+            .col-md-4
+              .input-container                    
+                %label._full-input
+                  %span.name
+                    Email address                
+                = @technician.email_primary                      
+
+            .col-md-4
+              .input-container                       
+                %label._full-input
+                  %span.name
+                    Phone number                
+                = @technician.phone_primary
+                                  
+      %hr 
+      .section
+        ._title
+          Address
+        ._body 
+          .row
+            .col-md-4
+              .input-container
+                .row
+                  .col-md-12
+                    %label._full-input
+                      %span.name
+                        Street Address 1
+                    = @technician.address_street_1
+                        
+              .input-container
+                .row
+                  .col-md-12
+                    %label._full-input
+                      %span.name
+                        Street Address 2 (opt.)
+                    = @technician.address_street_2
+                      
+            .col-md-4                                   
+              .input-container
+                .row
+                  .col-md-12
+                    %label._full-input
+                      %span.name
+                        Town
+                    = @technician.address_municipality
+                      
+              .input-container
+                .row
+                  .col-md-12
+                    %label._full-input
+                      %span.name
+                        Parish
+                    = @technician.address_territory  
+                      
+            .col-md-4                                      
+              .input-container
+                .row
+                  .col-md-12
+                    %label._full-input
+                      %span.name
+                        Country
+                    = @technician.address_country   
+                    
+      %hr
+      .section
+        ._title
+          App Settings
+        ._body              
+          .input-container              
+            %label._full-input
+              %span.name Active    
+            = @technician.active?? 'yes':'no'
+          .input-container              
+            %label._full-input
+              %span.name Admin    
+            = @technician.admin?? 'yes':'no'            
+          
+      %hr
+      .row      
+        .col-md-4.col-md-offset-8
+          = link_to 'Edit', edit_admin_technician_path(@technician), :class => "action _default pull-right"
+

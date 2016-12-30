@@ -1,0 +1,79 @@
+- content_for :page_title do
+  Messages
+  
+- content_for :client_class, '_showing-full-width _hide-header'
+                  
+._medium  
+  = form_tag :physician_messages, :method => :get do 
+    ._expandable
+      .row._parent       
+        .col-md-1
+          ._input-title
+            Search
+        .col-md-3
+          .input-container
+            %label._search
+              = search_field_tag :term, @term, :autocomplete => :off
+        .col-md-2
+          %div
+            %a.action._control{:data => {'id' => 'search-options'}}
+              Filter
+
+      .row
+        .col-md-5
+          .option-ui
+            ._child{:data => {'id' => 'search-options'}}
+              ._wrap
+                .input-container
+                  %label._date-input
+                    %span.name
+                      Status
+                    = select_tag :status, options_for_select([['Un-resolved', ''], ['Resolved', 'resolved']], @status)
+                    
+                .action._large._normalize._focus{:tabindex => '0'}     
+                  Search Now
+                  = submit_tag 'Search Now' 
+                  
+  .row
+    .col-md-12
+      - if @conversations.present?
+        %table.table
+          %thead
+            %tr
+              %th
+              %th
+              %th
+              %th
+
+          %tbody
+            - @conversations.each do |conversation|             
+              %tr.clickable{"data-target" => "#dg-messages", "data-toggle" => "modal", "data-url" => physician_message_path(conversation, type: conversation.class.name.parameterize)}
+                %td
+                  %span{:title => "#{conversation.messages.first.sender.name} - #{conversation.agency.phone_primary}", :data => {'tooltip' => ''}}
+                    #{conversation.agency.name}
+                %td 
+                  #{conversation.class.name.parameterize == 'diagnostic'?'RQ #':'RX #'}#{conversation.identifier}             
+                %td #{conversation.patient.name}        
+                %td.text-right
+                  %a._notification{:class => (conversation.message_status.dasherize rescue '')}
+                    %span._msg-count._circle
+                      = conversation.messages.length
+                    %span #{'Message'.pluralize(conversation.messages.length)}
+                    
+      - else           
+        ._prompt-wrap
+          ._prompt 
+            - unless @term.blank?
+              No messages found with 
+              %span
+                #{@term}.             
+            - else             
+              No outstanding messages.                    
+                     
+                    
+  .row
+    .col-md-12
+      .pull-right
+        = paginate(@conversations)
+                  
+              

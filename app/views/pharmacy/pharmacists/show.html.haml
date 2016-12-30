@@ -1,0 +1,162 @@
+- content_for :title, "Pharmacist"
+- content_for :page_title, "Pharmacist: #{@pharmacist.name}"
+
+- content_for :page_header do
+  .col-md-12.col-sm-12.col-xs-12
+    = render 'partials/pharmacist_profile_inline', patient: @pharmacist
+          
+- content_for :notice do
+  - unless notice.blank?
+    .row
+      .col-md-12
+        ._msg.success
+          ._alert
+            .ds-icon._ic-info
+          = notice  
+          
+.row
+  .col-md-12    
+    ._medium
+      .row
+        .col-md-7
+          .row
+            .col-md-2
+              .input-container
+                %label._full-input
+                  %span.name
+                    User Photo
+                ._input-group
+                  .focused   
+                    .row
+                      .col-md-12
+                        ._image-holder
+                          - if @pharmacist.avatar.url(:original).blank?
+                            %span.dg-icon.ic-gallery                          
+                          - else
+                            = image_tag @pharmacist.avatar.url(:thumb)   
+            .col-md-10
+              = link_to 'Edit', edit_pharmacy_pharmacist_path(@pharmacist), :class => "action _large pull-right"                            
+                  
+          %hr 
+          .section
+            ._title
+              Personal Information
+            ._body             
+              .row
+                .col-md-5
+                  .input-container
+                    %label._full-input
+                      %span.name
+                        First Name
+                    = @pharmacist.firstname
+                .col-md-2
+                  .input-container                
+                    %label._full-input
+                      %span.name
+                        M.I.        
+                    = @pharmacist.middlename
+                .col-md-5
+                  .input-container                
+                    %label._full-input
+                      %span.name
+                        Last Name        
+                    = @pharmacist.lastname
+                    
+              .row                        
+                .col-md-6
+                  .input-container                
+                    %label._full-input
+                      %span.name
+                        Gender
+                    = @pharmacist.gender_name
+                    
+              .row
+                .col-md-6
+                  .input-container          
+                    %label._full-input
+                      %span.name
+                        Registration Number
+                    = @pharmacist.reg_num   
+
+          %hr 
+          .section
+            ._title
+              Address
+            ._body 
+              .row
+                .col-md-4
+                  .input-container
+                    .row
+                      .col-md-12
+                        %label._full-input
+                          %span.name
+                            Street Address 1
+                        = @pharmacist.address_street_1
+                  .input-container
+                    .row
+                      .col-md-12
+                        %label._full-input
+                          %span.name
+                            Street Address 2 
+                        = @pharmacist.address_street_2
+                .col-md-4                                   
+                  .input-container
+                    .row
+                      .col-md-12
+                        %label._full-input
+                          %span.name
+                            Town
+                        = @pharmacist.address_municipality
+                  .input-container
+                    .row
+                      .col-md-12
+                        %label._full-input
+                          %span.name
+                            Parish
+                        = @pharmacist.address_territory
+                        
+                .col-md-4                                       
+                  .input-container
+                    .row
+                      .col-md-12
+                        %label._full-input
+                          %span.name
+                            Country
+                        = @pharmacist.address_country
+                          
+          %hr
+          .section
+            ._title 
+              Contact Information
+            ._body      
+              .input-container
+                .row
+                  .col-md-6
+                    %label._full-input
+                      %span.name
+                        Email
+                    = @pharmacist.email_primary
+
+
+                      
+              .input-container
+                .row
+                  .col-md-6
+                    %label._full-input
+                      %span.name
+                        Phone
+                    = @pharmacist.phone_primary                            
+
+                      
+          %hr
+          .section
+            ._title
+              App Settings
+            ._body              
+              .input-container              
+                %label._full-input
+                  %span.name Active    
+                = @pharmacist.active?? 'yes':'no'         
+
+
+

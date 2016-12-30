@@ -1,0 +1,23 @@
+.profile-info.section                          
+  .row
+    .col-md-6.col-sm-12
+      ._section
+        %span.name #{@technician.name}
+        
+    .col-md-6.col-sm-12
+      ._body
+        .row
+          .col-md-6.col-xs-12
+            %strong Address    
+            - unless @technician.address_street_1.blank?               
+              %div.ellipsis
+                #{@technician.address_street_1}
+            %div.ellipsis
+              #{@technician.address_territory}#{(', ' unless @technician.address_country.blank?)} #{@technician.address_country}
+          .col-md-6.col-xs-12.has-border
+            %strong Contact    
+            - unless @technician.phone_primary.blank?             
+              %div.ellipsis
+                #{@technician.phone_primary}
+            %div.ellipsis
+              #{@technician.email_primary}

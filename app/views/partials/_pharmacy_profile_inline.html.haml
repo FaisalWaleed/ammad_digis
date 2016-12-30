@@ -1,0 +1,23 @@
+.profile-info.section                          
+  .row
+    .col-md-6.col-sm-12
+      ._section
+        %span.name #{@pharmacy.name}
+        
+    .col-md-6.col-sm-12
+      ._body
+        .row
+          .col-md-6.col-xs-12
+            %strong Address  
+            - unless @pharmacy.address_street_1.blank?
+              %div.ellipsis
+                #{@pharmacy.address_street_1}
+            %div.ellipsis
+              #{@pharmacy.address_territory}#{(', ' unless @pharmacy.address_country.blank?)} #{@pharmacy.address_country}
+          .col-md-6.col-xs-12.has-border
+            %strong Contact     
+            - unless @pharmacy.phone_primary.blank?            
+              %div.ellipsis
+                #{@pharmacy.phone_primary}
+            %div.ellipsis
+              #{@pharmacy.email_primary}

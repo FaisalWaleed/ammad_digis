@@ -1,0 +1,43 @@
+- content_for :page_title do
+  Account recovery
+  
+.row
+  .col-xs-12.col-xs-offset-0.col-sm-8.col-sm-offset-2.col-md-8.col-md-offset-2.col-lg-8.col-lg-offset-2
+    .row
+      .col-xs-12.col-xs-offset-0.col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3.col-lg-6.col-lg-offset-3
+        ._medium
+          = form_tag pharmacist_password_resets_path, :autocomplete => "off" do   
+            .section
+              ._section
+                ._logo
+                  .row
+                    .col-md-6.col-md-offset-3.col-sm-6.col-sm-offset-3.col-xs-6.col-xs-offset-3
+                      = image_tag 'logo_lg.svg', "data-svg-fallback" => image_path('logo_lg.png')
+                      
+                - unless flash.blank?
+                  = render 'partials/notice_flash'  
+                  
+              ._body
+                .input-container   
+                  .row
+                    .col-md-12
+                      %p
+                        Please enter your email address below and then press "Reset Password".                  
+                  .row
+                    .col-md-12
+                      %label._full-input
+                        = email_field_tag :email, "", :class => 'allow-submit required', :placeholder => "Email", :data => {'ready' => '_reset-password'}
+                        .form-helper
+                          Your email is required. This isn't a valid email.                       
+                .input-container   
+                  .row
+                    .col-md-12
+                      .action._huge._fill._normalize._submit._reset-password
+                        Reset Password                    
+                        = submit_tag ""
+              .row
+                .col-md-12
+                  %p._small
+                    Cancel and return to
+                    #{link_to "Log in", pharmacist_login_path, :class => "_link"}.              
+       

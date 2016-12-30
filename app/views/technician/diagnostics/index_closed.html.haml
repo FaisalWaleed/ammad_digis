@@ -1,0 +1,50 @@
+- content_for :page_title do
+  Sent Test Results
+  
+- content_for :client_class, '_showing-full-width _hide-header'
+          
+._medium  
+  = form_tag :technician_closed_diagnostics, :method => :get do 
+    ._expandable
+      .row._parent       
+        .col-md-1
+          ._input-title
+            Search
+        .col-md-3
+          .input-container
+            %label._search
+              = search_field_tag :term, @term, :autocomplete => :off
+  .row
+    .col-md-12 
+      - unless @diagnostics.blank?    
+        %table.table
+          %thead
+            %tr
+              %th 
+              %th 
+              %th 
+              %th
+              %th
+              %th.hidden
+              %th.hidden
+
+          %tbody
+            = render :partial => 'index', :collection => @diagnostics, :as => :diagnostic
+                
+
+      - else
+        ._prompt-wrap
+          ._prompt 
+            - unless @term.blank?
+              No sent test results found with 
+              %span
+                #{@term}.             
+            - else             
+              No test results have been sent. 
+              
+              
+  .row
+    .col-md-12
+      .pull-right
+        = paginate(@diagnostics)              
+              

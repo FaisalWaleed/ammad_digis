@@ -1,0 +1,53 @@
+#client-sidebar-bg
+#client-sidebar
+  .row
+    .col-md-12
+      ._menu-wrap._logo
+        .client-image
+          .image-holder
+            = link_to image_tag( 'logo.png'), pharmacist_root_path
+      
+      ._menu-wrap._menu-links
+        .menu-group
+          %ul
+            %li
+              = active_link_to pharmacist_prescriptions_path, :active => [['pharmacist/prescriptions', 'pharmacist'], ['index']] do
+                %span.menu-label Prescriptions
+            %li
+              = active_link_to pharmacist_partial_prescriptions_path, :active => [['pharmacist/prescriptions', 'pharmacist'], ['partials']] do
+                %span.menu-label Partials / Repeat
+                -#%span._msg-count._circle                     
+            %li
+              = active_link_to pharmacist_archived_prescriptions_path, :active => [['pharmacist/prescriptions', 'pharmacist'], ['archived']] do
+                %span.menu-label Archived 
+                -#%span._msg-count._circle             
+                
+      ._menu-wrap._right
+        .notification-group
+          %ul   
+            %li
+              %a.get-prescription
+                %span._notification
+                  Add a RX                  
+            %li
+              %a{:href => "javascript:void"}
+                %span._show-notifications._msg-count._notification{"data-notification" => "messages"} #{current_pharmacist.unread_messages_count_for(current_pharmacy)}  
+            %li._seperator._left
+            %li.list-item
+              %a._show-more._stage
+                ._profile-image
+                  = image_tag current_pharmacist.avatar.url(:small)
+                %span.menu-label 
+                  #{current_pharmacist.name rescue 'Pharmacist'}
+              %div._more
+                %ul               
+                  %li
+                    = link_to pharmacist_logout_path do
+                      %span.menu-label Logout       
+                    
+#notice-container  
+  ._notice-wrap
+    ._ui
+      - unless flash.blank?             
+        = render 'partials/notice_flash'   
+      = yield :notice_list         

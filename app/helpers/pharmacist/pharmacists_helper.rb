@@ -1,0 +1,2 @@
+module Pharmacist::PharmacistsHelper
+end

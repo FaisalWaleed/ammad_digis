@@ -1,0 +1,75 @@
+- content_for :page_title do
+  Results
+  
+- content_for :client_class, '_showing-full-width _hide-header'
+          
+._medium  
+  = form_tag :physician_test_results, :method => :get do 
+    ._expandable
+      .row._parent       
+        .col-md-1
+          ._input-title
+            Search
+        .col-md-3
+          .input-container
+            %label._search
+              = search_field_tag :term, @term, :autocomplete => :off
+        .col-md-2
+          %div
+            %a.action._control{:data => {'id' => 'search-options'}}
+              Filter
+
+      .row
+        .col-md-5
+          .option-ui
+            ._child{:data => {'id' => 'search-options'}}
+              ._wrap
+                .input-container
+                  %label._date-input._full-input
+                    %span.name
+                      Status
+                    = select_tag :status, options_for_select([['All', ''], ['Reviewed', 'reviewed'], ['Archived', 'archived']], @status)
+                    
+                .action._large._normalize._focus{:tabindex => '0'}     
+                  Search Now
+                  = submit_tag 'Search Now' 
+    
+  .row
+    .col-md-12
+      - unless @test_results.blank?
+        %table.table
+          %thead
+            %tr
+              %th
+              %th 
+              %th
+              %th      
+              
+          %tbody
+            - @test_results.each do |result|
+              %tr
+                %td
+                  = link_to "REQ ##{result.identifier}", physician_test_result_path(result)
+                %td= result.patient.name
+                %td= result.created_at.strftime '%m/%d/%Y'
+                %td
+                  %strong
+                    = result.laboratory.name rescue ''
+
+                    
+                    
+      - else
+        ._prompt-wrap
+          ._prompt 
+            - unless @term.blank?
+              No results found with 
+              %span
+                #{@term}.             
+            - else             
+              No new results have been created.
+              
+
+  .row
+    .col-md-12
+      .pull-right
+        = paginate(@test_results)

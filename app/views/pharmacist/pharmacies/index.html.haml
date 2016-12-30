@@ -1,0 +1,46 @@
+- content_for :page_title do
+  My Pharmacies
+  
+- content_for :client_class, '_showing-full-width _hide-header'
+          
+._medium  
+  ._expandable
+    .row._parent       
+      .col-md-5
+        .input-container
+          %label._full-input
+            = select_tag :current_pharmacy, options_for_select(current_pharmacist.pharmacies.map { |p| [p.name, p.id] }, :selected => session[:current_pharmacy]), :include_blank => false  
+      .col-md-7
+        = link_to 'add new', new_pharmacist_pharmacy_path, :class => "action _large _focus pull-right"
+  
+  .row
+    .col-md-12
+      - unless @pharmacies.blank?
+        %table.table
+          %thead
+            %tr
+              %th Name
+              %th Email primary
+              %th Phone primary
+              %th Reg num   
+
+          %tbody
+            - @pharmacies.each do |pharmacy|
+              %tr
+                %td
+                  = link_to pharmacy.name, pharmacist_pharmacy_path(pharmacy)
+                %td= pharmacy.email_primary
+                %td= pharmacy.phone_primary
+                %td
+                  = pharmacy.reg_num
+      - else
+        ._prompt-wrap
+          ._prompt 
+            - unless @term.blank?
+              No pharmcies found with 
+              %span
+                #{@term}.             
+            - else             
+              No pharmacies have been created.                  
+              
+

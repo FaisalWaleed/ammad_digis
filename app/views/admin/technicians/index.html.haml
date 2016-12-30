@@ -1,0 +1,55 @@
+- content_for :title, "Technician"
+- content_for :page_title, "Technician"
+
+- content_for :page_action do
+  = link_to 'New Technician', new_admin_technician_path, :class => 'action _default _focus'
+  
+- content_for :filter do  
+  .col-md-4
+    = form_tag :admin_technicians, :method => :get do
+      .input-container
+        %label._full-input
+          = text_field_tag :term, @term, :class => "", :placeholder => "Search Technicians"
+          .form-helper.text-right
+            press Enter 
+  
+._medium
+  .row
+    .col-md-12
+      %table.table
+        %thead
+          %tr
+            %th 
+              %span.title Name
+            %th
+              %span.title Lab              
+            %th
+              %span.title Email
+            %th
+              %span.title Phone              
+            %th
+              %span.title Reg #
+            %th
+              %span.title Active             
+            %th.text-right
+              %span.title Actions 
+
+        %tbody
+          - @technicians.each do |technician|
+            %tr
+              %td
+                = link_to technician.location.name, edit_admin_technician_path(technician)
+              %td
+              %td= technician.email_primary
+              %td= technician.phone_primary
+              %td= technician.reg_num
+              %td
+                - unless technician.active? 
+                  NO
+                - else
+                  YES
+              %td.text-right
+                = link_to '', admin_technician_path(technician), :method => :delete, :data => { :confirm => 'delete' }, :class => 'ds-icon _ic-delete'
+
+= paginate @technicians
+

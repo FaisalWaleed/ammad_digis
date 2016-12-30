@@ -1,0 +1,50 @@
+.page-title
+  .title_left
+    %h3
+      = "#{current_patient.firstname} #{current_patient.lastname}"
+      Dashboard
+.clearfix
+.row
+  .row.tile_count
+    .bs-example{"data-example-id" => "simple-jumbotron"}
+      .jumbotron
+        %h1 Hello, world!
+        %p This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.
+    .col-md-3.col-sm-3.col-xs-6.tile_stats_count
+      %span.count_top
+        %i.fa.fa-money
+        Doctors Permission
+      .count 10
+      %span.count_bottom
+        %i.green 4%
+        From last Week
+    .col-md-3.col-sm-3.col-xs-6.tile_stats_count
+      %span.count_top
+        %i.fa.fa-clock-o
+        Prescriptions
+      .count 15
+      %span.count_bottom
+        %i.green
+          %i.fa.fa-sort-asc>
+          3%
+        From last Week
+    .col-md-3.col-sm-3.col-xs-6.tile_stats_count
+      %span.count_top
+        %i.fa.fa-user
+        Lab Reports
+      .count 20
+      %span.count_bottom
+        %i.red
+          %i.fa.fa-sort-desc>
+          12%
+        From last Week
+    .col-md-3.col-sm-3.col-xs-6.tile_stats_count
+      %span.count_top
+        %i.fa.fa-clock-o
+        Support Request
+      .count 100
+      %span.count_bottom
+        %i.red
+          %i.fa.fa-sort-desc>
+          12%
+        From last Week

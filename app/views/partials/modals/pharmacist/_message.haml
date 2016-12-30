@@ -1,0 +1,77 @@
+#_prescript-message._dg-chat
+  - if @dispense_order
+    ._header
+      ._controls                      
+        %a.back.dg-icon._ic-back{:tabindex => "-1"}   
+      ._title
+        RX# #{@dispense_order.prescription.identifier} MESSAGES 
+      - unless @dispense_order.message_status.humanize.blank?
+        ._sub-title
+          %label
+            ._badge._stateful{:class => (@dispense_order.message_status.dasherize rescue '')}
+              = @dispense_order.message_status.humanize              
+            
+    = form_for :message, :url => pharmacist_prescription_send_message_path(@dispense_order), :html => { :id => 'prescription_message' } do |f|
+      ._contents  
+        .row
+          .col-md-12
+            .profile-info.section
+              %h3
+                %span.bold-tx To:
+                = @dispense_order.physician.name
+              %p
+                %span.bold-txt Contact:
+                = @dispense_order.physician.phone_primary 
+            %hr                                
+                          
+        .row
+          .col-md-12
+            .section
+              ._body 
+                ._notes
+                  %ul
+                    - @dispense_order.messages.order('created_at ASC').each do |message|
+                      %li
+                        .row
+                          .col-md-8
+                            ._meta._title #{message.sender.firstname} #{message.sender.lastname}                        
+                          .col-md-4.text-right
+                            ._meta #{message.created_at.strftime '%m/%d/%Y - %I:%M %p'}
+                        %p._content._small
+                          = message.body   
+                    
+        - if @dispense_order.commentable?
+          .hide-if-resolved  
+            .row                          
+              .col-md-12
+                .section                        
+                  ._body
+                    .input-container
+                      .row
+                        .col-md-12
+                          %label._full-input
+                            = f.text_area :body, :class => 'required ds-radio', :placeholder => "Enter your response here."
+                    .input-container                          
+                      .row
+                        .col-md-12
+                          %label.checkbox.pull-right
+                            - unless @dispense_order.messages.present?
+                              %span.name Needs a response?
+                              = f.check_box :require_response, :class => 'ds-radio'
+                              
+                            - else
+                              %span.name Mark as resolved?  
+                              = f.check_box :mark_as_resolved, :class => 'ds-radio'
+      
+      - if @dispense_order.commentable?
+        .hide-if-resolved  
+          ._footer
+            .row
+              .col-md-12
+                %a#send_message.action._large._submit.pr{:tabindex => '0'} SEND
+
+      :javascript
+        (function($) {
+          $('._dg-chat ._body ._notes').scrollTop($('._dg-chat ._body ._notes')[0].scrollHeight);
+        })(jQuery);      
+  

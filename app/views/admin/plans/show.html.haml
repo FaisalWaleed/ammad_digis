@@ -1,0 +1,155 @@
+- content_for :title, "Plan"
+- content_for :page_title, "Plan: #{@plan.name}"
+   
+- content_for :notice do
+  - unless notice.blank?
+    .row
+      .col-md-6
+        ._msg.success
+          ._alert
+            .ds-icon._ic-info
+          = notice  
+.row
+  .col-md-6
+    ._medium
+      .section
+        ._body             
+          .row
+            .col-md-12
+              .input-container
+                %label._full-input
+                  %span.name
+                    Name
+                = @plan.name
+          .row
+            .col-md-12
+              .input-container
+                %label._full-input
+                  %span.name
+                    Description
+                = @plan.description
+                          
+      %hr 
+      .section
+        ._title
+          Pricing
+        ._body 
+          .row
+            .col-md-12
+              .input-container
+                %label._full-input
+                  %span.name
+                    Price
+                = @plan.price
+
+      %hr 
+      .section
+        ._title
+          Subscription
+        ._body                 
+          .row
+            .col-md-4
+              .input-container
+                %label._full-input
+                  %span.name
+                    Total                
+                = @plan.subscription_period_amount                   
+                = @plan.subscription_period_unit
+        
+            .col-md-4
+              .input-container
+                %label._full-input
+                  %span.name
+                    Grace   
+                = @plan.grace_period_amount          
+                = @plan.grace_period_unit
+                  
+            .col-md-4
+              .input-container
+                %label._full-input
+                  %span.name
+                    Trial   
+                = @plan.trial_period_amount               
+                = @plan.trial_period_unit
+        
+      %hr 
+      .section
+        ._title
+          Limits
+        ._body                 
+          .row
+            .col-md-6
+              .input-container
+                %label._full-input
+                  %span.name
+                    Subscriber Limit      
+                = @plan.subscriber_limit
+            .col-md-6
+              .input-container
+                %label._full-input
+                  %span.name
+                    Organization Limit 
+                = @plan.organization_limit
+                  
+      %hr 
+      .section
+        ._title
+          Available to
+        ._body              
+          .row
+            .col-md-12
+              .input-container              
+                %label
+                  %span.name Physicians:  
+                #{@plan.available_to_physician?? 'yes':'no'}
+                
+              .input-container                      
+                %label                  
+                  %span.name Pharmacists:  
+                #{@plan.available_to_pharmacy?? 'yes':'no'}      
+                
+              .input-container                
+                %label
+                  %span.name Technician:  
+                #{@plan.available_to_technician?? 'yes':'no'}
+                  
+              .input-container                    
+                %label
+                  %span.name Patient: 
+                #{@plan.available_to_patient?? 'yes':'no'}
+                                   
+        
+      %hr 
+      .section
+        ._title
+          App Settings
+        ._body              
+          .row
+            .col-md-12
+              .input-container              
+                %label
+                  %span.name Renewal notification:
+                #{@plan.renew_notify?? 'yes':'no'} 
+                  
+              .input-container              
+                %label
+                  %span.name Auto renew:                   
+                #{@plan.auto_renew?? 'yes':'no'}
+                  
+                  
+              .input-container              
+                %label
+                  %span.name Published:                 
+                #{@plan.published?? 'yes':'no'}
+                                  
+          
+              .input-container              
+                %label
+                  %span.name Default:      
+                #{@plan.default?? 'yes':'no'}
+    
+
+      %hr
+      .row      
+        .col-md-4.col-md-offset-8
+          = link_to 'Edit', edit_admin_plan_path(@plan), :class => "action _default pull-right"

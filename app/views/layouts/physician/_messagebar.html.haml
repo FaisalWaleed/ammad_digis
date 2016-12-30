@@ -1,0 +1,72 @@
+#client-notification-list
+  .client-infobar-bg
+  .client-infobar
+    .section
+      ._body
+        .tab-content
+          %h3 
+            Notifications    
+                  
+          #notification_list
+            ._prompt-wrap
+              ._prompt 
+                No new notifications.            
+          = link_to 'See all messages', physician_messages_path, :class => 'bold-txt _link'
+          
+          %hr
+          %h3 Diagnostics  
+          .list-ui
+            - if current_physician.diagnostics.unreviewed.blank?
+              ._prompt-wrap
+                ._prompt               
+                  No diagnostics.
+              
+            - current_physician.diagnostics.unreviewed.order(created_at: :desc).last(3).each do |d|
+              ._list-item
+                ._item-content
+                  ._identifier    
+                    ._title
+                      = link_to "REQ ##{d.identifier}", physician_diagnostic_path(d)
+                    ._date
+                      = d.created_at.strftime('%m/%d/%Y') rescue nil
+                    - if d.ready_for_review?
+                      = link_to 'Results', physician_test_result_path(d), :class => "_link bold-txt grn-txt pr"                                             
+                  ._expandable
+                    - TestTag.with_diagnostic(d).each do |tag|
+                      .list-item._parent
+                        ._drug-name                        
+                          %strong= tag.name
+                          %div
+                            = tag.test_requests.map{ |tr| tr.name }.join(", ") 
+                            
+                  ._expandable
+                    - d.profiled_testings.group_by(&:test_profile).each do |profile, testings|
+                      .list-item._parent
+                        ._drug-name                        
+                          %strong= profile.name
+                          %div
+                            = testings.map{ |t| t.test.name }.join(", ") 
+                            
+          - unless current_physician.diagnostics.unreviewed.blank?
+            = link_to "See all diagnostic requests", physician_diagnostics_path(), :class => "bold-txt _link"          
+          
+#notification-message-template.hidden
+  .list-item{:data => { "target" => "#dg-messages", "toggle" => "modal", "url" => "{{url}}" }}
+    .row.inline-list
+      .col-md-2
+        ._profile-image
+          {{avatar}}
+      .col-md-10
+        ._title
+          %strong
+            {{agency}}            
+          ._meta.pull-right
+            {{date}}
+        ._content._small
+          {{message}}
+    
+:javascript
+  window.appIcon = "#{image_path 'logo_lg.png'}";
+          
+                  
+                      

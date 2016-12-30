@@ -1,0 +1,41 @@
+- content_for :page_title do
+  Patients
+  
+- content_for :client_class, '_showing-full-width _hide-header'
+          
+._medium      
+  .row
+    .col-md-12
+      - unless @pharmacists.blank?
+        %table.table
+          %thead
+            %tr
+              %th
+              %th Name
+              %th Email primary
+              %th Phone primary
+              %th Reg num   
+
+          %tbody
+            - @pharmacists.each do |pharmacist|
+              %tr
+                %td
+                  ._thumb
+                    = image_tag pharmacist.avatar.url(:small)
+                %td
+                  = link_to pharmacist.name, pharmacist_pharmacist_path(pharmacist)
+                %td= pharmacist.email_primary
+                %td= pharmacist.phone_primary
+                %td
+                  = pharmacist.reg_num
+      - else
+        ._prompt-wrap
+          ._prompt 
+            - unless @term.blank?
+              No pharmacists found with 
+              %span
+                #{@term}.             
+            - else             
+              No pharmacists have been created.                  
+              
+

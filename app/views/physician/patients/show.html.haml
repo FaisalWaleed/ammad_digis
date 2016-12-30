@@ -1,0 +1,26 @@
+- content_for :page_title do
+  #{@patient.name}
+  
+- content_for :client_class, '_showing-info-bar'
+    
+- content_for :page_header do
+  .col-md-12.col-sm-12.col-xs-12
+    = render 'partials/patient_profile_inline', patient: @patient
+
+.row
+  .col-md-12
+    ._medium
+      ._button-ui.text-center    
+        = link_to 'New Prescription', new_physician_patient_prescription_path(@patient), :class => "_button _large"
+        = link_to 'New Lab Request', new_physician_patient_diagnostic_path(@patient, anchor: "lab"), :class => "_button _large"
+        = link_to 'New Radiology', new_physician_patient_diagnostic_path(@patient, anchor: "radiology"), :class => "_button _large"
+        
+                                
+- content_for :append_body do
+  = render 'layouts/physician/infobar', patient: @patient
+
+                        
+
+    
+
+

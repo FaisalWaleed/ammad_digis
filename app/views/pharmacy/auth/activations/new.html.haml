@@ -1,0 +1,36 @@
+- content_for :page_title do
+  Resend Activation Link
+
+.row
+  .col-lg-6.col-lg-offset-3.col-md-6.col-md-offset-3
+    .col-lg-8.col-lg-offset-2.col-md-8.col-md-offset-2.col-sm-12.col-sm-offset-0.col-xs-12.col-xs-offset-0
+      ._medium
+        .section
+          ._section
+            ._logo
+              .row
+                .col-md-6.col-md-offset-3.col-sm-6.col-sm-offset-3.col-xs-6.col-xs-offset-3
+                  = image_tag 'logo_lg.svg', "data-svg-fallback" => image_path('logo_lg.png')
+            %h1.title
+              Did not receive your activation link?                  
+            - unless flash.blank?
+              = render 'partials/notice_flash'   
+          ._body.text-center
+            .input-container   
+              .row
+                .col-md-12
+                  ._prompt-wrap
+                    ._prompt
+                      Resend activation link to 
+                      %strong
+                        #{ @pharmacy.email_primary }                
+
+            .input-container   
+              .row
+                .col-md-12
+                  = button_to 'Resend', pharmacy_resend_activation_path(@pharmacy), :class => "action _huge  _fill _focus"
+                    
+                    
+
+
+  

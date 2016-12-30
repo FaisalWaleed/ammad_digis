@@ -1,0 +1,11 @@
+
+- content_for :page_title do
+  Dashboard
+  
+
+
+- unless notice.blank?          
+  .row
+    .col-md-12
+      #notice._msg
+        = notice  

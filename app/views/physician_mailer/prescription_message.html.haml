@@ -1,0 +1,35 @@
+%tr{:style => "line-height: 1.3;"}
+  %td{:style => "line-height: 1.3;"}
+    %div{:style => "font-size: 14px;line-height: 1.3;"}        
+      %p{:style => "margin-top: 10px;line-height: 1.3;"}
+        Hello
+        %span{:style => "text-transform: capitalize"} #{ @physician.name },
+        
+      %p{:style => "line-height: 1.3; margin-bottom: 15px;"}
+        A new message has been received from 
+        %strong #{@pharmacist.name}
+        at 
+        %strong #{@pharmacy.name}
+        re: Prescription 
+        %strong #??????
+        on
+        %strong #{@message.created_at.strftime '%m/%d/%Y'}
+        at
+        %strong #{@message.created_at.strftime '%H:%M %p'}.
+        
+      %div{:style => "line-height: 1.2; margin-bottom: 15px; color: #525252; font-size: 15px; padding: 10px; background-color: #ecf8ff;"} 
+        %p{:style => "line-height: 1.2; margin-top: 0; margin-bottom: 5px;"}
+          #{@message.body}
+        %p{:style => "line-height: 1.2; margin-top: 0; margin-bottom: 0; font-size: 13px;"}
+          %strong
+            #{@pharmacist.name}
+          %br
+          Pharmacist, #{@pharmacy.name}                              
+        
+      %p{:style => "line-height: 1.3; margin-bottom: 15px;"}    
+        To reply to this message, login to your account here and click the message icon in the top right of your screen.
+        
+      %p{:style => "line-height: 1.3;"}
+        %strong Digiscriptsja.com          
+
+

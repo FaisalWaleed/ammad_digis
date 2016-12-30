@@ -1,0 +1,126 @@
+- content_for :client_class, '_page-medium' 
+
+- content_for :page_title do
+  #{current_pharmacy.name}
+
+- content_for :page_header do
+  .col-md-12
+    #chd
+      %h2.active-channel-name My Account  
+      
+.row
+  .col-md-12
+    ._medium
+      .row
+        .col-md-12
+          .profile-info.section
+            ._section
+              .row
+                .col-md-12
+                  %h3.pl #{current_pharmacy.name}
+                  - unless current_pharmacy.reg_num.blank?
+                    %span.pr
+                      %strong Reg #
+                      #{current_pharmacy.reg_num}
+                  
+            ._body
+              .row
+                .col-md-12
+                  .focused
+                    .row
+                      .col-md-6.col-xs-12
+                        %strong Address                      
+                        - unless current_pharmacy.address_street_1.blank?                      
+                          %div.ellipsis
+                            #{current_pharmacy.address_street_1}
+                        %div.ellipsis
+                          #{current_pharmacy.address_territory}#{(', ' unless current_pharmacy.address_country.blank?)} #{current_pharmacy.address_country}
+                      .col-md-6.col-xs-12.has-border
+                        %strong Contact                           
+                        - unless current_pharmacy.phone_primary.blank?
+                          %div.ellipsis
+                            #{current_pharmacy.phone_primary}
+                        %div.ellipsis
+                          #{current_pharmacy.email_primary}
+
+      .row
+        .col-md-12
+          .section
+            ._body
+              .inline-list
+                %ul
+                  %li
+                    %h3.title My Subscription
+                  - if @active_subscription
+                    %li              
+                      .bump
+                        #{ @active_subscription.subscription_period } - 
+                        expires #{ @active_subscription.expire_at.to_date.strftime('%d/%m/%Y') }                   
+                  - if @active_subscription.blank? || @active_subscription.due_for_renewal?      
+                    %li
+                      = link_to "#{ current_pharmacy.returning?? 'Renew' : 'Subscribe' } Now", new_pharmacy_subscription_path(plan_id: (@active_subscription.plan.id rescue nil)), :class => "action _focus _small"  
+                    
+              - if @active_card.present?      
+                .inline-list
+                  %ul
+                    %li
+                      Active card ending with #{@active_card.last4} - 
+                      #{link_to 'Manage Cards', pharmacy_cards_path, :class => '_link bold-txt'}
+                      - if @active_subscription
+                        %br
+                        %small
+                          Your next payment will be automatically processed on #{ @active_subscription.expire_at.to_date.strftime('%d/%m/%Y') }.  
+                        
+              - else
+                .inline-list
+                  %ul
+                    %li
+                      %p 
+                        You do not have a credit card attached to your account. Would you like to
+                        = link_to 'Add a Card?', new_pharmacy_card_path, :class => "_link bold-txt"                                                
+          
+      .row
+        .col-md-12
+          .section
+            %h3.title Payments   
+            - unless current_pharmacy.payments.blank?
+              ._body
+                %table.table.bordered
+                  %thead
+                    %tr
+                      %th Date
+                      %th Comments
+                      %th.text-right  Amount
+                      %th                 
+                  %tbody
+                    - current_pharmacy.payments.order(paid_at: :desc).each do |payment|
+                      %tr
+                        %td= payment.paid_at.strftime("%d/%m/%Y")                    
+                        %td
+                          %span{:style => "text-transform: capitalize;"}
+                            = payment.merchant_response_status
+                        %td.text-right 
+                          = number_to_currency payment.amount
+                        %td.text-right 
+                          = link_to pharmacy_payment_path(payment), :class => "_link", :title => "Print", :target => "_blank" do
+                            %span.dg-icon._ic-print
+                .text-right                                       
+                  = link_to "View all payments", pharmacy_payments_path, :class => "_link"
+            - else
+              ._prompt-wrap
+                ._prompt 
+                  You haven't purchased any subscriptions yet.                  
+                
+              
+          - if @active_subscription && @active_subscription.merchant_id.present?
+            .section
+              %h3.title Deactivate account           
+              ._body
+                %p
+                  If you no longer need your account on 
+                  %strong
+                    Digiscript,
+                  you can #{link_to "deactivate your account", pharmacy_subscription_path(@active_subscription), :method => :delete, :data => { :confirm => 'cancel'}, :class => "bold-txt _link red-txt"}.                         
+       
+                     
+ 

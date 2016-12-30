@@ -1,0 +1,2 @@
+module TestCenter::SubscriptionsHelper
+end

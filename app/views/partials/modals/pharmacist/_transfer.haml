@@ -1,0 +1,117 @@
+- if @transfer
+  ._header
+    ._controls                      
+      %a.back.dg-icon._ic-back{:tabindex => "-1"}   
+    ._title
+      RX #
+      #{ @transfer.prescription.identifier } : Transfer RX       
+    ._sub-title
+      = "#{@transfer.prescription.created_at.strftime("%b")} #{ @transfer.prescription.created_at.day.ordinalize } #{@transfer.prescription.created_at.strftime("%Y")}"     
+
+  ._contents
+    .row
+      .col-md-12
+        .profile-info.section
+          ._section
+            .row
+              .col-md-12
+                %h3= @transfer.patient.name
+                %span
+                  %span.bump._gender= @transfer.patient.gender_abbrev
+                  %span._age
+                    = @transfer.patient.age.to_i
+                    Y/O
+                
+          ._body
+            .row
+              .col-md-12
+                .focused
+                  .row
+                    .col-md-6.col-xs-12
+                      %strong Address 
+                      %div.ellipsis._double
+                        #{ @transfer.patient.address_street_1 }
+                    .col-md-6.col-xs-12.has-border
+                      %strong Contact 
+                      - unless @transfer.patient.phone_primary.blank?                    
+                        %div.ellipsis
+                          #{@transfer.patient.phone_primary}
+                      %div.ellipsis
+                        #{@transfer.patient.email_primary}
+    
+    .row
+      .col-md-12
+        .section
+          ._body             
+            .list-ui.transfer_prescription
+              ._expandable              
+                - @transfer.dispensables.each_with_index do | d,index |                          
+                  .list-item._parent{ :class => d.status }      
+                    ._item-line                  
+                      ._drug-name                        
+                        - unless d.prescript.free_flow?
+                          #{d.prescript.strfrx}
+                          - unless d.prescript.free_flow_details.blank?
+                            \- #{d.prescript.free_flow_details}                                  
+                        - else 
+                          #{d.prescript.free_flow_details} 
+                      ._content                                                
+                        - unless d.prescript.repeating?
+                          ._drug-repeat
+                            %strong Repeat: 
+                            #{d.prescript.repeats_remaining}    
+                            
+                        - unless d.prescript.note.blank?       
+                          ._notes
+                            ._title
+                              Physician's notes
+                            %p._small
+                              #{d.prescript.note rescue nil}    
+                            
+                        - if d.disbursements.length.nonzero?
+                          ._title
+                            #{ d.fully_filled? ? 'Previously Disbursed':'Disbursing'}
+                        - d.disbursements.each do |db|
+                          %p._small
+                            = db.annotation
+                            %br
+                            %span.italic-txt.bold-txt
+                              #{db.created_at.strftime('%d/%m/%Y')} by #{db.pharmacist.name} (#{ db.pharmacy.name })                          
+                                                          
+                          
+          - if @transfer.prescription.allow_generic?
+            %p 
+              ** Generic approved                          
+                        
+   
+  = form_for @transfer, :url => pharmacist_create_prescription_transfer_path do |f|
+    ._contents
+      .row
+        .col-md-9
+          .section
+            ._section
+              .row
+                .col-md-12
+                  %h3 Where would you like to send this RX?
+            ._body
+              .input-container
+                .row
+                  .col-md-12
+                    - @transfer.dispensables.each do |d|
+                      = hidden_field_tag 'dispense_order[dispensable_ids][]', d.id
+                    
+                    %label._search
+                      = f.text_field :pharmacy_name, data: { url: api_v1_search_pharmacies_path, autocomplete: true, 'item-template' => '#pharmacy_ac_item' }, :placeholder => "Enter pharmacy's name", :class => 'required ds-autocomplete'                      
+                      = f.hidden_field :pharmacy_id
+                      = f.hidden_field :prescription_id
+          
+    ._footer
+      .row
+        .col-md-12
+          %a#transfer_prescription.action._large._submit.pr{:tabindex => '0'} TRANSFER
+      
+- else
+  ._contents
+    .row
+      .col-md-12
+        %h3 Loading...

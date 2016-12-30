@@ -1,0 +1,45 @@
+#client-sidebar-bg
+#client-sidebar
+  .row
+    .col-md-12
+      ._menu-wrap._logo
+        .client-image
+          .image-holder
+            = link_to image_tag( 'logo.png'), test_center_root_path
+      
+      ._menu-wrap._menu-links
+        .menu-group
+          %ul    
+            %li
+              = active_link_to test_center_technicians_path, :active => [['test-center/technicians', 'test-center'], ['index']] do
+                %span.menu-label Locations               
+            %li
+              = active_link_to test_center_profile_edit_path do
+                %span.menu-label Profile                
+                                                
+                
+      ._menu-wrap._right
+        .notification-group
+          %ul
+            %li._seperator._left                  
+            %li.list-item
+              %a._show-more._stage
+                ._profile-image
+                  = image_tag current_test_center.avatar.url(:small)
+                %span.menu-label 
+                  #{current_test_center.name rescue 'Technician'}
+              %div._more
+                %ul            
+                  %li
+                    = active_link_to test_center_subscriptions_path do
+                      %span.menu-label Subscription                         
+                  %li
+                    = link_to test_center_logout_path do
+                      %span.menu-label Logout       
+                    
+#notice-container  
+  ._notice-wrap
+    ._ui
+      - unless flash.blank?             
+        = render 'partials/notice_flash'   
+      = yield :notice_list         

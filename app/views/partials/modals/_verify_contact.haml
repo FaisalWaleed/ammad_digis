@@ -1,0 +1,66 @@
+#verify-alert-template
+  .alert-ui#ds-verify
+    .alert-dialog
+      ._wrap       
+        %form#patient-contact{ :data => { "verification" => api_v1_patient_verify_path, "code" => api_v1_patient_send_code_path, "patient-id" => patient.id }}
+          ._header
+            ._title    
+              Verify Information: #{patient.name}    
+            ._controls
+              %span.dg-icon._ic-close{:tabindex => "-1"}              
+          ._content
+            ._notice-wrap
+              ._ui
+                .row
+                  .col-md-12
+                    ._msg.notice
+                            
+            .section
+              ._body.code-ui 
+                .input-container._ds-field{:data => {'type' => 'email'}}
+                  .row
+                    .col-md-9
+                      %label._full-input{:class => ('_has-action' if patient.email_verified?)}
+                        %input{:type => "email", :name => "patient[email_primary]", :placeholder => "Email", :value => patient.email_primary, :data => {'bind' => 'ptemail'}, :class => ' required _ds-validate _binded ds-radio'} 
+                        .form-helper
+                          Email address is invalid.                           
+                        ._control
+                          %a._badge._ds-pristine
+                            edit                        
+                    .col-md-3
+                      %a.action._fill._code
+                        Send Code  
+                      %label._full-input
+                        %input._code-field.required._ds-dirty{:type => "text", :placeholder => "Code", :name => "patient_email_code", :data => {"type" => "email", "verified" => "#{patient.email_verified?}"}}  
+                        .form-helper
+                          Invalid code.                     
+                          
+                .input-container._ds-field{:data => {'type' => 'phone'}}
+                  .row
+                    .col-md-9
+                      %label._full-input{:class => ('_has-action' if patient.phone_verified?)}                        
+                        %input{:type => "text", :name => "patient[phone_primary]", :placeholder => "Telephone", :value => patient.phone_primary, :data => {'bind' => 'ptphone'}, :class => '_tel required _ds-validate ds-radio _binded'} 
+                        .form-helper
+                          Phone number is invalid.                        
+                        ._control
+                          %a._badge._ds-pristine
+                            edit
+                    .col-md-3
+                      %a.action._fill._code
+                        Send Code 
+                      %label._full-input
+                        %input._code-field.required._ds-dirty{:type => "text", :placeholder => "Code", :name => "patient_phone_code", :data => {"type" => "phone", "verified" => "#{patient.phone_verified?}"}}   
+                        .form-helper
+                          Invalid code.         
+                          
+          ._footer
+            ._controls
+              %ul
+                %li
+                  %span.action._large._fill._submit._ok
+                    Verify & Save
+                %li
+                  %span.action._cancel
+                    Cancel
+
+    .alert-bg            

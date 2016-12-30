@@ -1,0 +1,77 @@
+#_tech-message._dg-chat
+  - if @diagnostic
+    ._header
+      ._controls                      
+        %a.back.dg-icon._ic-back{:tabindex => "-1"}   
+      ._title
+        RX# #{@diagnostic.identifier} MESSAGES 
+      - unless @diagnostic.message_status.humanize.blank?
+        ._sub-title
+          %label
+            ._badge._stateful{:class => (@diagnostic.message_status.dasherize rescue '')}
+              = @diagnostic.message_status.humanize        
+            
+    = form_for :message, :url => technician_diagnostic_send_message_path(@diagnostic), :html => { :id => 'diagnostic_message' } do |f|
+      ._contents  
+        .row
+          .col-md-12
+            .profile-info.section
+              %h3
+                %span.bold-tx To:
+                = @diagnostic.physician.name
+              %p
+                %span.bold-txt Contact:
+                = @diagnostic.physician.phone_primary 
+            %hr                                
+                          
+        .row
+          .col-md-12
+            .section
+              ._body 
+                ._notes
+                  %ul
+                    - @diagnostic.messages.order('created_at ASC').each do |message|
+                      %li
+                        .row
+                          .col-md-8
+                            ._meta._title #{message.sender.firstname} #{message.sender.lastname}                        
+                          .col-md-4.text-right
+                            ._meta #{message.created_at.strftime '%m/%d/%Y - %I:%M %p'}
+                        %p._content._small
+                          = message.body 
+                          
+        - if @diagnostic.commentable?                    
+          .hide-if-resolved  
+            .row                          
+              .col-md-12
+                .section                        
+                  ._body
+                    .input-container
+                      .row
+                        .col-md-12
+                          %label._full-input
+                            = f.text_area :body, :class => 'required ds-radio', :placeholder => "Enter your response here."
+                    .input-container                          
+                      .row
+                        .col-md-12
+                          %label.checkbox.pull-right
+                            - unless @diagnostic.messages.present?
+                              %span.name Needs a response?
+                              = f.check_box :require_response
+                              
+                            - else
+                              %span.name Mark as resolved?  
+                              = f.check_box :mark_as_resolved, :class => 'ds-radio'
+      
+      - if @diagnostic.commentable?      
+        .hide-if-resolved  
+          ._footer
+            .row
+              .col-md-12
+                %a#send_message.action._large._submit.pr{:tabindex => '0'} SEND
+
+      :javascript
+        (function($) {
+          $('._dg-chat ._body ._notes').scrollTop($('._dg-chat ._body ._notes')[0].scrollHeight);
+        })(jQuery);      
+  

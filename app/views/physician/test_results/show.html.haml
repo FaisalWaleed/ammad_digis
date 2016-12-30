@@ -1,0 +1,162 @@
+- content_for :page_title do
+  Results - #{@test_result.identifier}
+
+= render :partial => "layouts/physician/menu"         
+
+- content_for :client_class do
+  #{' _diagnostic-page '}
+
+#client-body
+  #client-header                    
+    #content-heading
+      .content-wrap
+        ._medium
+          .row
+            .col-md-12
+              #{yield :page_header}
+              #chd
+                = render 'partials/patient_profile_inline', patient: @test_result.patient    
+
+  #client-content
+    .content-wrap     
+      ._medium                           
+        .preview-ui
+          .row
+            .col-md-4  
+              ._field-wrap
+                ._header
+                  %h3
+                    Results received from:
+                ._inner-content                    
+                  ._content  
+                    ._review
+                      ._block
+                        %span._title
+                          Created on
+                        %span
+                          = @test_result.created_at.strftime '%m/%d/%Y %I:%M %p'                    
+                      ._block
+                        %span._title
+                          #{@test_result.test_center_type}
+                        ._contact-info
+                          %div #{@test_result.laboratory.name}
+                          %div #{@test_result.laboratory.address_street_1}
+                          %div #{@test_result.laboratory.address_street_2}
+                          %div #{@test_result.laboratory.address_municipality}
+                          %div #{@test_result.laboratory.address_country}
+                          %div #{@test_result.laboratory.phone_primary}, #{@test_result.laboratory.email_primary}    
+                          
+                        
+            .col-md-8
+              .row
+                .col-md-12
+                  ._header
+                    ._wrap 
+                      %span._identifier REQUEST ##{@test_result.identifier}
+                      %span._items
+                        #{pluralize(@test_result.total_tests,'test')}                        
+                      - unless @test_result.laboratory.present?                      
+                        %span._edit
+                          = link_to "", edit_physician_diagnostic_path(@test_result), :class => 'dg-icon _ic-edit'
+                            
+              .row
+                .col-md-12
+                  .section
+                    ._body
+                      .list-ui   
+                        ._list-item
+                          ._item-content
+                            ._expandable
+                              ._wrap
+                                ._parent
+                                  - unless @test_result.testings.blank?
+                                    .list-ui
+                                      ._expandable             
+                                        - @tags.each do |tag|
+                                          .list-item._parent
+                                            ._drug-name                        
+                                              %strong= tag.name
+                                              %div
+                                                = tag.test_requests.map{ |tr| tr.name }.join(", ") 
+                                                
+                                  - unless @test_result.profiled_testings.blank?
+                                    .list-ui
+                                      ._expandable             
+                                        - @profiles.each do |profile, testings|
+                                          .list-item._parent
+                                            ._drug-name                        
+                                              %strong= profile.name
+                                              %div
+                                                = testings.map{ |t| t.test.name }.join(", ") 
+              
+                    - unless @test_result.notes.blank?
+                      ._body
+                        .name 
+                          %strong Notes
+                        #{@test_result.notes} 
+                          
+                          
+              .row.inline-list
+                .col-md-9
+                  ._header
+                    ._wrap 
+                      %span._identifier RESULTS FOR ##{@test_result.identifier}      
+                - if @test_result.messages.length > 0
+                  .col-md-3
+                    %a{ :class => "#{(@test_result.message_status.dasherize rescue '')} _notification _block clickable", :data => {"target" => "#dg-messages", "toggle" => "modal", "url" => physician_message_path(@test_result, type: :diagnostic)} } 
+                      %span._msg-count._circle
+                        = @test_result.messages.length
+                      %span #{'Message'.pluralize(@test_result.messages.length)}    
+                    
+              .row
+                .col-md-12
+                  .section
+                    ._body
+                      - if @test_result.attachments.present?
+                        %table.table._minimal
+                          %thead
+                            %tr
+                              %th
+                                File
+                              %th
+                                Date uploaded
+                          %tbody
+                            - @test_result.attachments.each do |attachment|
+                              %tr
+                                %td
+                                  #{link_to (attachment.title.nil? || attachment.title == '' ? "#{@test_result.patient.name} - #{attachment.file_file_name}" : attachment.title), attachment.file.url, :target => '_blank'} 
+                                %td
+                                  #{attachment.file_updated_at.strftime '%m/%d/%Y %I:%M %p'}
+                                    
+                      - else  
+                        ._prompt-wrap
+                          ._prompt.required  
+                            No files have been submitted.  
+      
+      .row
+        .col-md-12.text-right 
+          .inline-list
+            %ul
+              - if @test_result.reviewed?
+                %li
+                  %strong
+                    %span.dg-icon._ic-clipboard          
+                    %span Reviewed              
+              - else
+                %li
+                  = link_to review_physician_test_result_path(@test_result), :class => "_link bold-txt" do
+                    %span.dg-icon._ic-clipboard          
+                    %span Mark as Reviewed
+              %li
+                |
+              - if @test_result.archived_for_physician? 
+                %li
+                  %strong
+                    %span.dg-icon._ic-archive         
+                    %span Archived              
+              - else
+                %li          
+                  = link_to archive_physician_test_result_path(@test_result), :class => "_link bold-txt" do
+                    %span.dg-icon._ic-archive
+                    %span Send to Archive                    
+

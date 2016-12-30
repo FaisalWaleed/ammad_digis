@@ -1,0 +1,74 @@
+#edit-account-template
+  #dg-edit-account.modal._persistent.fade
+    .modal-dialog
+      .modal-content
+        ._controls
+          .container-fluid
+            .row
+              .col-xs-12
+                %h3.title Edit My Account
+                %a.close{"aria-label" => "close", "data-dismiss" => "modal"}
+        ._contents
+          .container-fluid
+            .row
+              .col-xs-12
+                .section
+                  ._head
+                    %h3.title Personal
+                  ._body
+                    .input-container
+                      .row
+                        .col-md-4
+                          %input{:placeholder => "First Name", :type => "text"}/
+                        .col-md-4
+                          %input{:placeholder => "Middle Name", :type => "text"}/
+                        .col-md-4
+                          %input{:placeholder => "Last Name", :type => "text"}/
+                    .input-container
+                      .row
+                        .col-md-3
+                          %label._select
+                            %select
+                              %option Male
+                              %option Female
+                        .col-md-4
+                          %input{:placeholder => "DOB", :type => "text"}/
+                .section
+                  ._head
+                    %h3.title Address
+                  ._body
+                    .input-container
+                      .row
+                        .col-md-4
+                          %input{:placeholder => "Address 1", :type => "text"}/
+                        .col-md-4
+                          %input{:placeholder => "Address 2", :type => "text"}/
+                        .col-md-4
+                          %input{:placeholder => "City", :type => "text"}/
+                    .input-container
+                      .row
+                        .col-md-3
+                          %label._select
+                            %select
+                              %option Parish
+                              %option St. Elizabeth
+                        .col-md-4
+                          %input{:placeholder => "GPS Coordinates", :type => "text"}/
+                .section
+                  ._head
+                    %h3.title Contact Info
+                  ._body
+                    .input-container
+                      .row
+                        .col-md-4
+                          %input{:placeholder => "Email", :type => "text"}/
+                        .col-md-4
+                          %input{:placeholder => "Mobile", :type => "text"}/
+                        .col-md-4
+                          %input{:placeholder => "Office", :type => "text"}/
+                    .input-container
+                      .row
+                        .col-md-4
+                          %input{:placeholder => "Alt Phone", :type => "text"}/
+                ._footer
+                  %a.action._large._focus SAVE

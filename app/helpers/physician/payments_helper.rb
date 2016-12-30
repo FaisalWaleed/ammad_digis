@@ -1,0 +1,2 @@
+module Physician::PaymentsHelper
+end

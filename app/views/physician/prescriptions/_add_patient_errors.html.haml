@@ -1,0 +1,6 @@
+- if @patient && @patient.errors.any?
+  %h2= "#{pluralize(@patient.errors.count, "error")} prohibited this patient from being saved:"
+  %ul
+    - @patient.errors.full_messages.each do |msg|
+      %li= msg
+

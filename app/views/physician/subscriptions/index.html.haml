@@ -1,0 +1,126 @@
+- content_for :client_class, '_page-medium' 
+
+- content_for :page_title do
+  #{current_physician.name}
+
+- content_for :page_header do
+  .col-md-12
+    #chd
+      %h2.active-channel-name My Account  
+      
+.row
+  .col-md-12
+    ._medium
+      .row
+        .col-md-12
+          .profile-info.section
+            ._section
+              .row
+                .col-md-12
+                  %h3.pl Dr. #{current_physician.name}
+                  - unless current_physician.reg_num.blank?
+                    %span.pr
+                      %strong Reg #
+                      #{current_physician.reg_num}
+                  
+            ._body
+              .row
+                .col-md-12
+                  .focused
+                    .row
+                      .col-md-6.col-xs-12
+                        %strong Address                      
+                        - unless current_physician.address_street_1.blank?                      
+                          %div.ellipsis
+                            #{current_physician.address_street_1}
+                        %div.ellipsis
+                          #{current_physician.address_territory}#{(', ' unless current_physician.address_country.blank?)} #{current_physician.address_country}
+                      .col-md-6.col-xs-12.has-border
+                        %strong Contact                           
+                        - unless current_physician.phone_primary.blank?
+                          %div.ellipsis
+                            #{current_physician.phone_primary}
+                        %div.ellipsis
+                          #{current_physician.email_primary}
+
+      .row
+        .col-md-12
+          .section
+            ._body
+              .inline-list
+                %ul
+                  %li
+                    %h3.title My Subscription
+                  - if @active_subscription
+                    %li              
+                      .bump
+                        #{ @active_subscription.subscription_period } - 
+                        expires #{ @active_subscription.expire_at.to_date.strftime('%d/%m/%Y') }                   
+                  - if @active_subscription.blank? || @active_subscription.due_for_renewal?      
+                    %li
+                      = link_to "#{ current_physician.returning?? 'Renew' : 'Subscribe' } Now", new_physician_subscription_path(plan_id: (@active_subscription.plan.id rescue nil)), :class => "action _focus _small"  
+                    
+              - if @active_card.present? && @active_subscription.present?   
+                .inline-list
+                  %ul
+                    %li
+                      Active card ending with #{@active_card.last4} - 
+                      #{link_to 'Manage Cards', physician_cards_path, :class => '_link bold-txt'} 
+                      - if @active_subscription
+                        %br
+                        %small
+                          Your next payment will be automatically processed on #{ @active_subscription.expire_at.to_date.strftime('%d/%m/%Y') }.  
+                      
+              - else
+                .inline-list
+                  %ul
+                    %li
+                      %p 
+                        You do not have a credit card attached to your account. Would you like to
+                        = link_to 'Add a Card?', new_physician_card_path, :class => "_link bold-txt"                                                
+          
+      .row
+        .col-md-12
+          .section
+            %h3.title Payments   
+            - unless current_physician.payments.blank?
+              ._body
+                %table.table.bordered
+                  %thead
+                    %tr
+                      %th Date
+                      %th Comments
+                      %th.text-right  Amount
+                      %th                 
+                  %tbody
+                    - current_physician.payments.order(paid_at: :desc).each do |payment|
+                      %tr
+                        %td= payment.paid_at.strftime("%d/%m/%Y")                    
+                        %td
+                          %span{:style => "text-transform: capitalize;"}
+                            = payment.merchant_response_status
+                        %td.text-right 
+                          = number_to_currency payment.amount
+                        %td.text-right 
+                          = link_to physician_payment_path(payment), :class => "_link", :title => "Print", :target => "_blank" do
+                            %span.dg-icon._ic-print
+                .text-right                                       
+                  = link_to "View all payments", physician_payments_path, :class => "_link"
+            - else
+              ._prompt-wrap
+                ._prompt 
+                  You haven't purchased any subscriptions yet.                  
+                
+              
+          - if @active_subscription && @active_subscription.merchant_id.present?
+            .section
+              %h3.title Deactivate account           
+              ._body
+                %p
+                  If you no longer need your account on 
+                  %strong
+                    Digiscript,
+                  you can #{link_to "deactivate your account", physician_subscription_path(@active_subscription), :method => :delete, :data => { :confirm => 'cancel'}, :class => "bold-txt _link red-txt"}.                         
+       
+                     
+ 

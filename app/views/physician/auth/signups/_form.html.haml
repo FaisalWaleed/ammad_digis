@@ -1,0 +1,88 @@
+= form_for @physician, :url => physician_register_path do |f|
+  .section
+    ._section
+      ._logo
+        .row
+          .col-md-6.col-md-offset-3.col-sm-6.col-sm-offset-3.col-xs-6.col-xs-offset-3
+            = image_tag 'logo_lg.svg', "data-svg-fallback" => image_path('logo_lg.png')
+      %h1.title Create a Physician Account
+      %p._small
+        Sign up in 30 seconds. No credit card required. 
+        
+      - unless flash.blank?
+        = render 'partials/notice_flash'        
+
+    ._body                         
+      .row
+        .col-md-12
+          .input-container  
+            %label._full-input
+              = f.text_field :firstname, :class => "required", :autofocus => "autofocus", :placeholder => "First name"
+              .form-helper
+                Your first name is required                           
+
+      .row
+        .col-md-12
+          .input-container            
+            %label._full-input
+              = f.text_field :lastname, :class => "required", :placeholder => "Last name" 
+              .form-helper
+                Your last name is required.                                       
+                
+      .row
+        .col-md-12                                                      
+          .input-container     
+            %label._full-input
+              = f.telephone_field :phone_primary, :class => "required _tel", :placeholder => "Phone"
+              .form-helper
+                Your phone number is required.
+                
+      .row
+        .col-md-12
+          .input-container 
+            %label._full-input               
+              = f.email_field :email_primary, :placeholder => 'Email', :class => "_cloud required"
+              .form-helper
+                Your email is required. This isn't a valid email.                 
+                                
+      .row
+        .col-md-12                                                      
+          .input-container  
+            %label._full-input                      
+              = f.password_field :password, :placeholder => 'Password', :class => "_password required" 
+              .form-helper
+                Please create a password                         
+              
+      .row
+        .col-md-12                                                      
+          .input-container  
+            %label._full-input             
+              = f.password_field :password_confirmation, :placeholder => 'Confirm Password', :class => "_confirm-password required" 
+              .form-helper
+                Password must match the one typed before.                    
+
+      .input-container
+        .row
+          .col-md-12
+            %label.checkbox
+              %input.inline.required{'type' => 'checkbox'}                
+              %span.name 
+                I agree to the Digiscript 
+                %a._link{:href => "#"}
+                  terms of service.     
+              .form-helper
+                You must read and accept the terms of service.      
+                
+      .row
+        .col-md-12
+          .action._huge._fill._normalize._submit{:tabindex => 0}
+            Create my account
+            = submit_tag ''   
+  .row
+    .col-md-12
+      %p._small
+        Already have a Physician's account? 
+        #{link_to "Log in here", physician_login_path, :class => "_link"}.              
+                                
+
+

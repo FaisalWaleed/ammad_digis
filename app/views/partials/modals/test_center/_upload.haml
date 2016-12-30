@@ -1,0 +1,50 @@
+#tech-upload-template._template._remove
+  #_tech-results
+    - if @diagnostic
+      ._header
+        ._controls                      
+          %a.back.dg-icon._ic-back{:tabindex => "-1", :data => {"prev" => "#tech-diagnostic-template"}}   
+        ._title
+          #{@diagnostic.identifier} Upload Results         
+              
+      ._contents  
+        .row
+          .col-md-12
+            .profile-info.section
+              %h3
+                %span.bold-tx To:
+                = @diagnostic.physician.name
+              %p
+                %span.bold-txt Contact:
+                = @diagnostic.physician.phone_primary 
+            %hr                                
+                          
+        .row
+          .col-md-12
+            .section
+              ._body 
+                = form_for [:upload, :technician, @diagnostic], :html => { :class => '_form-ui' } do |f| 
+                  ._feedback-ui
+                    %p
+                      Please wait while your results are being saved. 
+                  ._form-fields
+                    ._file-data-ui
+                      ._main-field._file-upload-ui
+                        %h3.dz-message
+                          Drag files here or click to add a file.
+                        ._new-result
+                        %input{:type => 'file', :class => "_file-field hidden", :name => 'diagnostic[attachments_attributes]'}
+                      .list-ui#attachments
+                        = f.fields_for :attachments do |att|                  
+                          = render 'attachment_fields', f: att
+                
+        
+      .hide-if-uploading  
+        ._footer
+          .row
+            .col-md-12
+              %a#tech_upload_result.action._large._submit._focus.pr{:tabindex => '0'} UPLOAD
+              %a#tech_send_result.action._large._focus.pr._nav{"data-target" => "#tech-review-template", :tabindex => '0'} SEND            
+
+#tech-review-template._template._remove
+  = render :partial => 'partials/modals/technician/review'

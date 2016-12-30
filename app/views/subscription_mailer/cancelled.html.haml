@@ -1,0 +1,14 @@
+%tr{:style => "line-height: 1.3;"}
+  %td{:style => "line-height: 1.3;"}
+    %div{:style => "font-size: 14px;line-height: 1.3;"}
+      %p{:style => "margin-top: 10px;line-height: 1.3;"}
+        Hello
+        %span{:style => "text-transform: capitalize"} #{ @subscriber.name },
+        
+      %p{:style => "line-height: 1.3; margin-bottom: 15px;"}
+        Your subscription has been cancelled, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Your account will remain active until #{ @subscription.expire_at.strftime('%A %B %e, %Y') }.
+        
+      %p{:style => "line-height: 1.3;"}
+        %strong Digiscriptsja.com   
+
+ 

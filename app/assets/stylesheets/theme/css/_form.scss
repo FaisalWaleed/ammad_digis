@@ -1,0 +1,780 @@
+body {
+  &.dg {
+    #client-content {
+      form {
+        .section {
+          ._section {
+            padding-bottom: 0.5rem;
+          }
+          ._body {
+            margin-bottom: 1.5rem;
+            .row {
+              margin-right: -5px;
+              margin-left: -5px;
+              .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+                padding-left: 5px;
+                padding-right: 5px;
+              }
+            }
+          }
+        }
+        .section._with-border {
+          ._body {
+            padding-bottom: 1rem;
+          }
+          > ._body {
+            padding-bottom: 3rem;
+            border-bottom: 1px $border-color solid;
+          }
+          margin-bottom: 2rem;
+        }
+      }
+    }
+    .inline-list {
+      &.subscr-group {
+        .action {
+          font-size: 0.9rem;
+        }
+      }
+    }
+    .code-ui {
+      ._code {
+        &+ label {
+            display: none;             
+        }
+        &._ready {
+          display: none !important;
+          &+ label {
+            display: block;
+          }
+        }
+      }
+    }
+    ._file-upload-ui {
+    }
+    ._file-data-ui {
+      padding-bottom: 15px;
+      ._main-field {   
+        border: $border-width $grey3 solid;
+        background-color: $grey3;
+        min-height: 120px;
+        padding: 10px;
+        margin-bottom: 10px;
+        @include border-radius(4px);
+        h3 {
+          font-size: 20px;
+          text-align: center;
+        }
+      }
+    }
+    .radio, .checkbox {
+      margin-top: 0;
+      margin-bottom: 0;
+      &._align {
+        margin-top: 1.3rem;
+        @include screen(768px){
+          margin-top: 0;
+        }
+      }
+      span {
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 0.875rem;
+        margin-right: 5px;
+        &.name {
+          margin-bottom: 0;
+          @include screen(768px){
+            display: block;
+            overflow: hidden;
+            line-height: 1.1rem;
+          }          
+        }
+      }
+      @include screen(768px){
+        clear: both;
+        margin-bottom: 0.9rem;
+      }
+      label {
+        padding-left: 15px; 
+      }
+      &.inline {
+        input {
+          display: inline-block;  
+          vertical-align: middle;
+        }
+        span {
+          display: inline-block;
+          vertical-align: middle;
+        }
+      }
+    }
+    ._ui-toggle {
+      label {
+        input {
+          display: none;
+          visibility: hidden;
+        }        
+      }
+      ._handle {
+        &._stackable {
+          margin-bottom: 0.8rem;
+        }
+        &._checked {
+          .action {
+            background-color: $complete;
+            color: $white;
+            &:hover {
+              border-color: darken($complete,10%);
+            }
+          }
+        }  
+      }
+    }
+    label {
+      vertical-align: top;
+      margin-bottom: 0;
+      cursor: pointer; 
+      &._labelled {    
+        position: relative;
+        ._fxv {
+          position: absolute;
+          top: $border-width;
+          right: $border-width;
+          bottom: $border-width;
+          padding-left: 5px;
+          padding-right: 5px;
+          padding-top: $input-padding;
+          padding-bottom: $input-padding;
+          background-color: $white;
+          font-size: $input-font-size;
+          line-height: $input-line-height;        
+          color: $input-color;
+        }
+      }
+      &._inline {
+        input {
+          width: 55%;
+          min-width: 0;
+          margin-right: 5%;
+          display: inline-block; 
+          vertical-align: middle;
+        }
+        span {
+          display: inline-block; 
+          vertical-align: middle;
+          @extend .ellipsis;
+        }
+      }
+      .checkbox {
+        &.inline {
+          display: inline-block;
+          vertical-align: middle;
+          label {
+            padding-left: 0; 
+          }
+        }
+      }
+      &.checkbox, &.radio, &.checkbox-inline, &.radio-inline {
+        line-height: 2.1rem;
+        padding-left: 0;
+        margin-top: 0;
+        margin-right: 10px;
+        .name {
+          margin-bottom: 0;
+          vertical-align: middle;
+        }
+        + .radio-inline, + .checkbox-inline {
+          margin-left: 0;
+        }
+      }      
+      @extend .normal-txt;
+      ._inline {
+        margin-left: 10px; 
+      }
+      &._date-input {
+        .name {
+          display: block;
+        }
+        select, ._select-ui {
+          display: inline-block !important;
+          margin-right: 0.3rem;
+          width: auto;
+          min-width: auto;
+        }
+      }
+      &._full-input {
+        width: 100%;
+        input, textarea {
+          width: 100%; 
+        }
+        &._table_date_filter {
+          input {
+            width: 48%;
+            display: inline-block;
+            min-width: 48%;
+            &:first-of-type {
+              margin-right: 4%;
+            }
+          }
+        }
+        ._control {
+          display: none;
+        }
+        &._has-action {
+          position: relative;
+          ._control {
+            display: block;
+            position: absolute;
+            top: $input-padding;
+            right: $input-padding-lr;
+          }
+        }         
+      }
+      .form-helper {
+        max-height: 0;
+        margin-top: -0.3rem;
+        overflow: hidden;
+        line-height: 1.1;
+        position: absolute;        
+      }                 
+    } 
+    .focused {
+      margin-bottom: 1.5rem;
+      /*.input-container {
+        margin-bottom: 0 !important;
+      }
+      ._body {
+        margin-bottom: 0 !important;
+      }*/
+    }
+    ._file-input {
+      width: 100%;
+      @extend .action;
+      @extend .action._cancel;
+      @extend .action._normalize; 
+      input {
+        cursor: pointer;
+      }
+    } 
+    ._input-group {
+      display: table;
+      .focused {
+        display: block;
+      }
+      ._file-input {
+        margin-top: 0.9rem;        
+      }
+    }
+    ._image-holder {
+      position: relative;
+      min-width: 96px;
+      max-width: 100%;
+      &._image-missing {
+        border: 2px $black dashed;
+      }
+      img, canvas {
+        width: 100%;
+        /*max-width: 128px*/;
+      }
+      ._placeholder {
+        font-size: 6rem;
+      }
+      span {     
+        background-color: $grey;        
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        height: 100%;
+        left: 0;
+        right: 0;        
+        color: $white;
+        font-size: 45px;
+        line-height: 96px;
+        font-weight: 900;
+        text-align: center;
+      }
+      img, span, canvas {
+        @include border-radius(4px);
+      }
+    }     
+    .radio input[type="radio"],
+    .radio-inline input[type="radio"],
+    .checkbox input[type="checkbox"],
+    .checkbox-inline input[type="checkbox"] {
+      position: relative;
+      border: $border-width solid $border-color;
+      background: transparent;
+      color: $border-color;
+      clear: none;
+      cursor: pointer;
+      display: inline-block;
+      height: 20px;
+      margin: 0;
+      outline: 0;
+      padding: 0;
+      text-align: center;
+      vertical-align: middle;
+      width: 20px;
+      min-width: 20px;
+      -webkit-appearance: none;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      @include border-radius(2px);
+      @include screen(768px){
+        margin-right: 5px;        
+      }
+      &.ds-invalid {
+        border-color: #f26c4f;
+        &:focus {
+          border-color: $active;
+        }
+      }
+    }
+    input[type=checkbox], input[type=radio]  {
+      &:checked {
+        background-color: $active;
+        border-color: $active;
+        &:before {
+          content: $ic-checkmark;
+          color: $white;
+        }
+        &:focus {
+          background-color: $active;
+          border-color: $active;
+          &:before {
+            color: $white;
+          }          
+        }
+      }
+    }
+    input[type=checkbox]:indeterminate:before {
+      content: $ic-minus;
+      color: $border-color;
+    }    
+    input[type=checkbox]:before, input[type=radio]:checked:before {
+      display: inline-block;
+      vertical-align: top;
+      font-family: $icon-font;
+      width: 16px;
+      speak: none;
+      outline: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 16px;
+      font-size: 14px;
+    }
+    input[type="file"]:focus, input[type="radio"]:focus, input[type="checkbox"]:focus {
+      outline: none;
+      &:before {
+        color: $white;
+      }
+    }   
+    form {
+      ._form_paused {
+        @include transition(300ms opacity ease-in);
+      }
+      .on-form-ready {
+        opacity: 0;
+        display: none !important;
+        @include transition(300ms opacity ease-in);
+      }
+      ._submit-ready {
+        color: $white;
+        @extend .action._main;
+        pointer-events: auto;  
+        cursor: pointer;
+      }
+      ._submit {
+        color: $white;
+        @extend .action._main;
+        pointer-events: auto;  
+        cursor: pointer;
+        @extend .normal-txt;
+        @include transition(300ms opacity ease-in);   
+        &._disabled {
+          background-color: #edeef0 !important;
+          border-color: $grey !important;            
+        }        
+      }          
+      &.ready, &.ext-ready {
+        ._form_paused {
+          display: none;          
+        }
+        .on-form-ready {
+          display: block !important;
+          opacity: 1;
+        }
+        ._submit {
+          @extend ._submit-ready;
+          &._disabled {
+            @extend ._submit;
+            background-color: #edeef0 !important;
+            border-color: $grey !important;            
+          }
+        }        
+      }  
+      ._prepare-form {
+        @extend ._submit;
+      }
+      .focused {
+        display: inline-block;        
+      }
+    }
+    .form-helper {
+      display: block;
+      font-size: 0.8rem;
+      @include transition(all 200ms ease-in-out);
+    }
+    .ds-invalid, .field_with_errors {
+      ~ .form-helper {
+        color: #f26c4f;
+        margin-top: 0.5rem;
+        max-height: 5rem;
+        position: relative;
+        @include opacity(1);
+      }
+    }      
+    ._input-title {
+      padding-top: $input-padding;
+      padding-bottom: $input-padding;
+      font-size: 1.3rem;
+      line-height: $input-line-height;
+      @extend .bold-txt;
+    }    
+    ._expanded-form {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      @include opacity(0);
+      &._active {
+        @include opacity(1);
+      }
+      .input-container {
+        input {
+          margin-bottom: 0;
+        }
+      }      
+      @include box-shadow(0px 1px 2px 1px rgba(50, 50, 50, 0.20));
+    }
+    .input-container {
+      margin-bottom: 15px;
+      &._label-only {
+        margin-bottom: 0 !important;
+      }
+      &._inline {
+        position: relative;
+        input, select, textarea { 
+          border-top: none;
+          border-left: none;
+          border-right: none;
+          @include border-radius(0);
+        }        
+      }
+      &._flush {
+        input, select, textarea { 
+          border-color: transparent;
+        }        
+      }
+      .heading {
+        font-weight: 600;
+        font-size: 1rem;
+        margin-bottom: 0.4rem;
+        display: inline-block;
+      }
+      .name {
+        font-size: 0.8rem;
+        margin-bottom: 0.3rem;
+        display: inline-block;
+      }
+      &:last-of-type {
+        margin-bottom: 0;
+        @include screen(768px){
+          margin-bottom: 15px;
+        }
+      }
+      &:first-of-type {
+        margin-bottom: 15px;
+      }      
+      .action {
+        &._large {
+          padding-top: 0.3125rem;
+          padding-bottom: 0.3125rem;
+          padding-left: 0.3125rem;
+          padding-right: 0.3125rem;
+          font-size: 0.9rem;
+        }
+      }
+      ._input-icon {
+        font-size: 1.8rem;
+        line-height: 2.1rem;  
+        cursor: pointer;
+      }
+      .inline-list {
+        ._input-icon {
+          &:hover {
+            &:after {
+              color: $active;
+            }
+          }
+        }        
+      }      
+      .row {
+        margin-right: -5px;
+        margin-left: -5px;
+        .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+      input, select, textarea, button, .select2-container--default .select2-selection {
+        outline: none;
+        /* @include appearance(none); */
+        border: 1px $grey solid;
+        @include border-radius(3px);
+        padding-top: $input-padding;
+        padding-bottom: $input-padding;
+        padding-left: $input-padding-lr;
+        padding-right: $input-padding-lr;
+        font-size: $input-font-size;
+        line-height: $input-line-height;
+        color: $input-color;
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+        margin-bottom: 1px;
+        @extend .thin-txt;
+        &._size-small {
+          width: 4rem;
+        }
+        &._size-medium {
+          width: 5rem;
+        }     
+        &._size-6rem {
+          width: 6rem;
+        }         
+        @include placeholder {      
+          color: $grey;
+          font-size: 0.9rem;
+        }   
+        &.ds-invalid {
+          border-color: #f26c4f;
+          @include placeholder {      
+            color: $white;
+          }             
+        }
+        &.placeholder {
+          color: $grey;
+        }
+        &:focus {
+          border-color: $active;
+          @include box-shadow(none); 
+          &.ds-invalid {
+            border-color: #f26c4f;
+          }
+        }        
+      }
+      textarea {
+        resize: vertical;
+      }
+      .field_with_errors {
+        input, select, textarea, button, .select2-container--default .select2-selection {
+          border-color: #f26c4f;
+          @include placeholder {      
+            color: $white;
+          }             
+        }        
+      }      
+      input[type="submit"]{
+        width: auto;
+        min-width: 0;
+      }
+      input[type="date"], input[type="file"] {
+        padding-top: 0.3rem;
+        padding-bottom: 0.3rem;
+      }     
+      ._select {
+        position: relative;
+        width: 100%;
+        &._inline {
+          display: inline-block;
+          width: auto;
+        }
+        select {
+          /* padding-right: 2rem; */
+          line-height: 1rem;
+          @include appearance(none);
+          padding-right: 1.5rem;
+          background-color: $white;
+        } 
+        &._multiple {
+          &:after {
+            font-family: $icon-font;
+            content: $ic-down;
+            position: absolute;
+            top: 0rem; 
+            bottom: 0;
+            margin: auto;
+            right: 0.3rem;
+            height: 0.7rem;
+            line-height: 0.7rem;
+            font-size: 0.3rem;
+          }  
+        }
+      }
+      ._search {
+        position: relative;
+        width: 100%;
+        &:after {
+          @extend .dg-icon;
+          content: $ic-search;
+          position: absolute;
+          height: 100%;
+          width: 2rem;
+          font-size: 1.1rem;
+          line-height: 2.3rem;
+          top: 0;
+          right: 0;
+          text-align: center;
+          color: $body-color;
+        }
+        &._focus, &:hover {
+          &:after {
+            color: $body-color;
+          }
+        }
+        input{
+          padding-right: 2.5rem;
+        }        
+      }     
+      ._suggest {
+        width: 100%;
+        .name {
+          color: $active;
+          @extend .medium-txt;
+          margin-bottom: 0.5rem;
+          font-size: 1rem;
+        }
+        ._target {
+          overflow: hidden;
+          border: 1px transparent solid; 
+          @extend ._clear;
+          ._prompt-wrap {
+            display: none;
+            ._prompt {
+              text-align: left;
+            }
+          }          
+          &._empty {
+            ._prompt-wrap {
+              display: block;
+            }
+          }
+          ._selected {
+            display: block;
+            margin-top: 0.3rem;
+            .title {
+              text-transform: capitalize;
+              font-size: 1rem;
+              margin-bottom: 0.5rem;
+            }
+            .vc {
+              @include border-radius(3px);
+              @extend .action;
+              @extend .action._small;
+              margin-right: 0.8rem;
+              margin-bottom: 0.8rem;
+              display: inline-block;
+              @extend .__pop;
+              cursor: auto;
+              .vl {              
+                padding: 0 0.5rem;
+                line-height: 1rem;
+                color: $body-color;
+                font-size: 0.8rem;
+                text-transform: capitalize;
+                @extend .medium-txt;
+                .vx {
+                  /*display: none;*/
+                  @extend .dg-icon;
+                  margin-left: 0.3rem;
+                  font-size: 0.5rem;
+                  line-height: 1rem; 
+                  cursor: pointer;
+                  @extend .dg-icon._ic-close;   
+                  &:after {
+                    color: $body-color;
+                  }   
+                }                
+                &:after {
+                  color: $body-color;
+                }                                 
+              }               
+              &:hover {
+                color: $white;
+                .vl, .vx {
+                  color: $white;
+                  &:after {
+                    color: $white;
+                  }
+                }
+              }
+              &.va {
+                background-color: $active;
+                color: $white;
+                cursor: pointer;
+                line-height: 0;
+                padding-left: 7px;
+                padding-right: 7px;               
+                .vl {
+                  color: $white;              
+                  @extend .dg-icon;
+                  @extend .dg-icon._ic-add;  
+                  font-size: 0.7rem; 
+                  line-height: 1rem;
+                  padding: 0;
+                  &:after {
+                    color: $white;
+                  }                                  
+                }
+              }                              
+            }             
+          }
+          textarea {
+            display: none;
+            vertical-align: middle;
+            margin: 0;
+            width: 100%;
+            @include appearance(none);
+            overflow: hidden;
+            resize: none;
+            border: none;
+            outline: none;
+            height: 1.875rem;
+            line-height: 1.875rem;
+            font-size: 0.8rem;
+            padding-top: 0;
+            padding-bottom: 0;
+          }          
+        }
+        &._edit {
+          ._target {            
+            textarea {
+              display: block; 
+            }
+            ._selected {
+              .vc .vl .vx {
+                display: inline-block;
+              }
+              .va {
+                display: none !important;
+              }
+            }
+          }
+        }        
+      }
+    }
+  }
+}

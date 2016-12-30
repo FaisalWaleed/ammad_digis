@@ -1,0 +1,2 @@
+module Admin::PharmaciesHelper
+end

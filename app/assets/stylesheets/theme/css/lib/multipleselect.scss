@@ -1,0 +1,204 @@
+/**
+ * @author zhixin wen <wenzhixin2010@gmail.com>
+ */
+
+.ms-parent {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+}
+
+.ms-choice.disabled {
+    background-color: #f4f4f4;
+    background-image: none;
+}
+
+.ms-drop {
+    width: 100%;
+    overflow: hidden;
+    display: none;
+    margin-top: 4px;
+    position: absolute;    
+    background: none;
+    background-color: $white;   
+    z-index: 1052;
+    font-family: $body-font;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    color: $body-color;
+    border: 1px $grey solid;
+    @include border-radius(3px);  
+}
+
+.ms-drop.bottom {
+    top: 100%;
+}
+
+.ms-drop.top {
+    bottom: 100%;
+}
+
+.ms-search {
+    display: inline-block;
+    margin: 0;
+    min-height: 26px;
+    padding: 4px;
+    position: relative;
+    white-space: nowrap;
+    width: 100%;
+    z-index: 10000;
+}
+
+.ms-search input {
+    width: 100%;
+    height: auto !important;
+    min-height: 24px;
+    padding: 0 20px 0 5px;
+    margin: 0;
+    outline: 0;
+    font-family: sans-serif;
+    font-size: 1em;
+    border: 1px solid #aaa;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    background: #fff url('multiple-select.png') no-repeat 100% -22px;
+    background: url('multiple-select.png') no-repeat 100% -22px, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, white), color-stop(0.99, #eeeeee));
+    background: url('multiple-select.png') no-repeat 100% -22px, -webkit-linear-gradient(center bottom, white 85%, #eeeeee 99%);
+    background: url('multiple-select.png') no-repeat 100% -22px, -moz-linear-gradient(center bottom, white 85%, #eeeeee 99%);
+    background: url('multiple-select.png') no-repeat 100% -22px, -o-linear-gradient(bottom, white 85%, #eeeeee 99%);
+    background: url('multiple-select.png') no-repeat 100% -22px, -ms-linear-gradient(top, #ffffff 85%, #eeeeee 99%);
+    background: url('multiple-select.png') no-repeat 100% -22px, linear-gradient(top, #ffffff 85%, #eeeeee 99%);
+}
+
+.ms-search, .ms-search input {
+    -webkit-box-sizing: border-box;
+    -khtml-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.ms-drop ul {
+    overflow: auto;
+    margin: 0;
+    padding: 0;
+}
+
+.ms-drop ul > li {
+    list-style: none;
+    display: list-item;
+    background-image: none;
+    position: static;
+}
+
+.ms-drop ul > li .disabled {
+    opacity: .35;
+    filter: Alpha(Opacity=35);
+}
+
+.ms-drop ul > li.multiple {
+    display: block;
+    float: left;
+}
+
+.ms-drop ul > li.group {
+    clear: both;
+}
+
+.ms-drop ul > li.multiple label {
+    width: 100%;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ms-drop ul > li label {
+    font-weight: normal;
+    display: block;
+    white-space: nowrap;
+}
+
+.ms-drop ul > li label.optgroup {
+    font-weight: bold;
+}
+
+.ms-drop .ms-no-results {
+    display: none;
+}
+
+// THEMEING
+body {
+  &.dg {
+    .ms-drop {
+      label {
+        line-height: 2.1rem;
+        padding-left: 0;
+        margin-top: 0;
+        margin-right: 0px; 
+        span {
+          vertical-align: middle;
+        }
+      }
+      input[type="checkbox"] {
+        position: relative;
+        border: $border-width solid $border-color;
+        background: transparent;
+        color: $border-color;
+        clear: none;
+        cursor: pointer;
+        display: inline-block;
+        height: 20px;
+        margin: 0;
+        margin-right: 3px;  
+        outline: 0;
+        padding: 0;
+        text-align: center;
+        vertical-align: middle;
+        width: 20px;
+        min-width: 20px;
+        -webkit-appearance: none;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        @include border-radius(2px);
+        &:checked {
+          background-color: $border-color;
+          &:before {
+            content: $ic-checkmark;
+            color: $white;
+          }
+          &:focus {
+            background-color: $active;
+            border-color: $active;
+            &:before {
+              color: $white;
+            }          
+          }
+        }
+      }
+      input[type=checkbox]:indeterminate:before {
+        content: $ic-minus;
+        color: $border-color;
+      }    
+      input[type=checkbox]:before {
+        display: inline-block;
+        vertical-align: top;
+        font-family: $icon-font;
+        width: 16px;
+        speak: none;
+        outline: none;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        line-height: 16px;
+        font-size: 14px;
+      }
+    }
+  }
+}

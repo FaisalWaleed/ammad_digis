@@ -1,0 +1,10 @@
+
+- unless test_type.test_tags.blank?
+  - test_type.test_tags.each do |tag|          
+    - tag.tests.each do |test|
+      = check_box_tag 'diagnostic[test_ids][]', test.id, f.object.test_ids.include?(test.id)
+          
+- unless test_type.test_profiles.blank?            
+  - test_type.test_profiles.each do |profile|
+    - profile.tests.each do |test|  
+      = check_box_tag 'diagnostic[test_ids][]', test.id, f.object.test_ids.include?(test.id)

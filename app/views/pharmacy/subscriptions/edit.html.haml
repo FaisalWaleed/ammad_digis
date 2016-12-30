@@ -1,0 +1,22 @@
+- content_for :page_title do
+  = current_pharmacy.name
+    
+- content_for :client_class, '_showing-info-bar' 
+
+- content_for :page_action do
+  .col-md-4.col-sm-4.col-xs-12
+    .section
+      ._body              
+        = link_to 'Cancel', pharmacy_subscriptions_path(), :class => "action _large _focus pull-right"
+    
+- content_for :page_header do
+  .col-md-8.col-xs-12
+    #chd
+      %h2.active-channel-name Edit My Account  
+
+.row
+  .col-md-12
+    ._medium
+      = render 'form_renew'
+
+

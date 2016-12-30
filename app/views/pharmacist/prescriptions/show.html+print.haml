@@ -1,0 +1,186 @@
+- content_for :page_title do
+  View Prescription
+   
+- content_for :client_class, '_showing-full-width' 
+
+:css 
+  ._sdiukbnmwad4 {
+    background-image: url("#{asset_path(@dispense_order.physician.signature.url(:original))}");
+  }
+
+._prescription-wrap
+  .prescription-view
+    ._header
+      .row
+        .col-md-6.col-xs-6
+          ._title
+            RX #
+            = @dispense_order.prescription.identifier
+        .col-md-6.col-xs-6
+          ._sub-title
+            = @dispense_order.prescription.ordinal_date
+
+    ._content
+      .row
+        .col-md-12
+          .profile-info.section
+            ._section
+              %span.name
+                = @dispense_order.patient.name
+            ._section.pull-right                      
+              %span
+                %span._age
+                  #{@dispense_order.patient.age}
+                  %span
+                    Y/O
+                %span.bump._gender #{ @dispense_order.patient.gender_abbrev }
+            .row
+              .col-md-12
+                ._body.focused
+                  .row
+                    .col-md-6.col-xs-6
+                      .ellipsis._double
+                        = @dispense_order.patient.address_street_1
+                    .col-md-6.col-xs-6.has-border
+                      .ellipsis
+                        = @dispense_order.patient.phone_primary
+                      .ellipsis{:title => (@dispense_order.patient.email_primary)}
+                        = @dispense_order.patient.email_primary                                                                                             
+                          
+      .row
+        .col-md-12
+          .section
+            ._body             
+              %table.table.table-item
+                %tbody
+                  - @dispense_order.prescripts.each do |p|
+                    %tr
+                      %td
+                        - unless p.free_flow? 
+                          #{p.strfrx}
+                          - unless p.free_flow_details.blank?
+                            \ - 
+                            #{p.free_flow_details}
+                        - else 
+                          #{p.free_flow_details}
+                          
+                        - unless p.repeating?
+                          %div
+                            %span._drug-repeat
+                              Repeat: #{p.repeats_remaining} 
+                        - if p.disbursements.length.nonzero?
+                          .bold-txt
+                            Previously Disbursed
+                          - p.disbursements.each do |db|
+                            %div
+                              = db.annotation
+                              %br
+                              %span.italic-txt
+                                #{db.created_at.strftime('%d/%m/%Y')} by #{db.pharmacist.name} (#{ db.pharmacy.name })  
+                            
+                      %td.text-right 
+                        .checkbox
+                          %label        
+                            %input{:type => "checkbox", :disabled => "true", :checked => p.filled?}
+                            
+      - unless @dispense_order.prescription.note.blank?                                                   
+        .row
+          .col-md-10
+            .section
+              ._body 
+                ._notes
+                  %p._small
+                    = @dispense_order.prescription.note
+                    
+      - if @dispense_order.prescription.allow_generic?
+        %p 
+          %strong
+            ** Generic approved
+      %p
+        %strong
+          Insurance: 
+        #{@dispense_order.prescription.insurer_names.join(', ').presence || 'None selected'}              
+      
+      %hr 
+      .row
+        .col-md-12
+          ._title Physician:
+          ._sdiukbnmwad4
+            = image_tag 'signature.gif'                 
+          .section
+            ._fc-wrap
+              %h4
+                Dr. #{@dispense_order.physician.name}
+              %div
+                reg #
+                = @dispense_order.physician.reg_num                          
+
+        .col-md-12
+          .section
+            .focused._no-margin
+              .row
+                .col-md-6.col-xs-6
+                  %div.ellipsis
+                    = @dispense_order.physician.address_street_1
+                  %div.ellipsis
+                    = "#{@dispense_order.pharmacy.address_territory}, #{@dispense_order.pharmacy.address_country}"                          
+                .col-md-6.col-xs-6.has-border
+                  %div.ellipsis
+                    = @dispense_order.physician.phone_primary
+                  %div.ellipsis{:title => (@dispense_order.physician.email_primary)}
+                    = @dispense_order.physician.email_primary                           
+                        
+      - @dispense_order.dispensations.each do |d|
+        %hr           
+        .row
+          .col-md-7
+            .section
+              ._fc-wrap
+                %h4 
+                  Filled at 
+                  %strong= d.pharmacy.name
+                %div
+                  reg #
+                  = d.pharmacy.reg_num
+                  
+          .col-md-5
+            .section                        
+              ._body
+                .focused
+                  .row
+                    .col-md-12
+                      %div.ellipsis
+                        %strong= d.created_at.strftime('%I:%M %P')
+                      %div
+                        = d.created_at.strftime('%B %d, %Y')
+                        
+      - if @dispense_order.pharmacy_id?
+        %hr/
+        .row  
+          .col-md-12
+            ._title Sent to:
+            ._section
+              .row
+                .col-md-12
+                  ._fc-wrap
+                    %h4
+                      #{@dispense_order.pharmacy.name}
+                    %div
+                      reg #
+                      = @dispense_order.pharmacy.reg_num                          
+
+        .row
+          .col-md-12
+            .focused
+              .row
+                .col-md-6.col-xs-6
+                  %div.ellipsis
+                    = @dispense_order.pharmacy.address_street_1
+                  %div.ellipsis
+                    = "#{@dispense_order.pharmacy.address_territory}, #{@dispense_order.pharmacy.address_country}"
+                .col-md-6.col-xs-6.has-border
+                  %div.ellipsis
+                    = @dispense_order.pharmacy.phone_primary
+                  %div.ellipsis
+                    = @dispense_order.pharmacy.email_primary                                                                       
+

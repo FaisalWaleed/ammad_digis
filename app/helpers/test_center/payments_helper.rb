@@ -1,0 +1,2 @@
+module TestCenter::PaymentsHelper
+end

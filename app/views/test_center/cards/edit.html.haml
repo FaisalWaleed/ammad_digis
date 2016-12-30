@@ -1,0 +1,8 @@
+%h1 Editing Card: **** **** **** #{@card.last4}
+
+= form_for :card, url: test_center_card_path(rand(1000...9999)), method: :patch do |f|
+  = render 'partials/customer/cards/form', f: f
+  
+  %p
+    = f.submit 'Update'
+    = link_to "Cancel", test_center_subscriptions_path  

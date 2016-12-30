@@ -1,0 +1,31 @@
+.profile-info.section._inline                          
+  .row
+    .col-md-12
+      ._section._col-a
+        - unless current_page?(edit_physician_patient_path(patient))
+          %span.name
+            = link_to patient.name, edit_physician_patient_path(patient)
+        - if current_page?(edit_physician_patient_path(patient))
+          %span.name
+            = link_to patient.name, physician_patient_path(@patient) 
+      ._section._col-b            
+        %span
+          %span._age 
+            #{patient.age.to_i}
+            %span
+              Y/O
+          %span.bump._gender #{patient.gender_abbrev}              
+      ._body.focused._col-c
+        .row
+          .col-md-6.col-xs-12
+            %strong Address
+            %div.ellipsis._double
+              #{patient.address_street_1}
+          .col-md-6.col-xs-12.has-border
+            %strong Contact
+            - unless patient.phone_primary.blank?
+              %div.ellipsis
+                #{patient.phone_primary}
+            %div.ellipsis
+              #{patient.email_primary}
+                     

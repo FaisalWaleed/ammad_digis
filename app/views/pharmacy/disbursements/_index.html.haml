@@ -1,0 +1,5 @@
+%tr.clickable{"data-target" => "#dg-pharm-disbursement", "data-toggle" => "modal", "data-url" => pharmacy_disbursement_path(disbursement)}   
+  %td= disbursement.annotation
+  %td= disbursement.created_at.strftime('%d/%m/%Y')
+  %td= disbursement.pharmacist_name
+  %td= disbursement.pharmacy_name    

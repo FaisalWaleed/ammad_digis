@@ -1,0 +1,2 @@
+module Physician::PrescriptionsHelper
+end

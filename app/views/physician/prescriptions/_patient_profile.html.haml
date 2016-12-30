@@ -1,0 +1,32 @@
+.row
+  .col-md-9
+    .profile-info.section
+      ._section
+        .row
+          .col-md-9
+            %h3.pl #{patient.name}
+            %span.pr
+              %span.bump._gender #{patient.gender.name.first rescue nil}
+              %span._age #{patient.age.to_i} Y/O
+            
+      ._body
+        .row._anchored
+          .col-md-9
+            .focused
+              .row
+                .col-md-6.col-xs-12
+                  = patient.address_street_1
+                  %br/
+                  #{patient.address_territory}, #{patient.address_country}
+                .col-md-6.col-xs-12.has-border
+                  %div
+                    = patient.phone_primary
+                  %div
+                    = patient.email_primary
+    
+          %a.action._medium{"data-target" => "#dg-patient-history", "data-toggle" => "modal"} View History
+    
+= hidden_field_tag 'prescription[patient_id]', patient.id
+
+- content_for :after_body do
+  = render :partial => 'partials/modals/patient_history', :locals => {:patient => patient}

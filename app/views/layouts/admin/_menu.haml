@@ -1,0 +1,59 @@
+._user-wrap
+  = link_to edit_admin_admin_path(current_admin) do
+    ._profile-image
+      = image_tag current_admin.avatar.url(:medium)
+    ._profile-info
+      %span
+        SIGNED IN AS
+      ._title
+        #{current_admin.firstname rescue 'Admin'} 
+      %div
+        = link_to 'Sign out', admin_logout_path
+          
+
+._menu-wrap._menu
+  %ul
+    %li
+      = active_link_to admin_plans_path, :active => :inclusive do
+        %span.menu-label Plans
+    %li
+      = active_link_to admin_subscriptions_path, :active => :inclusive do
+        %span.menu-label Subscriptions
+    %li._seperator
+    %li
+      = active_link_to admin_physicians_path, :active => :inclusive do
+        %span.menu-label Physicians
+
+    %li
+      = active_link_to admin_pharmacies_path, :active => :inclusive do
+        %span.menu-label Pharmacies        
+    %li
+      = active_link_to admin_pharmacists_path, :active => :inclusive do
+        %span.menu-label Pharmacists
+        
+    %li
+      = active_link_to admin_laboratories_path, :active => :inclusive do
+        %span.menu-label Laboratories
+    %li
+      = active_link_to admin_technicians_path, :active => :inclusive do
+        %span.menu-label Technicians        
+    %li._seperator
+    %li
+      = active_link_to admin_drugs_path, :active => :inclusive do
+        %span.menu-label Drugs
+    %li
+      = active_link_to admin_tests_path, :active => :inclusive do
+        %span.menu-label Diagnostic Tests
+    %li
+      = active_link_to admin_test_profiles_path, :active => :inclusive do
+        %span.menu-label Test Profiles
+    %li._seperator
+    %li
+      = active_link_to admin_patients_path, :active => :inclusive do
+        %span.menu-label Patient  
+    %li._seperator        
+    %li
+      = active_link_to admin_admins_path, :active => :inclusive do
+        %span.menu-label Admins         
+        
+        

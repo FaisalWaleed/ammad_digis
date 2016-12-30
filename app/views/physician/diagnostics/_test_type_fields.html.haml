@@ -1,0 +1,48 @@
+.channel{ class: "_#{ test_type.name.parameterize } #{ '_remove' unless @diagnostic.id }" }
+  .row
+    .col-md-5
+      .input-container._inline.hidden
+        %label._full-input
+          %input._filter{:type => 'text', :placeholder => 'Search', :data => {'target' => "._#{ test_type.name.parameterize } ._option-ui"}}
+  
+  - unless test_type.test_tags.blank?
+    ._progress-ui._filter
+      %h3.title
+        Groups          
+      %ul
+        - test_type.test_tags.each do |tag|
+          %li._tab{ :class => "", :data => {'name' => "._#{tag.name.parameterize}", 'group' => '._tag-set', 'parent' => "#{ test_type.name.parameterize }-#{ tag.name.parameterize}"}}
+            = tag.name
+
+    - test_type.test_tags.each do |tag|          
+      ._card._tag-set._remove{ class: "_#{ tag.name.parameterize }" }
+        ._option-ui
+          - tag.tests.order( 'name ASC' ).each do |test|
+            ._option
+              %label.checkbox-inline
+                = check_box_tag 'diagnostic[test_ids][]', test.id, f.object.test_ids.include?(test.id), :data => {'id' => test.id, 'group' => "#{ test_type.name.parameterize }-#{ tag.name.parameterize}", 'setname' => "#{ tag.name }" }
+                %span.name
+                  = test.name
+            
+  - unless test_type.test_profiles.blank?            
+    ._progress-ui._filter
+      %h3.title
+        Profiles          
+      %ul
+        - test_type.test_profiles.each do |profile|
+          %li._tab{ :class => "", :data => {'mode' => 'all', 'name' => "._#{profile.name.parameterize}", 'group' => '._profile-set', 'parent' => "#{ test_type.name.parameterize }-#{ profile.name.parameterize}"}}
+            = profile.name
+
+    - test_type.test_profiles.each do |profile|
+      ._card._profile-set._remove{ class: "_#{ profile.name.parameterize }" }
+        ._option-ui
+          - profile.tests.order( 'name ASC' ).each do |test|
+            ._option
+              %label.checkbox-inline
+                = f.fields_for :profiled_testings, ProfiledTesting.new do |pt|
+                  = pt.hidden_field :test_profile_id, :value => profile.id
+                  = pt.hidden_field :test_id, :value => test.id
+                  
+                  = pt.check_box :_permit, :data => {'id' => test.id, 'group' => "#{ test_type.name.parameterize }-#{ profile.name.parameterize}", 'setname' => "#{ profile.name }"}
+                %span.name
+                  = test.name

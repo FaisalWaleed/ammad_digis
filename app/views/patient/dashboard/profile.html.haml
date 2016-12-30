@@ -1,0 +1,113 @@
+%div
+  .clearfix
+  .alert.alert-danger{style: "display: none"}
+  .row
+    .col-md-12.col-sm-12.col-xs-12
+      .x_panel
+        .x_title
+          %h2
+            Create Account
+            %small Create a Patient Account
+          .clearfix
+        .x_content
+          / Smart Wizard
+          %p This is a basic form wizard example that inherits the colors from the selected scheme.
+          = form_for @patient, url: update_info_patient_dashboard_index_path, html: {class: 'form-horizontal profile-form form-label-left'} do |f|
+            #wizard.form_wizard.wizard_horizontal
+              %ul.wizard_steps
+                %li
+                  %a{:href => "#step-1"}
+                    %span.step_no 1
+                    %span.step_descr
+                      Personal Information
+                      %br/
+                      %small Step 1 description
+                %li
+                  %a{:href => "#step-2"}
+                    %span.step_no 2
+                    %span.step_descr
+                      Contact Information
+                      %br/
+                      %small Step 2 description
+                %li
+                  %a{:href => "#step-3"}
+                    %span.step_no 4
+                    %span.step_descr
+                      Step 4
+                      %br/
+                      %small Review
+              #step-1
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "first-name"}
+                    Profile picture
+                    %span.required *
+                  .col-md-6.col-sm-6.col-xs-12
+                    = f.file_field :avatar, class: 'form-control col-md-7.col-xs-12'
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "first-name"}
+                    First Name
+                    %span.required *
+                  .col-md-6.col-sm-6.col-xs-12
+                    = f.text_field :firstname, :placeholder => "First Name", required: true, class: 'form-control col-md-7 col-xs-12'
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "last-name"}
+                    Last Name
+                    %span.required *
+                  .col-md-6.col-sm-6.col-xs-12
+                    = f.text_field :lastname, :placeholder => "Last Name", required: true, class: 'form-control col-md-7 col-xs-12'
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "middle-name"} Middle Name / Initial
+                  .col-md-6.col-sm-6.col-xs-12
+                    = f.text_field :middlename, :placeholder => "Middle Name", class: 'form-control col-md-7 col-xs-12'
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12 Gender
+                  .col-md-6.col-sm-6.col-xs-12
+                    #gender.btn-group{"data-toggle" => "buttons"}
+                      %label.btn.btn-default{"data-toggle-class" => "btn-primary", "data-toggle-passive-class" => "btn-default"}
+                        %input{:name => "gender", :type => "radio", :value => "male"}/
+                          Male
+                      %label.btn.btn-primary.active{"data-toggle-class" => "btn-primary", "data-toggle-passive-class" => "btn-default"}
+                        %input{:checked => "checked", :name => "gender", :type => "radio", :value => "female"}/
+                        Female
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12
+                    Date Of Birth
+                    %span.required *
+                  .col-md-6.col-sm-6.col-xs-12
+                    = f.date_select :date_of_birth, {order: [:month, :day, :year], prompt: { day: 'Day', month: 'Month', year: 'Year' }, start_year: Date.today.year, end_year: Date.today.year - 100 }, {:class => 'required date-picker form-control col-md-7 col-xs-12{'}
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12
+                    Address
+                    %span.required *
+                  .col-md-6.col-sm-6.col-xs-12
+                    = f.text_field :address_street_1, :placeholder => "Address", class: 'form-control col-md-7 col-xs-12'
+              #step-2
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "first-name"}
+                    Email Address
+                    %span.required *
+                  .col-md-6.col-sm-6.col-xs-12
+                    = f.email_field :email_primary, required: true, class: "form-control col-md-7 col-xs-12"
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "middle-name"}
+                    Password
+                    %span.required *
+                  .col-md-6.col-sm-6.col-xs-12
+                    = f.password_field :password, :class => "form-control col-md-7 col-xs-12", :autocomplete => "off", :placeholder => "**********"
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "middle-name"}
+                    Confirm Password
+                    %span.required *
+                  .col-md-6.col-sm-6.col-xs-12
+                    = f.password_field :password_confirmation, :class => "form-control col-md-7 col-xs-12", :autocomplete => "off", :placeholder => "**********"
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12
+                    Phone Number
+                    %span.required *
+                  .col-md-6.col-sm-6.col-xs-12
+                    = f.text_field :phone_primary, required: true, :class => "_tel form-control"
+              #step-3
+                .checkbox
+                  %label
+                    %input.flat{:checked => "checked", :disabled => "disabled", :type => "checkbox"}/
+                    I agree to the Digiscript terms of service.

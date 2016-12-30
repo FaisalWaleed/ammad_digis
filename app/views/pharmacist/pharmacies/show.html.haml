@@ -1,0 +1,73 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @pharmacy.name
+%p
+  %b Contact firstname:
+  = @pharmacy.contact_firstname
+%p
+  %b Contact lastname:
+  = @pharmacy.contact_lastname
+%p
+  %b Address street 1:
+  = @pharmacy.address_street_1
+%p
+  %b Address street 2:
+  = @pharmacy.address_street_2
+%p
+  %b Address municipality:
+  = @pharmacy.address_municipality
+%p
+  %b Address territory:
+  = @pharmacy.address_territory
+%p
+  %b Address postal code:
+  = @pharmacy.address_postal_code
+%p
+  %b Address country:
+  = @pharmacy.address_country
+%p
+  %b Latitude:
+  = @pharmacy.latitude
+%p
+  %b Longitude:
+  = @pharmacy.longitude
+%p
+  %b Email primary:
+  = @pharmacy.email_primary
+%p
+  %b Email secondary:
+  = @pharmacy.email_secondary
+%p
+  %b Phone primary:
+  = @pharmacy.phone_primary
+%p
+  %b Phone secondary:
+  = @pharmacy.phone_secondary
+%p
+  %b Reg num:
+  = @pharmacy.reg_num
+
+= link_to 'Edit', edit_pharmacist_pharmacy_path(@pharmacy)
+\|
+= link_to 'Back', pharmacist_pharmacies_path
+
+
+.row
+  .col-md-12
+    %h3 Prescriptions
+    %p
+      = link_to "Download Report", pharmacist_pharmacy_path(@pharmacy, format: :csv)
+    
+    %table.table
+      %thead
+        %tr
+          %th Rx#
+          %th Status
+          
+      %tbody
+      - @pharmacy.dispense_orders.each do |order|
+        %tr
+          %td= order.identifier
+          %td= order.status

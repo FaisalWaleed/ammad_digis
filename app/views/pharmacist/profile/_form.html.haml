@@ -1,0 +1,181 @@
+= form_for :pharmacist, :url => pharmacist_profile_update_path do |f|
+  .section
+    .row
+      .col-md-8
+        ._section
+          %h3.title Personal Information 
+        ._body  
+          .row
+            .col-md-5
+              .input-container                    
+                %label._full-input
+                  %span.name
+                    First name
+                  = f.text_field :firstname, :class => "required"
+                  .form-helper
+                    Your first name is required                           
+            .col-md-2
+              .input-container                    
+                %label._full-input
+                  %span.name
+                    Middle initial                
+                  = f.text_field :middlename
+            .col-md-5
+              .input-container                    
+                %label._full-input
+                  %span.name
+                    Last name                
+                  = f.text_field :lastname, :class => "required"
+                  .form-helper
+                    Your last name is required.                              
+                                  
+          .row
+            .col-md-3
+              .input-container
+                %label._full-input
+                  %span.name
+                    Gender                 
+                  = f.select :gender_id, Gender.all.map { |g| [g.name, g.id] }, :include_blank => true, :prompt => "Gender", :class => "required"
+                  .form-helper
+                    Your gender is required.
+                    
+            .col-md-4
+              .input-container                     
+                %label._full-input
+                  %span.name
+                    Registration number
+                  = f.text_field :reg_num, :class => "required"  
+                  .form-helper
+                    Your Pharmacist's registration number is required.                      
+ 
+        ._section
+          %h3.title Contact Information
+        ._body
+          .row
+            .col-md-6
+              .input-container                    
+                %label._full-input
+                  %span.name
+                    Email address                
+                  = f.text_field :email_primary, :class => "required"
+                  .form-helper
+                    Your email is required. This isn't a valid email.                          
+
+            .col-md-6
+              .input-container                       
+                %label._full-input
+                  %span.name
+                    Phone number                
+                  = f.text_field :phone_primary, :class => "required _tel"
+                  .form-helper
+                    Your phone number is required.                                                                                                              
+
+    ._section
+      %h3.title Address    
+    ._body 
+      .row
+        .col-md-4
+          .input-container
+            .row
+              .col-md-12
+                %label._full-input
+                  %span.name
+                    Address line 1                
+                  = f.text_field :address_street_1, :class => "required"
+                  .form-helper
+                    Your address line 1 is required.                   
+        .col-md-4                  
+          .input-container
+            .row
+              .col-md-12
+                %label._full-input
+                  %span.name
+                    Address line 2                
+                  = f.text_field :address_street_2, :class => "required"
+                  .form-helper
+                    Your address line 2 is required.   
+      .row
+        .col-md-4                                   
+          .input-container
+            .row
+              .col-md-12
+                %label._full-input
+                  %span.name
+                    Town                
+                  = f.text_field :address_municipality, :class => "required"
+                  .form-helper
+                    Your town is required.                 
+        .col-md-4
+          .input-container
+            %label._full-input
+              %span.name
+                Parish           
+              = f.select :address_territory, PARISHES, {:include_blank => "Select a parish"}, :class => "required"
+              .form-helper
+                Your parish is required.   
+      .row
+        .col-md-4                  
+          .input-container
+            %label._full-input
+              %span.name
+                Postal code            
+              = f.text_field :address_postal_code               
+        .col-md-4          
+          .input-container
+            %label._full-input
+              %span.name
+                Country             
+              = f.text_field :address_country, :class => "required"
+              .form-helper
+                Your country is required.     
+
+    ._section
+      %h3.title Digiscripts    
+    ._body     
+      .row
+        .col-md-4      
+          .input-container
+            %label._full-input
+              %span.name
+                Password               
+              = f.password_field :password, :class => "_password required _optional", :placeholder => '•••••••'
+              .form-helper
+                Please create a password                  
+          .input-container
+            %label._full-input
+              %span.name
+                Confirm password            
+              = f.password_field :password_confirmation, :class => "_confirm-password required _optional", :placeholder => '•••••••' 
+              .form-helper
+                Password must match the one typed before. 
+        .col-md-2
+          .input-container
+            %label._full-input
+              %span.name
+                Photo
+            ._input-group
+              .focused   
+                .row
+                  .col-md-12
+                    ._image-holder
+                      - if @pharmacist.avatar.url(:original).blank?
+                        %span.dg-icon.ic-gallery                          
+                      - else
+                        = image_tag @pharmacist.avatar.url(:thumb)          
+                .row          
+                  .col-md-12
+                    %label._full-input
+                      ._file-input
+                        %span Upload photo
+                        = f.file_field :avatar                    
+
+  .row      
+    .col-md-8
+      = link_to 'cancel', pharmacist_prescriptions_path, :class => "action _large _cancel"      
+    .col-md-4
+      .action._large._normalize.pull-right._submit{:tabindex => '0'}    
+        Save
+        = f.submit ''   
+
+- content_for :after_body do     
+  = render 'partials/modals/modal'

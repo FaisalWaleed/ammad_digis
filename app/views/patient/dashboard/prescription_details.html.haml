@@ -1,0 +1,42 @@
+.channel.channel-review
+  ._medium  
+    .preview-ui
+      .row   
+        .col-md-12
+          .row._select-pharmacy
+            .form-group
+              %label.col-md-4.control-label{:for => "resume"} Physician Name:
+              %div.col-md-7 #{@prescription.physician.try(:name)}
+            - if @prescription.pharmacy.present?
+              .clearfix
+              .form-group
+                %label.col-md-4.control-label{:for => "resume"} Pharmacy Name:
+                %div.col-md-7 #{@prescription.pharmacy_name}
+              .clearfix
+              .form-group
+                %label.col-md-4.control-label{:for => "resume"} Pharmacy Address:
+                %div.col-md-7
+                  %p #{@prescription.pharmacy.address_street_1}
+                  %p #{@prescription.pharmacy.address_street_2}
+                  %p #{@prescription.pharmacy.address_municipality}
+                  %p #{@prescription.pharmacy.address_country}
+              .clearfix
+              .form-group
+                %label.col-md-4.control-label{:for => "resume"} Phone 
+                %div.col-md-7 #{@prescription.pharmacy.phone_primary}
+              .clearfix
+              .form-group
+                %label.col-md-4.control-label{:for => "resume"} Email 
+                %div.col-md-7 #{@prescription.pharmacy.email_primary}
+            .clearfix
+            .form-group
+              %label.col-md-4.control-label{:for => "resume"} Verification Pin
+              %div.col-md-7 #{@prescription.verification_pin}
+            .clearfix
+            .form-group
+              %label.col-md-4.control-label{:for => "resume"} Generic Approved
+              %div.col-md-7  #{@prescription.allow_generic? ? 'Yes' : 'No'}
+            .clearfix
+            .form-group
+              %label.col-md-4.control-label{:for => "resume"} Insurance 
+              %div.col-md-7 #{@prescription.insurer_names.join(', ').presence || 'None selected'}

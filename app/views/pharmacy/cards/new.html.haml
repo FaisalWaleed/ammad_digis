@@ -1,0 +1,24 @@
+- content_for :client_class, '_page-narrow' 
+
+- content_for :page_title do
+  #{current_pharmacy.name} - Add a credit card
+    
+- content_for :page_header do
+  .col-xs-12
+    #chd
+      %h2.active-channel-name 
+        Add a credit card
+            
+.row
+  .col-md-12    
+    ._medium      
+      = form_for :card, url: pharmacy_cards_path do |f|
+        = render 'partials/customer/cards/form', f: f
+        
+        .row
+          .col-md-8.col-xs-12
+            = link_to 'cancel', pharmacy_subscriptions_path, :class => "action _large _clear text-left"      
+          .col-md-4.col-xs-12
+            .action._large._normalize.pull-right._submit{:tabindex => '0'}     
+              Save
+              = f.submit    

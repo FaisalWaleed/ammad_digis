@@ -1,0 +1,33 @@
+!!!
+%html
+  %head
+    %script{:src => "https://use.typekit.net/ddt7bah.js"}
+    :javascript
+      try{Typekit.load({ async: true });}catch(e){}  
+    %title
+      Digiscripts - Physician - 
+      = yield :page_title
+      
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = yield :page_js    
+    /[if lt IE 9]  
+      = javascript_include_tag 'lib_ie/svg', 'data-turbolinks-track' => true       
+      = javascript_include_tag 'lib_ie/html5shiv-printshiv', 'data-turbolinks-track' => true 
+      = javascript_include_tag 'lib_ie/respond', 'data-turbolinks-track' => true       
+    = csrf_meta_tags
+  %body.dg{"data-msg-source" => physician_messages_path(:json)}
+    = render :partial => 'partials/no_script'   
+    #client-ui{:class => (yield :client_class)} 
+      = yield      
+    = yield :after_body
+    #prescription-message-template
+      #dg-messages.modal._persistent.fade{ 'data-remote' => 'true' }
+        .modal-dialog
+          .modal-content     
+          
+    /[if lt IE 9]
+      = javascript_include_tag 'lib_ie/rem.min'   
+    /[if lt IE 10]      
+      = javascript_include_tag 'lib_ie/placeholder' 
+ 

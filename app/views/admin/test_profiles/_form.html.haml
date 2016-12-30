@@ -1,0 +1,59 @@
+._medium
+  = form_for [:admin, @test_profile] do |f|
+    - content_for :notice do
+      - if @test_profile.errors.any?
+        .row
+          .col-md-7
+            - @test_profile.errors.full_messages.each do |msg|          
+              ._msg.error
+                ._alert
+                  .ds-icon._ic-info
+                = msg     
+
+    .row
+      .col-md-4
+        .input-container
+          %label._full-input
+            %span.name
+              Name
+            = f.text_field :name, :placeholder => "", :class => 'required', :data => {"size" => "2"}
+            .form-helper
+              Name is required.              
+            
+      .col-md-3
+        .input-container                
+          %label._full-input
+            %span.name
+              Test Type
+            = f.select :test_type_id, TestType.all.map { |t| [t.name, t.id] }, {:include_blank => 'Select...'}, :class => "required _toggle"
+            .form-helper
+              Test type is required.              
+
+    - Test.all.group_by(&:test_type).map do |type, tests|               
+      .section._panel{:class => ('_remove' unless (f.object.test_type.name.downcase if f.object.test_type.present?) == type.name.downcase), :data => {"name" => "#{type.name.downcase}"}}
+        %hr      
+        ._section
+          ._title
+            = type.name rescue nil
+          ._body         
+            .row
+              .col-md-5
+                .input-container._inline
+                  %label._full-input
+                    %input._filter{:type => 'text', :placeholder => 'Search', :data => {'target' => "#_#{type.name}-#{type.id}"}}                         
+            .row
+              .col-md-12{:id => "_#{type.name}-#{type.id}"} 
+                .input-container                  
+                  = hidden_field_tag 'test_profile[test_ids][]'              
+                  - tests.each do |t|              
+                    %label.checkbox-inline
+                      = check_box_tag 'test_profile[test_ids][]', t.id, f.object.test_ids.include?(t.id)
+                      %span.name
+                        = t.name    
+        
+    %hr
+    .row      
+      .col-md-4.col-md-offset-8
+        .action._large._normalize.pull-right._submit    
+          Save
+          = f.submit ''

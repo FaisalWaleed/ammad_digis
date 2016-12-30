@@ -1,0 +1,103 @@
+.row
+  .col-md-12.col-sm-12.col-xs-12
+    .x_panel
+      .x_title
+        %h2
+          Diagnostic History
+          %small Diagnostic profile till date
+        .clearfix
+      .x_content
+        %p.text-muted.font-13.m-b-30
+          Fetch data from Physician Login -&gt; Bob Jones -&gt; History of Diagnostics
+        %table#datatable-buttons.table.table-striped.table-bordered
+          %thead
+            %tr
+              %th Physician Name
+              %th Laboratory Info
+              %th Created Date
+              %th Request#
+              %th Lab Report
+              %th Date uploaded
+          %tbody
+            - @diagnostics.each do |diagnostic|
+              %tr
+                %td
+                  - if diagnostic.pharmacy.present?
+                    = image_tag diagnostic.physician.avatar.url(:small)
+                    = succeed diagnostic.physician.name do
+                      %br/
+                %td
+                  - if diagnostic.laboratory.present?
+                    = diagnostic.laboratory.name
+                    %br/
+                    = diagnostic.laboratory.address_street_1
+                    %br/
+                    = diagnostic.laboratory.address_street_2
+                    %br/
+                    = diagnostic.laboratory.phone_primary
+                    %br/
+                    = diagnostic.laboratory.email_primary
+                %td diagnostic.created_at
+                %td
+                  %a.btn.btn-primary{"data-target" => "#newTitle", "data-toggle" => "modal", :href => "", :title => "Add New"} #{prescription.identifier}
+                %td
+                  {{Patient_Name}} - {{Request#}.jpg
+                  = succeed "Fetch" do
+                    %br/
+                  = succeed "and" do
+                    %br/
+                %td
+                  = diagnostic.updated_at
+.clearfix
+.row
+  .col-md-12.col-sm-12.col-xs-12
+    .x_panel
+      .x_title
+        %h2
+          Prescription History
+          %small Prescription history till date
+        .clearfix
+      .x_content
+        %p.text-muted.font-13.m-b-30
+          This section shows all prescription if its been selected (Send to patient check while the prescription was created. Physician Login -&gt; Bob Jones -&gt; History of Prescriptions)
+        %table#datatable-buttons.table.table-striped.table-bordered
+          %thead
+            %tr
+              %th Physician Name
+              %th Pharmacy Info
+              %th Created Date
+              %th Request#
+              %th Prescription Copy
+              %th Date uploaded
+          %tbody
+            - @prescriptions.each do |prescription|
+              %tr
+                %td
+                  - if prescription.pharmacy.present?
+                    = image_tag prescription.physician.avatar.url(:small)
+                    = succeed prescription.physician.name do
+                      %br/
+                %td
+                  - if prescription.pharmacy.present?
+                    = prescription.pharmacy.name
+                    %br/
+                    = prescription.pharmacy.address_street_1
+                    %br/
+                    = prescription.pharmacy.address_street_2
+                    %br/
+                    = prescription.pharmacy.phone_primary
+                    %br/
+                    = prescription.pharmacy.email_primary
+                %td
+                  = prescription.created_at
+                %td
+                  = link_to prescription.identifier, '', data: {target: "#prescription-detail", toggle: "modal", presecription_id: prescription.id }, class: 'btn btn-primary'
+                %td
+                  {{Patient_Name}} - {{Request#}.jpg
+                  = succeed "Fetch" do
+                    %br/
+                  = succeed "and" do
+                    %br/
+                %td
+                  = prescription.filled_at
+= render 'show_prescription_modal'

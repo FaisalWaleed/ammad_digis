@@ -1,0 +1,198 @@
+- content_for :page_title do
+  View Prescription
+   
+- content_for :client_class, '_showing-full-width' 
+
+:css 
+  ._sdiukbnmwad4 {
+    background-image: url("#{asset_path(@prescription.physician.signature.url(:original))}");
+  }
+
+._prescription-wrap
+  .prescription-view
+    ._header
+      .row
+        .col-md-6
+          ._title
+            RX #
+            = @prescription.identifier
+        .col-md-6
+          ._sub-title
+            = @prescription.ordinal_date
+
+    ._content
+      .row
+        .col-md-12
+          .profile-info.section
+            ._section
+              %span.name
+                = @prescription.patient.name
+            ._section.pull-right                      
+              %span
+                %span._age
+                  #{@prescription.patient.age}
+                  %span
+                    Y/O
+                %span.bump._gender #{ @prescription.patient.gender_abbrev }
+            .row
+              .col-md-12
+                ._body.focused
+                  .row
+                    .col-md-6.col-xs-12
+                      .ellipsis._double
+                        = @prescription.patient.address_street_1
+                    .col-md-6.col-xs-12.has-border
+                      .ellipsis
+                        = @prescription.patient.phone_primary
+                      .ellipsis{:title => (@prescription.patient.email_primary)}
+                        = @prescription.patient.email_primary                                                                                             
+                          
+      .row
+        .col-md-12
+          .section
+            ._body             
+              %table.table.table-item
+                %tbody
+                  - @prescription.prescripts.each do |p|
+                    %tr
+                      %td
+                        - unless p.free_flow? 
+                          #{p.strfrx}
+                          - unless p.free_flow_details.blank?
+                            \ - 
+                            #{p.free_flow_details}
+                        - else 
+                          #{p.free_flow_details}
+                          
+                        - unless p.repeating?
+                          %div
+                            %span._drug-repeat
+                              Repeat: #{p.repeats_remaining}                                  
+                      %td.text-right 
+                        .checkbox
+                          %label        
+                            %input{:type => "checkbox", :disabled => "true", :checked => p.filled?}
+                            
+      - unless @prescription.note.blank?                                                   
+        .row
+          .col-md-10
+            .section
+              ._body 
+                ._notes
+                  %p._small
+                    = @prescription.note
+                    
+      - if @prescription.allow_generic?
+        %p 
+          %strong
+            ** Generic approved
+      %p
+        %strong
+          Insurance: 
+        #{@prescription.insurer_names.join(', ').presence || 'None selected'}              
+      
+      %hr 
+      .row
+        .col-md-12
+          ._title Physician:
+          .section
+            ._fc-wrap
+              %h4
+                Dr. #{@prescription.physician.name}
+              %div
+                reg #
+                = @prescription.physician.reg_num                          
+
+        .col-md-12
+          .section
+            .focused._no-margin
+              .row
+                .col-md-6.col-xs-12
+                  %div.ellipsis
+                    = @prescription.physician.address_street_1
+                  %div.ellipsis
+                    = "#{@prescription.physician.address_territory}, #{@prescription.physician.address_country}"                       
+                .col-md-6.col-xs-12.has-border
+                  %div.ellipsis
+                    = @prescription.physician.phone_primary
+                  %div.ellipsis{:title => (@prescription.physician.email_primary)}
+                    = @prescription.physician.email_primary   
+                    
+      ._sdiukbnmwad4
+        = image_tag 'signature.gif' 
+        
+      - unless @prescription.dispensations.blank?                              
+        - @prescription.dispensations.each do |d|
+          %hr           
+          .row
+            .col-md-7
+              .section
+                ._fc-wrap
+                  %h4 
+                    Filled at 
+                    %strong= d.pharmacy.name
+                  %div
+                    reg #
+                    = d.pharmacy.reg_num
+                    
+            .col-md-5
+              .section                        
+                ._body
+                  .focused
+                    .row
+                      .col-md-12
+                        %div.ellipsis
+                          %strong= d.created_at.strftime('%I:%M %P')
+                        %div
+                          = d.created_at.strftime('%B %d, %Y')
+                        
+      - unless @prescription.pharmacy_id?
+        %hr
+        = form_for @prescription, :url => patient_prescription_path(@prescription) do |f|
+          .row
+            .col-md-12
+              .section._state
+                ._title Select Pharmacy
+                ._body
+                  .input-container
+                    .row
+                      .col-md-7
+                        %label._search
+                          = f.text_field :pharmacy_name, :placeholder => "Enter pharmacy's name", :data => { url: api_v1_search_pharmacies_path, autocomplete: true, 'item-template' => '#pharmacy_ac_item' }, :class => 'required ds-autocomplete'
+                          = f.hidden_field :pharmacy_id, :id => 'pharmacy_id'                              
+                      .col-md-5
+                        .action._large._normalize._fill._submit
+                          Send to Pharmacy
+                          = f.submit ''
+      
+      - else
+        %hr/
+        .row  
+          .col-md-12
+            ._title Sent to:
+            ._section
+              .row
+                .col-md-12
+                  ._fc-wrap
+                    %h4
+                      #{@prescription.pharmacy.name}
+                    %div
+                      reg #
+                      = @prescription.pharmacy.reg_num                          
+
+        - if @prescription.pharmacy
+          .row
+            .col-md-12
+              .focused
+                .row
+                  .col-md-6.col-xs-12
+                    %div.ellipsis
+                      = @prescription.pharmacy.address_street_1
+                    %div.ellipsis
+                      = "#{@prescription.pharmacy.address_territory}, #{@prescription.pharmacy.address_country}"
+                  .col-md-6.col-xs-12.has-border
+                    %div.ellipsis
+                      = @prescription.pharmacy.phone_primary
+                    %div.ellipsis
+                      = @prescription.pharmacy.email_primary                                                                       
+

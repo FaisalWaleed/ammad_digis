@@ -1,0 +1,2 @@
+module Physician::CardsHelper
+end

@@ -1,0 +1,84 @@
+= form_for [:test_center, @subscription] do |f|
+  %input{ :id => 'ds-secret', :type => 'hidden', :disabled => 'true', :value => Rails.application.secrets.stripe_publishable_key }
+  .multistep-ui  
+    ._progress-ui._styled
+      %ul
+        %li._next._active{:data => {'name' => '._step-one'}}
+          Choose your plan
+        %li#ds-progressing._next.hidden{:data => {'name' => '._step-two'}}
+         
+          
+    ._card._step-one
+      .section
+        .row
+          .col-md-12
+            - if current_subscription
+              ._body 
+                %span.subscr-plan-label
+                  %span.small-block.bump
+                    Current subscription expires -
+                    = current_subscription.expire_at.to_date.strftime('%d/%m/%Y')  
+            .input-container
+              .row
+                .col-md-12
+                  .inline-list.subscr-group._ui-toggle
+                    %ul.row
+                      - if session[:subscribe_plan_id].to_i == 0
+                        - selectedPlan = @plans.first.id rescue nil
+                      - else
+                        - selectedPlan = session[:subscribe_plan_id].to_i
+                        
+                      - @plans.each do |plan|
+                        %li.col-md-6.col-xs-12._handle._stackable{ :class => (plan.id == selectedPlan ? '_checked' : '') }
+                          %label._full-input
+                            %span.action._huge._fill
+                              #{ pluralize plan.subscription_period_amount, plan.subscription_period_unit } -
+                              #{ number_to_currency plan.price }
+                            = f.radio_button :plan_id, plan.id, :checked => (@plans.length == 1 || plan.id == selectedPlan)
+                            
+            .input-container                 
+              %label.checkbox
+                = f.check_box :renew_notify
+                %span.name
+                  Notify me when a renewal is due                    
+              %label.checkbox
+                = f.check_box :auto_renew
+                %span.name
+                  Automatically renew this subscription on my behalf                                                                                           
+
+
+      .section
+        .row
+          .col-md-12 
+            %hr
+            
+            = f.fields_for :payments, f.object.payments.build do |p|                 
+              = p.hidden_field :amount, :value => @subscription.price
+              = p.hidden_field :customer_type, :value  => 'TestCenter'
+              = p.hidden_field :customer_id, :value  => current_test_center.id
+              
+              = p.hidden_field :payer_email, :value  => current_test_center.email_primary
+              
+              = p.hidden_field :cc_token, class: "", "data-stripe" => "cc-token"
+            
+              = render :partial => 'partials/credit_card_form', locals: {f: f, payer: p}
+              
+            %hr
+            
+            .row      
+              .col-md-8.col-xs-12
+                = link_to 'cancel', test_center_subscriptions_path, :class => "action _large _clear text-left"   
+              .col-md-4.col-xs-12
+                .action._large._normalize.pull-right._submit{:tabindex => '0'}     
+                  Purchase
+                  = f.submit 
+
+    ._card._step-two._remove
+      ._prompt-wrap
+        ._prompt 
+          Please wait while we process your payment...        
+
+- content_for :page_js do 
+  = javascript_include_tag "https://js.stripe.com/v2/", 'data-turbolinks-track' => true
+  
+  

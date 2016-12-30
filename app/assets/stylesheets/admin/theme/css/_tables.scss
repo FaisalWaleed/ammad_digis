@@ -1,0 +1,124 @@
+body {
+    &.dg-admin {
+        .table {
+            border-color: $border-color;
+            &._clear {
+              border: none;
+              margin-bottom: 0;
+              td, tr {
+                border: none;
+              }
+            }
+            .col-check {
+                padding-right: 0px;
+            }
+            tr {
+                label {
+                    padding-left: 0
+                }
+                color: $body-color;
+            }
+            thead {
+                tr {
+                    border-top: 10px transparent solid;
+                    border-bottom: 10px transparent solid;
+                    th {
+                        padding-top: 0;
+                        padding-bottom: 0;
+                        background-color: transparent;
+                        vertical-align: middle;
+                        &:first-of-type, &.first {
+                          padding-left: 0;
+                        }
+                        &:last-of-type, &.last {
+                          padding-right: 0; 
+                        }                        
+                        .title {
+                            @extend .bold-txt;
+                            font-size: 0.875rem;
+                            color: $body-color;
+                            text-transform: capitalize;
+                        }
+                    }
+                }
+            }
+            tbody {
+                tr {
+                    font-size: 0.875rem;
+                    border-top: none;
+                    border-bottom-color: $grey3;
+                    padding-top: 0;
+                    padding-bottom: 0;
+                    padding-left: 0px;
+                    padding-right: 0px;                 
+                    td {
+                      vertical-align: middle;
+                      color: $input-color;
+                      border-top: none;
+                      border-bottom: 1px $grey3 solid; 
+                      padding-top: 0.9rem;
+                      padding-bottom: 0.9rem;
+                      @extend .regular-txt;
+                      &:first-of-type, &.first {
+                        padding-left: 0;
+                      }
+                      &:last-of-type, &.last {
+                        padding-right: 0; 
+                      }
+                      a {
+                        @extend .medium-txt;
+                        color: $active;
+                        &.ds-icon {                          
+                          font-size: 1.3rem;
+                        }
+                        &.action {
+                          color: $white;
+                        }
+                        &:hover {
+                            color: $active;
+                            &:after {
+                              color: $active; 
+                            }
+                        }
+                        &._ic-delete {
+                          &:hover {
+                            &:after {
+                              color: $urgent; 
+                            } 
+                          }
+                        }
+                      }
+                      .levels {
+                        color: $grey;
+                      }
+                      ._thumb { 
+                        width: 96px;
+                        display: inline-block;
+                        vertical-align: top;
+                        margin-right: 10px;
+                        img {
+                          @include border-radius(2px);
+                          border: 1px $grey solid;
+                        }
+                      }                        
+                    }
+                    .item-meta {
+                        color: $border-color;
+                        font-size: 0.875rem;
+                        @extend .regular-txt;
+                        * {
+                            margin-bottom: 0;
+                        }
+                        img {
+                            display: none;
+                            visibility: hidden;
+                        }
+                    }
+                    img {
+                        width: auto;
+                    }
+                }
+            }
+        }
+    }
+}

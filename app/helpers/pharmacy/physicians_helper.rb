@@ -1,0 +1,2 @@
+module Pharmacy::PhysiciansHelper
+end

@@ -1,0 +1,14 @@
+%tr.clickable{"data-target" => "#dg-tech-diagnostic", "data-toggle" => "modal", "data-url" => technician_diagnostic_path(diagnostic)}
+  %td= diagnostic.identifier
+  %td= diagnostic.patient.name
+  %td #{diagnostic.created_at.strftime("%m/%d/%Y")} 
+  %td #{pluralize(diagnostic.total_tests, 'test')}
+  %td.last.text-right
+    %a._notification{:class => (diagnostic.message_status.dasherize rescue '')}
+      %span._msg-count._circle
+        = diagnostic.messages.size
+      %span #{'Messages'.pluralize(diagnostic.messages.size)}
+  %td.hidden
+    = diagnostic.status
+  %td.hidden
+    = diagnostic.physician.name

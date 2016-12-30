@@ -1,0 +1,2527 @@
+@font-face {
+  font-family: 'dicons';
+  src: font-url('icons/dicons/dicons.eot?hz3m4d');
+  src: font-url('icons/dicons/dicons.eot?hz3m4d#iefix') format('embedded-opentype'),
+    font-url('icons/dicons/dicons.ttf?hz3m4d') format('truetype'),
+    font-url('icons/dicons/dicons.woff?hz3m4d') format('woff'),
+    font-url('icons/dicons/dicons.svg?hz3m4d#dicons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.dg-icon {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'dicons' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.ic-notes_square {
+    &:before {
+        content: $ic-notes_square;
+    }
+}
+.ic-delete {
+    &:before {
+        content: $ic-delete;
+    }
+}
+.ic-notepad {
+    &:before {
+        content: $ic-notepad;
+    }
+}
+.ic-drop-down-arrow {
+    &:before {
+        content: $ic-drop-down-arrow;
+    }
+}
+.ic-clipboard2 {
+    &:before {
+        content: $ic-clipboard2;
+    }
+}
+.ic-edit {
+    &:before {
+        content: $ic-edit;
+    }
+}
+.ic-image2 {
+    &:before {
+        content: $ic-image2;
+    }
+}
+.ic-message {
+    &:before {
+        content: $ic-message;
+    }
+}
+.ic-repeat {
+    &:before {
+        content: $ic-repeat;
+    }
+}
+.ic-home {
+    &:before {
+        content: $ic-home;
+    }
+}
+.ic-home2 {
+    &:before {
+        content: $ic-home2;
+    }
+}
+.ic-home3 {
+    &:before {
+        content: $ic-home3;
+    }
+}
+.ic-office {
+    &:before {
+        content: $ic-office;
+    }
+}
+.ic-newspaper {
+    &:before {
+        content: $ic-newspaper;
+    }
+}
+.ic-pencil {
+    &:before {
+        content: $ic-pencil;
+    }
+}
+.ic-pencil2 {
+    &:before {
+        content: $ic-pencil2;
+    }
+}
+.ic-quill {
+    &:before {
+        content: $ic-quill;
+    }
+}
+.ic-pen {
+    &:before {
+        content: $ic-pen;
+    }
+}
+.ic-blog {
+    &:before {
+        content: $ic-blog;
+    }
+}
+.ic-eyedropper {
+    &:before {
+        content: $ic-eyedropper;
+    }
+}
+.ic-droplet {
+    &:before {
+        content: $ic-droplet;
+    }
+}
+.ic-paint-format {
+    &:before {
+        content: $ic-paint-format;
+    }
+}
+.ic-image {
+    &:before {
+        content: $ic-image;
+    }
+}
+.ic-images {
+    &:before {
+        content: $ic-images;
+    }
+}
+.ic-camera {
+    &:before {
+        content: $ic-camera;
+    }
+}
+.ic-headphones {
+    &:before {
+        content: $ic-headphones;
+    }
+}
+.ic-music {
+    &:before {
+        content: $ic-music;
+    }
+}
+.ic-play {
+    &:before {
+        content: $ic-play;
+    }
+}
+.ic-film {
+    &:before {
+        content: $ic-film;
+    }
+}
+.ic-video-camera {
+    &:before {
+        content: $ic-video-camera;
+    }
+}
+.ic-dice {
+    &:before {
+        content: $ic-dice;
+    }
+}
+.ic-pacman {
+    &:before {
+        content: $ic-pacman;
+    }
+}
+.ic-spades {
+    &:before {
+        content: $ic-spades;
+    }
+}
+.ic-clubs {
+    &:before {
+        content: $ic-clubs;
+    }
+}
+.ic-diamonds {
+    &:before {
+        content: $ic-diamonds;
+    }
+}
+.ic-bullhorn {
+    &:before {
+        content: $ic-bullhorn;
+    }
+}
+.ic-connection {
+    &:before {
+        content: $ic-connection;
+    }
+}
+.ic-podcast {
+    &:before {
+        content: $ic-podcast;
+    }
+}
+.ic-feed {
+    &:before {
+        content: $ic-feed;
+    }
+}
+.ic-mic {
+    &:before {
+        content: $ic-mic;
+    }
+}
+.ic-book {
+    &:before {
+        content: $ic-book;
+    }
+}
+.ic-books {
+    &:before {
+        content: $ic-books;
+    }
+}
+.ic-library {
+    &:before {
+        content: $ic-library;
+    }
+}
+.ic-file-text {
+    &:before {
+        content: $ic-file-text;
+    }
+}
+.ic-profile {
+    &:before {
+        content: $ic-profile;
+    }
+}
+.ic-file-empty {
+    &:before {
+        content: $ic-file-empty;
+    }
+}
+.ic-files-empty {
+    &:before {
+        content: $ic-files-empty;
+    }
+}
+.ic-file-text2 {
+    &:before {
+        content: $ic-file-text2;
+    }
+}
+.ic-file-picture {
+    &:before {
+        content: $ic-file-picture;
+    }
+}
+.ic-file-music {
+    &:before {
+        content: $ic-file-music;
+    }
+}
+.ic-file-play {
+    &:before {
+        content: $ic-file-play;
+    }
+}
+.ic-file-video {
+    &:before {
+        content: $ic-file-video;
+    }
+}
+.ic-file-zip {
+    &:before {
+        content: $ic-file-zip;
+    }
+}
+.ic-copy {
+    &:before {
+        content: $ic-copy;
+    }
+}
+.ic-paste {
+    &:before {
+        content: $ic-paste;
+    }
+}
+.ic-stack {
+    &:before {
+        content: $ic-stack;
+    }
+}
+.ic-folder {
+    &:before {
+        content: $ic-folder;
+    }
+}
+.ic-folder-open {
+    &:before {
+        content: $ic-folder-open;
+    }
+}
+.ic-folder-plus {
+    &:before {
+        content: $ic-folder-plus;
+    }
+}
+.ic-folder-minus {
+    &:before {
+        content: $ic-folder-minus;
+    }
+}
+.ic-folder-download {
+    &:before {
+        content: $ic-folder-download;
+    }
+}
+.ic-folder-upload {
+    &:before {
+        content: $ic-folder-upload;
+    }
+}
+.ic-price-tag {
+    &:before {
+        content: $ic-price-tag;
+    }
+}
+.ic-price-tags {
+    &:before {
+        content: $ic-price-tags;
+    }
+}
+.ic-barcode {
+    &:before {
+        content: $ic-barcode;
+    }
+}
+.ic-qrcode {
+    &:before {
+        content: $ic-qrcode;
+    }
+}
+.ic-ticket {
+    &:before {
+        content: $ic-ticket;
+    }
+}
+.ic-cart {
+    &:before {
+        content: $ic-cart;
+    }
+}
+.ic-coin-dollar {
+    &:before {
+        content: $ic-coin-dollar;
+    }
+}
+.ic-coin-euro {
+    &:before {
+        content: $ic-coin-euro;
+    }
+}
+.ic-coin-pound {
+    &:before {
+        content: $ic-coin-pound;
+    }
+}
+.ic-coin-yen {
+    &:before {
+        content: $ic-coin-yen;
+    }
+}
+.ic-credit-card {
+    &:before {
+        content: $ic-credit-card;
+    }
+}
+.ic-calculator {
+    &:before {
+        content: $ic-calculator;
+    }
+}
+.ic-lifebuoy {
+    &:before {
+        content: $ic-lifebuoy;
+    }
+}
+.ic-phone {
+    &:before {
+        content: $ic-phone;
+    }
+}
+.ic-phone-hang-up {
+    &:before {
+        content: $ic-phone-hang-up;
+    }
+}
+.ic-address-book {
+    &:before {
+        content: $ic-address-book;
+    }
+}
+.ic-envelop {
+    &:before {
+        content: $ic-envelop;
+    }
+}
+.ic-pushpin {
+    &:before {
+        content: $ic-pushpin;
+    }
+}
+.ic-location {
+    &:before {
+        content: $ic-location;
+    }
+}
+.ic-location2 {
+    &:before {
+        content: $ic-location2;
+    }
+}
+.ic-compass {
+    &:before {
+        content: $ic-compass;
+    }
+}
+.ic-compass2 {
+    &:before {
+        content: $ic-compass2;
+    }
+}
+.ic-map {
+    &:before {
+        content: $ic-map;
+    }
+}
+.ic-map2 {
+    &:before {
+        content: $ic-map2;
+    }
+}
+.ic-history {
+    &:before {
+        content: $ic-history;
+    }
+}
+.ic-clock {
+    &:before {
+        content: $ic-clock;
+    }
+}
+.ic-clock2 {
+    &:before {
+        content: $ic-clock2;
+    }
+}
+.ic-alarm {
+    &:before {
+        content: $ic-alarm;
+    }
+}
+.ic-bell {
+    &:before {
+        content: $ic-bell;
+    }
+}
+.ic-stopwatch {
+    &:before {
+        content: $ic-stopwatch;
+    }
+}
+.ic-calendar {
+    &:before {
+        content: $ic-calendar;
+    }
+}
+.ic-printer {
+    &:before {
+        content: $ic-printer;
+    }
+}
+.ic-keyboard {
+    &:before {
+        content: $ic-keyboard;
+    }
+}
+.ic-display {
+    &:before {
+        content: $ic-display;
+    }
+}
+.ic-laptop {
+    &:before {
+        content: $ic-laptop;
+    }
+}
+.ic-mobile {
+    &:before {
+        content: $ic-mobile;
+    }
+}
+.ic-mobile2 {
+    &:before {
+        content: $ic-mobile2;
+    }
+}
+.ic-tablet {
+    &:before {
+        content: $ic-tablet;
+    }
+}
+.ic-tv {
+    &:before {
+        content: $ic-tv;
+    }
+}
+.ic-drawer {
+    &:before {
+        content: $ic-drawer;
+    }
+}
+.ic-drawer2 {
+    &:before {
+        content: $ic-drawer2;
+    }
+}
+.ic-box-add {
+    &:before {
+        content: $ic-box-add;
+    }
+}
+.ic-box-remove {
+    &:before {
+        content: $ic-box-remove;
+    }
+}
+.ic-download {
+    &:before {
+        content: $ic-download;
+    }
+}
+.ic-upload {
+    &:before {
+        content: $ic-upload;
+    }
+}
+.ic-floppy-disk {
+    &:before {
+        content: $ic-floppy-disk;
+    }
+}
+.ic-drive {
+    &:before {
+        content: $ic-drive;
+    }
+}
+.ic-database {
+    &:before {
+        content: $ic-database;
+    }
+}
+.ic-undo {
+    &:before {
+        content: $ic-undo;
+    }
+}
+.ic-redo {
+    &:before {
+        content: $ic-redo;
+    }
+}
+.ic-undo2 {
+    &:before {
+        content: $ic-undo2;
+    }
+}
+.ic-redo2 {
+    &:before {
+        content: $ic-redo2;
+    }
+}
+.ic-forward {
+    &:before {
+        content: $ic-forward;
+    }
+}
+.ic-reply {
+    &:before {
+        content: $ic-reply;
+    }
+}
+.ic-bubble {
+    &:before {
+        content: $ic-bubble;
+    }
+}
+.ic-bubbles {
+    &:before {
+        content: $ic-bubbles;
+    }
+}
+.ic-bubbles2 {
+    &:before {
+        content: $ic-bubbles2;
+    }
+}
+.ic-bubble2 {
+    &:before {
+        content: $ic-bubble2;
+    }
+}
+.ic-bubbles3 {
+    &:before {
+        content: $ic-bubbles3;
+    }
+}
+.ic-bubbles4 {
+    &:before {
+        content: $ic-bubbles4;
+    }
+}
+.ic-user {
+    &:before {
+        content: $ic-user;
+    }
+}
+.ic-users {
+    &:before {
+        content: $ic-users;
+    }
+}
+.ic-user-plus {
+    &:before {
+        content: $ic-user-plus;
+    }
+}
+.ic-user-minus {
+    &:before {
+        content: $ic-user-minus;
+    }
+}
+.ic-user-check {
+    &:before {
+        content: $ic-user-check;
+    }
+}
+.ic-user-tie {
+    &:before {
+        content: $ic-user-tie;
+    }
+}
+.ic-quotes-left {
+    &:before {
+        content: $ic-quotes-left;
+    }
+}
+.ic-quotes-right {
+    &:before {
+        content: $ic-quotes-right;
+    }
+}
+.ic-hour-glass {
+    &:before {
+        content: $ic-hour-glass;
+    }
+}
+.ic-spinner {
+    &:before {
+        content: $ic-spinner;
+    }
+}
+.ic-spinner2 {
+    &:before {
+        content: $ic-spinner2;
+    }
+}
+.ic-spinner3 {
+    &:before {
+        content: $ic-spinner3;
+    }
+}
+.ic-spinner4 {
+    &:before {
+        content: $ic-spinner4;
+    }
+}
+.ic-spinner5 {
+    &:before {
+        content: $ic-spinner5;
+    }
+}
+.ic-spinner6 {
+    &:before {
+        content: $ic-spinner6;
+    }
+}
+.ic-spinner7 {
+    &:before {
+        content: $ic-spinner7;
+    }
+}
+.ic-spinner8 {
+    &:before {
+        content: $ic-spinner8;
+    }
+}
+.ic-spinner9 {
+    &:before {
+        content: $ic-spinner9;
+    }
+}
+.ic-spinner10 {
+    &:before {
+        content: $ic-spinner10;
+    }
+}
+.ic-spinner11 {
+    &:before {
+        content: $ic-spinner11;
+    }
+}
+.ic-binoculars {
+    &:before {
+        content: $ic-binoculars;
+    }
+}
+.ic-search {
+    &:before {
+        content: $ic-search;
+    }
+}
+.ic-zoom-in {
+    &:before {
+        content: $ic-zoom-in;
+    }
+}
+.ic-zoom-out {
+    &:before {
+        content: $ic-zoom-out;
+    }
+}
+.ic-enlarge {
+    &:before {
+        content: $ic-enlarge;
+    }
+}
+.ic-shrink {
+    &:before {
+        content: $ic-shrink;
+    }
+}
+.ic-enlarge2 {
+    &:before {
+        content: $ic-enlarge2;
+    }
+}
+.ic-shrink2 {
+    &:before {
+        content: $ic-shrink2;
+    }
+}
+.ic-key {
+    &:before {
+        content: $ic-key;
+    }
+}
+.ic-key2 {
+    &:before {
+        content: $ic-key2;
+    }
+}
+.ic-lock {
+    &:before {
+        content: $ic-lock;
+    }
+}
+.ic-unlocked {
+    &:before {
+        content: $ic-unlocked;
+    }
+}
+.ic-wrench {
+    &:before {
+        content: $ic-wrench;
+    }
+}
+.ic-equalizer {
+    &:before {
+        content: $ic-equalizer;
+    }
+}
+.ic-equalizer2 {
+    &:before {
+        content: $ic-equalizer2;
+    }
+}
+.ic-cog {
+    &:before {
+        content: $ic-cog;
+    }
+}
+.ic-cogs {
+    &:before {
+        content: $ic-cogs;
+    }
+}
+.ic-hammer {
+    &:before {
+        content: $ic-hammer;
+    }
+}
+.ic-magic-wand {
+    &:before {
+        content: $ic-magic-wand;
+    }
+}
+.ic-aid-kit {
+    &:before {
+        content: $ic-aid-kit;
+    }
+}
+.ic-bug {
+    &:before {
+        content: $ic-bug;
+    }
+}
+.ic-pie-chart {
+    &:before {
+        content: $ic-pie-chart;
+    }
+}
+.ic-stats-dots {
+    &:before {
+        content: $ic-stats-dots;
+    }
+}
+.ic-stats-bars {
+    &:before {
+        content: $ic-stats-bars;
+    }
+}
+.ic-stats-bars2 {
+    &:before {
+        content: $ic-stats-bars2;
+    }
+}
+.ic-trophy {
+    &:before {
+        content: $ic-trophy;
+    }
+}
+.ic-gift {
+    &:before {
+        content: $ic-gift;
+    }
+}
+.ic-glass {
+    &:before {
+        content: $ic-glass;
+    }
+}
+.ic-glass2 {
+    &:before {
+        content: $ic-glass2;
+    }
+}
+.ic-mug {
+    &:before {
+        content: $ic-mug;
+    }
+}
+.ic-spoon-knife {
+    &:before {
+        content: $ic-spoon-knife;
+    }
+}
+.ic-leaf {
+    &:before {
+        content: $ic-leaf;
+    }
+}
+.ic-rocket {
+    &:before {
+        content: $ic-rocket;
+    }
+}
+.ic-meter {
+    &:before {
+        content: $ic-meter;
+    }
+}
+.ic-meter2 {
+    &:before {
+        content: $ic-meter2;
+    }
+}
+.ic-hammer2 {
+    &:before {
+        content: $ic-hammer2;
+    }
+}
+.ic-fire {
+    &:before {
+        content: $ic-fire;
+    }
+}
+.ic-lab {
+    &:before {
+        content: $ic-lab;
+    }
+}
+.ic-magnet {
+    &:before {
+        content: $ic-magnet;
+    }
+}
+.ic-bin {
+    &:before {
+        content: $ic-bin;
+    }
+}
+.ic-bin2 {
+    &:before {
+        content: $ic-bin2;
+    }
+}
+.ic-briefcase {
+    &:before {
+        content: $ic-briefcase;
+    }
+}
+.ic-airplane {
+    &:before {
+        content: $ic-airplane;
+    }
+}
+.ic-truck {
+    &:before {
+        content: $ic-truck;
+    }
+}
+.ic-road {
+    &:before {
+        content: $ic-road;
+    }
+}
+.ic-accessibility {
+    &:before {
+        content: $ic-accessibility;
+    }
+}
+.ic-target {
+    &:before {
+        content: $ic-target;
+    }
+}
+.ic-shield {
+    &:before {
+        content: $ic-shield;
+    }
+}
+.ic-power {
+    &:before {
+        content: $ic-power;
+    }
+}
+.ic-switch {
+    &:before {
+        content: $ic-switch;
+    }
+}
+.ic-power-cord {
+    &:before {
+        content: $ic-power-cord;
+    }
+}
+.ic-clipboard {
+    &:before {
+        content: $ic-clipboard;
+    }
+}
+.ic-list-numbered {
+    &:before {
+        content: $ic-list-numbered;
+    }
+}
+.ic-list {
+    &:before {
+        content: $ic-list;
+    }
+}
+.ic-list2 {
+    &:before {
+        content: $ic-list2;
+    }
+}
+.ic-tree {
+    &:before {
+        content: $ic-tree;
+    }
+}
+.ic-menu {
+    &:before {
+        content: $ic-menu;
+    }
+}
+.ic-menu2 {
+    &:before {
+        content: $ic-menu2;
+    }
+}
+.ic-menu3 {
+    &:before {
+        content: $ic-menu3;
+    }
+}
+.ic-menu4 {
+    &:before {
+        content: $ic-menu4;
+    }
+}
+.ic-cloud {
+    &:before {
+        content: $ic-cloud;
+    }
+}
+.ic-cloud-download {
+    &:before {
+        content: $ic-cloud-download;
+    }
+}
+.ic-cloud-upload {
+    &:before {
+        content: $ic-cloud-upload;
+    }
+}
+.ic-cloud-check {
+    &:before {
+        content: $ic-cloud-check;
+    }
+}
+.ic-download2 {
+    &:before {
+        content: $ic-download2;
+    }
+}
+.ic-upload2 {
+    &:before {
+        content: $ic-upload2;
+    }
+}
+.ic-download3 {
+    &:before {
+        content: $ic-download3;
+    }
+}
+.ic-upload3 {
+    &:before {
+        content: $ic-upload3;
+    }
+}
+.ic-sphere {
+    &:before {
+        content: $ic-sphere;
+    }
+}
+.ic-earth {
+    &:before {
+        content: $ic-earth;
+    }
+}
+.ic-link {
+    &:before {
+        content: $ic-link;
+    }
+}
+.ic-flag {
+    &:before {
+        content: $ic-flag;
+    }
+}
+.ic-attachment {
+    &:before {
+        content: $ic-attachment;
+    }
+}
+.ic-eye {
+    &:before {
+        content: $ic-eye;
+    }
+}
+.ic-eye-plus {
+    &:before {
+        content: $ic-eye-plus;
+    }
+}
+.ic-eye-minus {
+    &:before {
+        content: $ic-eye-minus;
+    }
+}
+.ic-eye-blocked {
+    &:before {
+        content: $ic-eye-blocked;
+    }
+}
+.ic-bookmark {
+    &:before {
+        content: $ic-bookmark;
+    }
+}
+.ic-bookmarks {
+    &:before {
+        content: $ic-bookmarks;
+    }
+}
+.ic-sun {
+    &:before {
+        content: $ic-sun;
+    }
+}
+.ic-contrast {
+    &:before {
+        content: $ic-contrast;
+    }
+}
+.ic-brightness-contrast {
+    &:before {
+        content: $ic-brightness-contrast;
+    }
+}
+.ic-star-empty {
+    &:before {
+        content: $ic-star-empty;
+    }
+}
+.ic-star-half {
+    &:before {
+        content: $ic-star-half;
+    }
+}
+.ic-star-full {
+    &:before {
+        content: $ic-star-full;
+    }
+}
+.ic-heart {
+    &:before {
+        content: $ic-heart;
+    }
+}
+.ic-heart-broken {
+    &:before {
+        content: $ic-heart-broken;
+    }
+}
+.ic-man {
+    &:before {
+        content: $ic-man;
+    }
+}
+.ic-woman {
+    &:before {
+        content: $ic-woman;
+    }
+}
+.ic-man-woman {
+    &:before {
+        content: $ic-man-woman;
+    }
+}
+.ic-happy {
+    &:before {
+        content: $ic-happy;
+    }
+}
+.ic-happy2 {
+    &:before {
+        content: $ic-happy2;
+    }
+}
+.ic-smile {
+    &:before {
+        content: $ic-smile;
+    }
+}
+.ic-smile2 {
+    &:before {
+        content: $ic-smile2;
+    }
+}
+.ic-tongue {
+    &:before {
+        content: $ic-tongue;
+    }
+}
+.ic-tongue2 {
+    &:before {
+        content: $ic-tongue2;
+    }
+}
+.ic-sad {
+    &:before {
+        content: $ic-sad;
+    }
+}
+.ic-sad2 {
+    &:before {
+        content: $ic-sad2;
+    }
+}
+.ic-wink {
+    &:before {
+        content: $ic-wink;
+    }
+}
+.ic-wink2 {
+    &:before {
+        content: $ic-wink2;
+    }
+}
+.ic-grin {
+    &:before {
+        content: $ic-grin;
+    }
+}
+.ic-grin2 {
+    &:before {
+        content: $ic-grin2;
+    }
+}
+.ic-cool {
+    &:before {
+        content: $ic-cool;
+    }
+}
+.ic-cool2 {
+    &:before {
+        content: $ic-cool2;
+    }
+}
+.ic-angry {
+    &:before {
+        content: $ic-angry;
+    }
+}
+.ic-angry2 {
+    &:before {
+        content: $ic-angry2;
+    }
+}
+.ic-evil {
+    &:before {
+        content: $ic-evil;
+    }
+}
+.ic-evil2 {
+    &:before {
+        content: $ic-evil2;
+    }
+}
+.ic-shocked {
+    &:before {
+        content: $ic-shocked;
+    }
+}
+.ic-shocked2 {
+    &:before {
+        content: $ic-shocked2;
+    }
+}
+.ic-baffled {
+    &:before {
+        content: $ic-baffled;
+    }
+}
+.ic-baffled2 {
+    &:before {
+        content: $ic-baffled2;
+    }
+}
+.ic-confused {
+    &:before {
+        content: $ic-confused;
+    }
+}
+.ic-confused2 {
+    &:before {
+        content: $ic-confused2;
+    }
+}
+.ic-neutral {
+    &:before {
+        content: $ic-neutral;
+    }
+}
+.ic-neutral2 {
+    &:before {
+        content: $ic-neutral2;
+    }
+}
+.ic-hipster {
+    &:before {
+        content: $ic-hipster;
+    }
+}
+.ic-hipster2 {
+    &:before {
+        content: $ic-hipster2;
+    }
+}
+.ic-wondering {
+    &:before {
+        content: $ic-wondering;
+    }
+}
+.ic-wondering2 {
+    &:before {
+        content: $ic-wondering2;
+    }
+}
+.ic-sleepy {
+    &:before {
+        content: $ic-sleepy;
+    }
+}
+.ic-sleepy2 {
+    &:before {
+        content: $ic-sleepy2;
+    }
+}
+.ic-frustrated {
+    &:before {
+        content: $ic-frustrated;
+    }
+}
+.ic-frustrated2 {
+    &:before {
+        content: $ic-frustrated2;
+    }
+}
+.ic-crying {
+    &:before {
+        content: $ic-crying;
+    }
+}
+.ic-crying2 {
+    &:before {
+        content: $ic-crying2;
+    }
+}
+.ic-point-up {
+    &:before {
+        content: $ic-point-up;
+    }
+}
+.ic-point-right {
+    &:before {
+        content: $ic-point-right;
+    }
+}
+.ic-point-down {
+    &:before {
+        content: $ic-point-down;
+    }
+}
+.ic-point-left {
+    &:before {
+        content: $ic-point-left;
+    }
+}
+.ic-warning {
+    &:before {
+        content: $ic-warning;
+    }
+}
+.ic-notification {
+    &:before {
+        content: $ic-notification;
+    }
+}
+.ic-question {
+    &:before {
+        content: $ic-question;
+    }
+}
+.ic-plus {
+    &:before {
+        content: $ic-plus;
+    }
+}
+.ic-minus {
+    &:before {
+        content: $ic-minus;
+    }
+}
+.ic-info {
+    &:before {
+        content: $ic-info;
+    }
+}
+.ic-cancel-circle {
+    &:before {
+        content: $ic-cancel-circle;
+    }
+}
+.ic-blocked {
+    &:before {
+        content: $ic-blocked;
+    }
+}
+.ic-cross {
+    &:before {
+        content: $ic-cross;
+    }
+}
+.ic-checkmark {
+    &:before {
+        content: $ic-checkmark;
+    }
+}
+.ic-checkmark2 {
+    &:before {
+        content: $ic-checkmark2;
+    }
+}
+.ic-spell-check {
+    &:before {
+        content: $ic-spell-check;
+    }
+}
+.ic-enter {
+    &:before {
+        content: $ic-enter;
+    }
+}
+.ic-exit {
+    &:before {
+        content: $ic-exit;
+    }
+}
+.ic-play2 {
+    &:before {
+        content: $ic-play2;
+    }
+}
+.ic-pause {
+    &:before {
+        content: $ic-pause;
+    }
+}
+.ic-stop {
+    &:before {
+        content: $ic-stop;
+    }
+}
+.ic-previous {
+    &:before {
+        content: $ic-previous;
+    }
+}
+.ic-next {
+    &:before {
+        content: $ic-next;
+    }
+}
+.ic-backward {
+    &:before {
+        content: $ic-backward;
+    }
+}
+.ic-forward2 {
+    &:before {
+        content: $ic-forward2;
+    }
+}
+.ic-play3 {
+    &:before {
+        content: $ic-play3;
+    }
+}
+.ic-pause2 {
+    &:before {
+        content: $ic-pause2;
+    }
+}
+.ic-stop2 {
+    &:before {
+        content: $ic-stop2;
+    }
+}
+.ic-backward2 {
+    &:before {
+        content: $ic-backward2;
+    }
+}
+.ic-forward3 {
+    &:before {
+        content: $ic-forward3;
+    }
+}
+.ic-first {
+    &:before {
+        content: $ic-first;
+    }
+}
+.ic-last {
+    &:before {
+        content: $ic-last;
+    }
+}
+.ic-previous2 {
+    &:before {
+        content: $ic-previous2;
+    }
+}
+.ic-next2 {
+    &:before {
+        content: $ic-next2;
+    }
+}
+.ic-eject {
+    &:before {
+        content: $ic-eject;
+    }
+}
+.ic-volume-high {
+    &:before {
+        content: $ic-volume-high;
+    }
+}
+.ic-volume-medium {
+    &:before {
+        content: $ic-volume-medium;
+    }
+}
+.ic-volume-low {
+    &:before {
+        content: $ic-volume-low;
+    }
+}
+.ic-volume-mute {
+    &:before {
+        content: $ic-volume-mute;
+    }
+}
+.ic-volume-mute2 {
+    &:before {
+        content: $ic-volume-mute2;
+    }
+}
+.ic-volume-increase {
+    &:before {
+        content: $ic-volume-increase;
+    }
+}
+.ic-volume-decrease {
+    &:before {
+        content: $ic-volume-decrease;
+    }
+}
+.ic-loop {
+    &:before {
+        content: $ic-loop;
+    }
+}
+.ic-loop2 {
+    &:before {
+        content: $ic-loop2;
+    }
+}
+.ic-infinite {
+    &:before {
+        content: $ic-infinite;
+    }
+}
+.ic-shuffle {
+    &:before {
+        content: $ic-shuffle;
+    }
+}
+.ic-arrow-up-left {
+    &:before {
+        content: $ic-arrow-up-left;
+    }
+}
+.ic-arrow-up {
+    &:before {
+        content: $ic-arrow-up;
+    }
+}
+.ic-arrow-up-right {
+    &:before {
+        content: $ic-arrow-up-right;
+    }
+}
+.ic-arrow-right {
+    &:before {
+        content: $ic-arrow-right;
+    }
+}
+.ic-arrow-down-right {
+    &:before {
+        content: $ic-arrow-down-right;
+    }
+}
+.ic-arrow-down {
+    &:before {
+        content: $ic-arrow-down;
+    }
+}
+.ic-arrow-down-left {
+    &:before {
+        content: $ic-arrow-down-left;
+    }
+}
+.ic-arrow-left {
+    &:before {
+        content: $ic-arrow-left;
+    }
+}
+.ic-arrow-up-left2 {
+    &:before {
+        content: $ic-arrow-up-left2;
+    }
+}
+.ic-arrow-up2 {
+    &:before {
+        content: $ic-arrow-up2;
+    }
+}
+.ic-arrow-up-right2 {
+    &:before {
+        content: $ic-arrow-up-right2;
+    }
+}
+.ic-arrow-right2 {
+    &:before {
+        content: $ic-arrow-right2;
+    }
+}
+.ic-arrow-down-right2 {
+    &:before {
+        content: $ic-arrow-down-right2;
+    }
+}
+.ic-arrow-down2 {
+    &:before {
+        content: $ic-arrow-down2;
+    }
+}
+.ic-arrow-down-left2 {
+    &:before {
+        content: $ic-arrow-down-left2;
+    }
+}
+.ic-arrow-left2 {
+    &:before {
+        content: $ic-arrow-left2;
+    }
+}
+.ic-circle-up {
+    &:before {
+        content: $ic-circle-up;
+    }
+}
+.ic-circle-right {
+    &:before {
+        content: $ic-circle-right;
+    }
+}
+.ic-circle-down {
+    &:before {
+        content: $ic-circle-down;
+    }
+}
+.ic-circle-left {
+    &:before {
+        content: $ic-circle-left;
+    }
+}
+.ic-tab {
+    &:before {
+        content: $ic-tab;
+    }
+}
+.ic-move-up {
+    &:before {
+        content: $ic-move-up;
+    }
+}
+.ic-move-down {
+    &:before {
+        content: $ic-move-down;
+    }
+}
+.ic-sort-alpha-asc {
+    &:before {
+        content: $ic-sort-alpha-asc;
+    }
+}
+.ic-sort-alpha-desc {
+    &:before {
+        content: $ic-sort-alpha-desc;
+    }
+}
+.ic-sort-numeric-asc {
+    &:before {
+        content: $ic-sort-numeric-asc;
+    }
+}
+.ic-sort-numberic-desc {
+    &:before {
+        content: $ic-sort-numberic-desc;
+    }
+}
+.ic-sort-amount-asc {
+    &:before {
+        content: $ic-sort-amount-asc;
+    }
+}
+.ic-sort-amount-desc {
+    &:before {
+        content: $ic-sort-amount-desc;
+    }
+}
+.ic-command {
+    &:before {
+        content: $ic-command;
+    }
+}
+.ic-shift {
+    &:before {
+        content: $ic-shift;
+    }
+}
+.ic-ctrl {
+    &:before {
+        content: $ic-ctrl;
+    }
+}
+.ic-opt {
+    &:before {
+        content: $ic-opt;
+    }
+}
+.ic-checkbox-checked {
+    &:before {
+        content: $ic-checkbox-checked;
+    }
+}
+.ic-checkbox-unchecked {
+    &:before {
+        content: $ic-checkbox-unchecked;
+    }
+}
+.ic-radio-checked {
+    &:before {
+        content: $ic-radio-checked;
+    }
+}
+.ic-radio-checked2 {
+    &:before {
+        content: $ic-radio-checked2;
+    }
+}
+.ic-radio-unchecked {
+    &:before {
+        content: $ic-radio-unchecked;
+    }
+}
+.ic-crop {
+    &:before {
+        content: $ic-crop;
+    }
+}
+.ic-make-group {
+    &:before {
+        content: $ic-make-group;
+    }
+}
+.ic-ungroup {
+    &:before {
+        content: $ic-ungroup;
+    }
+}
+.ic-scissors {
+    &:before {
+        content: $ic-scissors;
+    }
+}
+.ic-filter {
+    &:before {
+        content: $ic-filter;
+    }
+}
+.ic-font {
+    &:before {
+        content: $ic-font;
+    }
+}
+.ic-ligature {
+    &:before {
+        content: $ic-ligature;
+    }
+}
+.ic-ligature2 {
+    &:before {
+        content: $ic-ligature2;
+    }
+}
+.ic-text-height {
+    &:before {
+        content: $ic-text-height;
+    }
+}
+.ic-text-width {
+    &:before {
+        content: $ic-text-width;
+    }
+}
+.ic-font-size {
+    &:before {
+        content: $ic-font-size;
+    }
+}
+.ic-bold {
+    &:before {
+        content: $ic-bold;
+    }
+}
+.ic-underline {
+    &:before {
+        content: $ic-underline;
+    }
+}
+.ic-italic {
+    &:before {
+        content: $ic-italic;
+    }
+}
+.ic-strikethrough {
+    &:before {
+        content: $ic-strikethrough;
+    }
+}
+.ic-omega {
+    &:before {
+        content: $ic-omega;
+    }
+}
+.ic-sigma {
+    &:before {
+        content: $ic-sigma;
+    }
+}
+.ic-page-break {
+    &:before {
+        content: $ic-page-break;
+    }
+}
+.ic-superscript {
+    &:before {
+        content: $ic-superscript;
+    }
+}
+.ic-subscript {
+    &:before {
+        content: $ic-subscript;
+    }
+}
+.ic-superscript2 {
+    &:before {
+        content: $ic-superscript2;
+    }
+}
+.ic-subscript2 {
+    &:before {
+        content: $ic-subscript2;
+    }
+}
+.ic-text-color {
+    &:before {
+        content: $ic-text-color;
+    }
+}
+.ic-pagebreak {
+    &:before {
+        content: $ic-pagebreak;
+    }
+}
+.ic-clear-formatting {
+    &:before {
+        content: $ic-clear-formatting;
+    }
+}
+.ic-table {
+    &:before {
+        content: $ic-table;
+    }
+}
+.ic-table2 {
+    &:before {
+        content: $ic-table2;
+    }
+}
+.ic-insert-template {
+    &:before {
+        content: $ic-insert-template;
+    }
+}
+.ic-pilcrow {
+    &:before {
+        content: $ic-pilcrow;
+    }
+}
+.ic-ltr {
+    &:before {
+        content: $ic-ltr;
+    }
+}
+.ic-rtl {
+    &:before {
+        content: $ic-rtl;
+    }
+}
+.ic-section {
+    &:before {
+        content: $ic-section;
+    }
+}
+.ic-paragraph-left {
+    &:before {
+        content: $ic-paragraph-left;
+    }
+}
+.ic-paragraph-center {
+    &:before {
+        content: $ic-paragraph-center;
+    }
+}
+.ic-paragraph-right {
+    &:before {
+        content: $ic-paragraph-right;
+    }
+}
+.ic-paragraph-justify {
+    &:before {
+        content: $ic-paragraph-justify;
+    }
+}
+.ic-indent-increase {
+    &:before {
+        content: $ic-indent-increase;
+    }
+}
+.ic-indent-decrease {
+    &:before {
+        content: $ic-indent-decrease;
+    }
+}
+.ic-share {
+    &:before {
+        content: $ic-share;
+    }
+}
+.ic-new-tab {
+    &:before {
+        content: $ic-new-tab;
+    }
+}
+.ic-embed {
+    &:before {
+        content: $ic-embed;
+    }
+}
+.ic-embed2 {
+    &:before {
+        content: $ic-embed2;
+    }
+}
+.ic-terminal {
+    &:before {
+        content: $ic-terminal;
+    }
+}
+.ic-share2 {
+    &:before {
+        content: $ic-share2;
+    }
+}
+.ic-mail {
+    &:before {
+        content: $ic-mail;
+    }
+}
+.ic-mail2 {
+    &:before {
+        content: $ic-mail2;
+    }
+}
+.ic-mail3 {
+    &:before {
+        content: $ic-mail3;
+    }
+}
+.ic-mail4 {
+    &:before {
+        content: $ic-mail4;
+    }
+}
+.ic-google {
+    &:before {
+        content: $ic-google;
+    }
+}
+.ic-google-plus {
+    &:before {
+        content: $ic-google-plus;
+    }
+}
+.ic-google-plus2 {
+    &:before {
+        content: $ic-google-plus2;
+    }
+}
+.ic-google-plus3 {
+    &:before {
+        content: $ic-google-plus3;
+    }
+}
+.ic-google-drive {
+    &:before {
+        content: $ic-google-drive;
+    }
+}
+.ic-facebook {
+    &:before {
+        content: $ic-facebook;
+    }
+}
+.ic-facebook2 {
+    &:before {
+        content: $ic-facebook2;
+    }
+}
+.ic-facebook3 {
+    &:before {
+        content: $ic-facebook3;
+    }
+}
+.ic-ello {
+    &:before {
+        content: $ic-ello;
+    }
+}
+.ic-instagram {
+    &:before {
+        content: $ic-instagram;
+    }
+}
+.ic-twitter {
+    &:before {
+        content: $ic-twitter;
+    }
+}
+.ic-twitter2 {
+    &:before {
+        content: $ic-twitter2;
+    }
+}
+.ic-twitter3 {
+    &:before {
+        content: $ic-twitter3;
+    }
+}
+.ic-feed2 {
+    &:before {
+        content: $ic-feed2;
+    }
+}
+.ic-feed3 {
+    &:before {
+        content: $ic-feed3;
+    }
+}
+.ic-feed4 {
+    &:before {
+        content: $ic-feed4;
+    }
+}
+.ic-youtube {
+    &:before {
+        content: $ic-youtube;
+    }
+}
+.ic-youtube2 {
+    &:before {
+        content: $ic-youtube2;
+    }
+}
+.ic-youtube3 {
+    &:before {
+        content: $ic-youtube3;
+    }
+}
+.ic-youtube4 {
+    &:before {
+        content: $ic-youtube4;
+    }
+}
+.ic-twitch {
+    &:before {
+        content: $ic-twitch;
+    }
+}
+.ic-vimeo {
+    &:before {
+        content: $ic-vimeo;
+    }
+}
+.ic-vimeo2 {
+    &:before {
+        content: $ic-vimeo2;
+    }
+}
+.ic-vimeo3 {
+    &:before {
+        content: $ic-vimeo3;
+    }
+}
+.ic-lanyrd {
+    &:before {
+        content: $ic-lanyrd;
+    }
+}
+.ic-flickr {
+    &:before {
+        content: $ic-flickr;
+    }
+}
+.ic-flickr2 {
+    &:before {
+        content: $ic-flickr2;
+    }
+}
+.ic-flickr3 {
+    &:before {
+        content: $ic-flickr3;
+    }
+}
+.ic-flickr4 {
+    &:before {
+        content: $ic-flickr4;
+    }
+}
+.ic-picassa {
+    &:before {
+        content: $ic-picassa;
+    }
+}
+.ic-picassa2 {
+    &:before {
+        content: $ic-picassa2;
+    }
+}
+.ic-dribbble {
+    &:before {
+        content: $ic-dribbble;
+    }
+}
+.ic-dribbble2 {
+    &:before {
+        content: $ic-dribbble2;
+    }
+}
+.ic-dribbble3 {
+    &:before {
+        content: $ic-dribbble3;
+    }
+}
+.ic-forrst {
+    &:before {
+        content: $ic-forrst;
+    }
+}
+.ic-forrst2 {
+    &:before {
+        content: $ic-forrst2;
+    }
+}
+.ic-deviantart {
+    &:before {
+        content: $ic-deviantart;
+    }
+}
+.ic-deviantart2 {
+    &:before {
+        content: $ic-deviantart2;
+    }
+}
+.ic-steam {
+    &:before {
+        content: $ic-steam;
+    }
+}
+.ic-steam2 {
+    &:before {
+        content: $ic-steam2;
+    }
+}
+.ic-dropbox {
+    &:before {
+        content: $ic-dropbox;
+    }
+}
+.ic-onedrive {
+    &:before {
+        content: $ic-onedrive;
+    }
+}
+.ic-github {
+    &:before {
+        content: $ic-github;
+    }
+}
+.ic-github2 {
+    &:before {
+        content: $ic-github2;
+    }
+}
+.ic-github3 {
+    &:before {
+        content: $ic-github3;
+    }
+}
+.ic-github4 {
+    &:before {
+        content: $ic-github4;
+    }
+}
+.ic-github5 {
+    &:before {
+        content: $ic-github5;
+    }
+}
+.ic-wordpress {
+    &:before {
+        content: $ic-wordpress;
+    }
+}
+.ic-wordpress2 {
+    &:before {
+        content: $ic-wordpress2;
+    }
+}
+.ic-joomla {
+    &:before {
+        content: $ic-joomla;
+    }
+}
+.ic-blogger {
+    &:before {
+        content: $ic-blogger;
+    }
+}
+.ic-blogger2 {
+    &:before {
+        content: $ic-blogger2;
+    }
+}
+.ic-tumblr {
+    &:before {
+        content: $ic-tumblr;
+    }
+}
+.ic-tumblr2 {
+    &:before {
+        content: $ic-tumblr2;
+    }
+}
+.ic-yahoo {
+    &:before {
+        content: $ic-yahoo;
+    }
+}
+.ic-tux {
+    &:before {
+        content: $ic-tux;
+    }
+}
+.ic-apple {
+    &:before {
+        content: $ic-apple;
+    }
+}
+.ic-finder {
+    &:before {
+        content: $ic-finder;
+    }
+}
+.ic-android {
+    &:before {
+        content: $ic-android;
+    }
+}
+.ic-windows {
+    &:before {
+        content: $ic-windows;
+    }
+}
+.ic-windows8 {
+    &:before {
+        content: $ic-windows8;
+    }
+}
+.ic-soundcloud {
+    &:before {
+        content: $ic-soundcloud;
+    }
+}
+.ic-soundcloud2 {
+    &:before {
+        content: $ic-soundcloud2;
+    }
+}
+.ic-skype {
+    &:before {
+        content: $ic-skype;
+    }
+}
+.ic-reddit {
+    &:before {
+        content: $ic-reddit;
+    }
+}
+.ic-linkedin {
+    &:before {
+        content: $ic-linkedin;
+    }
+}
+.ic-linkedin2 {
+    &:before {
+        content: $ic-linkedin2;
+    }
+}
+.ic-lastfm {
+    &:before {
+        content: $ic-lastfm;
+    }
+}
+.ic-lastfm2 {
+    &:before {
+        content: $ic-lastfm2;
+    }
+}
+.ic-delicious {
+    &:before {
+        content: $ic-delicious;
+    }
+}
+.ic-stumbleupon {
+    &:before {
+        content: $ic-stumbleupon;
+    }
+}
+.ic-stumbleupon2 {
+    &:before {
+        content: $ic-stumbleupon2;
+    }
+}
+.ic-stackoverflow {
+    &:before {
+        content: $ic-stackoverflow;
+    }
+}
+.ic-pinterest {
+    &:before {
+        content: $ic-pinterest;
+    }
+}
+.ic-pinterest2 {
+    &:before {
+        content: $ic-pinterest2;
+    }
+}
+.ic-xing {
+    &:before {
+        content: $ic-xing;
+    }
+}
+.ic-xing2 {
+    &:before {
+        content: $ic-xing2;
+    }
+}
+.ic-flattr {
+    &:before {
+        content: $ic-flattr;
+    }
+}
+.ic-foursquare {
+    &:before {
+        content: $ic-foursquare;
+    }
+}
+.ic-paypal {
+    &:before {
+        content: $ic-paypal;
+    }
+}
+.ic-paypal2 {
+    &:before {
+        content: $ic-paypal2;
+    }
+}
+.ic-paypal3 {
+    &:before {
+        content: $ic-paypal3;
+    }
+}
+.ic-yelp {
+    &:before {
+        content: $ic-yelp;
+    }
+}
+.ic-file-pdf {
+    &:before {
+        content: $ic-file-pdf;
+    }
+}
+.ic-file-openoffice {
+    &:before {
+        content: $ic-file-openoffice;
+    }
+}
+.ic-file-word {
+    &:before {
+        content: $ic-file-word;
+    }
+}
+.ic-file-excel {
+    &:before {
+        content: $ic-file-excel;
+    }
+}
+.ic-libreoffice {
+    &:before {
+        content: $ic-libreoffice;
+    }
+}
+.ic-html5 {
+    &:before {
+        content: $ic-html5;
+    }
+}
+.ic-html52 {
+    &:before {
+        content: $ic-html52;
+    }
+}
+.ic-css3 {
+    &:before {
+        content: $ic-css3;
+    }
+}
+.ic-git {
+    &:before {
+        content: $ic-git;
+    }
+}
+.ic-svg {
+    &:before {
+        content: $ic-svg;
+    }
+}
+.ic-codepen {
+    &:before {
+        content: $ic-codepen;
+    }
+}
+.ic-chrome {
+    &:before {
+        content: $ic-chrome;
+    }
+}
+.ic-firefox {
+    &:before {
+        content: $ic-firefox;
+    }
+}
+.ic-IE {
+    &:before {
+        content: $ic-IE;
+    }
+}
+.ic-opera {
+    &:before {
+        content: $ic-opera;
+    }
+}
+.ic-safari {
+    &:before {
+        content: $ic-safari;
+    }
+}
+.ic-IcoMoon {
+    &:before {
+        content: $ic-IcoMoon;
+    }
+}
+

@@ -1,0 +1,47 @@
+#client-sidebar-bg
+#client-sidebar
+  .row
+    .col-md-12
+      ._menu-wrap._logo
+        .client-image
+          .image-holder
+            = link_to image_tag( 'logo.png'), pharmacy_root_path
+      
+      ._menu-wrap._menu-links
+        .menu-group
+          %ul
+            %li
+              = active_link_to pharmacy_pharmacists_path, :active => [['pharmacy/pharmacists', 'pharmacy'], []] do
+                %span.menu-label Pharmacists         
+            %li
+              = active_link_to pharmacy_disbursements_path, :active => [['pharmacy/disbursements', 'pharmacy'], []] do
+                %span.menu-label Disbursements         
+                
+      ._menu-wrap._right
+        .notification-group
+          %ul   
+            %li._seperator._left                  
+            %li.list-item
+              %a._show-more._stage
+                ._profile-image
+                  = image_tag current_pharmacy.avatar.url(:small)
+                %span.menu-label 
+                  #{current_pharmacy.name rescue 'Pharmacy'}
+              %div._more
+                %ul
+                  %li
+                    = active_link_to pharmacy_subscriptions_path do
+                      %span.menu-label Subscription                             
+                  %li
+                    = link_to pharmacy_profile_edit_path do
+                      %span.menu-label Profile                    
+                  %li
+                    = link_to pharmacy_logout_path do
+                      %span.menu-label Logout       
+                    
+#notice-container  
+  ._notice-wrap
+    ._ui
+      - unless flash.blank?             
+        = render 'partials/notice_flash'   
+      = yield :notice_list         

@@ -1,0 +1,134 @@
+- if @patient.errors.any?
+  - content_for :notice_list do
+    .row
+      .col-md-12
+        - @patient.errors.each do |attr, msg|
+          ._msg._error
+            #{attr.to_s.humanize} #{msg} 
+
+= form_for [:physician, @patient] do |f|       
+  .section
+    .row
+      .col-md-12
+        .row
+          .col-md-4.col-md-offset-4
+            .input-container                 
+              ._input-group
+                .focused             
+                  ._image-holder
+                    - if @patient.avatar.url(:original).blank?
+                      %span.dg-icon.ic-gallery                          
+                    - else
+                      = image_tag @patient.avatar.url(:thumb)          
+
+                  %label._full-input
+                    ._file-input
+                      %span Upload photo
+                      = f.file_field :avatar        
+        ._section
+          %h3.title Personal Information
+        ._body
+          .row
+            .col-md-5
+              .input-container                  
+                %label._full-input
+                  %span.name
+                    First name                
+                  = f.text_field :firstname, :class => "required"
+                  .form-helper
+                    The patient's first name is required                          
+            .col-md-2
+              .input-container                        
+                %label._full-input
+                  %span.name
+                    Middle initial                
+                  = f.text_field :middlename                  
+                  
+            .col-md-5
+              .input-container                        
+                %label._full-input
+                  %span.name
+                    Last name                
+                  = f.text_field :lastname, :class => "required" 
+                  .form-helper
+                    The patient's last name is required.                           
+
+          .row
+            .col-md-3
+              .input-container                        
+                %label._full-input
+                  %span.name
+                    Gender                
+                  = f.select :gender_id, Gender.all.map{ |g| [g.name, g.id] }, {:include_blank => true, :prompt => 'Gender'}, {:class => "required"}
+                  .form-helper
+                    The patient's gender is required.   
+                                              
+            .col-md-9
+              .input-container                        
+                %label._date-input
+                  %span.name
+                    DOB
+                  = f.date_select :date_of_birth, {order: [:month, :day, :year], prompt: { day: 'Day', month: 'Month', year: 'Year' }, start_year: Date.today.year, end_year: Date.today.year - 100 }, {:class => 'required'}
+                  .form-helper
+                    The patient's Date of Birth is required.                   
+                                                               
+        ._section
+          %h3.title Contact Information   
+        ._body         
+          .row
+            .col-md-6
+              .input-container                        
+                %label._full-input
+                  %span.name
+                    Email address                
+                  = f.email_field :email_primary, :data => {'bind' => 'ptemail'}
+                  
+            .col-md-6
+              .input-container               
+                %label.checkbox._align
+                  = f.check_box :email_verified, :class => 'verify-checkbox', :data => {'type' => 'email'}
+                  %span.name
+                    E-Mail verified  
+          .row                    
+            .col-md-6   
+              .input-container                        
+                %label._full-input
+                  %span.name
+                    Phone number               
+                  = f.text_field :phone_primary, :data => {'bind' => 'ptphone'}, :class => '_tel'
+                    
+            .col-md-6
+              .input-container                 
+                %label.checkbox._align
+                  = f.check_box :phone_verified, :class => 'verify-checkbox', :data => {'type' => 'phone'}
+                  %span.name
+                    Phone verified                        
+        .row   
+          .col-md-12  
+            ._section
+              %h3.title Address  
+            ._body 
+              .row
+                .col-md-12
+                  .input-container
+                    %label._full-input
+                      %span.name
+                        Address            
+                      = f.text_area :address_street_1, :class => "required"
+                      .form-helper
+                        The patient's address is required.         
+                      
+              
+            
+
+  .row      
+    .col-md-8
+      = link_to 'cancel', physician_patients_path, :class => "action _large _cancel"      
+    .col-md-4
+      .action._large._normalize.pull-right._submit{:tabindex => '0'}
+        Save
+        = f.submit ''  
+        
+- content_for :after_body do     
+  = render 'partials/modals/modal'
+  = render :partial => 'partials/modals/verify_contact', :locals => {:patient => @patient}

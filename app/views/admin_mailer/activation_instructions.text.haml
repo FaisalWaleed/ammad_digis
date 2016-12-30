@@ -1,0 +1,3 @@
+Hi #{ @admin.firstname },
+
+= link_to "activate account", admin_activation_url(:activation_code => @admin.perishable_token)

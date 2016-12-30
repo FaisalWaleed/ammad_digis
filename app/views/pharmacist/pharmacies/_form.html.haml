@@ -1,0 +1,147 @@
+= form_for [:pharmacist, @pharmacy] do |f|
+  .section
+    .row
+      .col-md-8
+        ._section
+          %h3.title Pharmacy Information 
+        ._body 
+          .row
+            .col-md-8
+              .input-container                    
+                %label._full-input
+                  %span.name
+                    Pharmacy name 
+                  = f.text_field :name, :class => "required"  
+                  .form-helper
+                    Name is required.
+
+            .col-md-4
+              .input-container                     
+                %label._full-input
+                  %span.name
+                    Registration number
+                  = f.text_field :reg_num, :class => "required"  
+                  .form-helper
+                    Your Pharmacist's registration number is required.                      
+
+        ._section
+          %h3.title Contact Information
+        ._body
+          .row
+            .col-md-6
+              .input-container                    
+                %label._full-input
+                  %span.name
+                    First name
+                  = f.text_field :contact_firstname, :class => "required"
+                  .form-helper
+                    Contact first name is required                           
+            .col-md-6
+              .input-container                    
+                %label._full-input
+                  %span.name
+                    Last name                
+                  = f.text_field :contact_lastname, :class => "required"
+                  .form-helper
+                    Your last name is required.    
+          .row
+            .col-md-6
+              .input-container                    
+                %label._full-input
+                  %span.name
+                    Email address                
+                  = f.text_field :email_primary, :class => "required"
+                  .form-helper
+                    Your email is required. This isn't a valid email.                          
+
+            .col-md-6
+              .input-container                       
+                %label._full-input
+                  %span.name
+                    Phone number                
+                  = f.text_field :phone_primary, :class => "required _tel"
+                  .form-helper
+                    Your phone number is required.                                                                                                              
+
+    ._section
+      %h3.title Address    
+    ._body 
+      .row
+        .col-md-4
+          .input-container
+            .row
+              .col-md-12
+                %label._full-input
+                  %span.name
+                    Address line 1                
+                  = f.text_field :address_street_1, :class => "required"
+                  .form-helper
+                    Your address line 1 is required.                   
+        .col-md-4                  
+          .input-container
+            .row
+              .col-md-12
+                %label._full-input
+                  %span.name
+                    Address line 2                
+                  = f.text_field :address_street_2, :class => "required"
+                  .form-helper
+                    Your address line 2 is required.   
+      .row
+        .col-md-4                                   
+          .input-container
+            .row
+              .col-md-12
+                %label._full-input
+                  %span.name
+                    Town                
+                  = f.text_field :address_municipality, :class => "required"
+                  .form-helper
+                    Your town is required.                 
+        .col-md-4
+          .input-container
+            %label._full-input
+              %span.name
+                Parish           
+              = f.select :address_territory, PARISHES, {:include_blank => "Select a parish"}, :class => "required"
+              .form-helper
+                Your parish is required.   
+      .row
+        .col-md-4                  
+          .input-container
+            %label._full-input
+              %span.name
+                Postal code            
+              = f.text_field :address_postal_code               
+        .col-md-4          
+          .input-container
+            %label._full-input
+              %span.name
+                Country             
+              = f.text_field :address_country, :class => "required"
+              .form-helper
+                Your country is required.     
+      .row
+        .col-md-4
+          .input-container   
+            %label._full-input
+              %span.name
+                Latitude   
+              = f.text_field :latitude      
+        .col-md-4
+          .input-container   
+            %label._full-input
+              %span.name
+                Longitude   
+              = f.text_field :longitude           
+                                
+  .row      
+    .col-md-8
+      = link_to 'cancel', pharmacist_pharmacies_path, :class => "action _large _cancel"      
+    .col-md-4
+      .action._large._normalize.pull-right._submit{:tabindex => '0'}    
+        Save
+        = f.submit ''   
+
+- content_for :after_body do     
+  = render 'partials/modals/modal'

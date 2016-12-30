@@ -1,0 +1,160 @@
+- content_for :page_title do
+  Diagnostic - #{@diagnostic.identifier}
+
+= render :partial => "layouts/physician/menu"         
+
+- content_for :client_class do
+  #{' _diagnostic-page '}
+
+#client-body
+  #client-header                    
+    #content-heading
+      .content-wrap
+        ._medium
+          .row
+            .col-md-12
+              #{yield :page_header}
+              #chd
+                = render 'partials/patient_profile_inline', patient: @diagnostic.patient    
+
+  #client-content
+    .content-wrap     
+      = form_for [:physician, @diagnostic], :data => {'target' => 'diagnostic-form'} do |f|
+        = f.hidden_field :patient_id
+        = f.hidden_field :verification_pin
+        .hidden
+          - labType = 0
+          - @diagnostic.test_types.uniq.each do |type|
+            - labType = type.id
+            = render :partial => 'test_type_fields_hidden', :object => type, :as => :test_type, :locals => { f: f } 
+        ._medium                           
+          .preview-ui
+            .row                            
+              .col-md-6
+                .row
+                  .col-md-12
+                    ._header
+                      ._wrap 
+                        %span._identifier REQUEST ##{@diagnostic.identifier}
+                        %span._items
+                          #{pluralize(@diagnostic.total_tests,'test')}                        
+                        - unless @diagnostic.laboratory.present?                      
+                          %span._edit
+                            = link_to "", edit_physician_diagnostic_path(@diagnostic), :class => 'dg-icon _ic-edit'
+                        %div
+                          %small
+                            = @diagnostic.created_at.strftime '%m/%d/%Y %I:%M %p' 
+                              
+                .row
+                  .col-md-12
+                    .section
+                      ._body
+                        - if @diagnostic.testings.present? || @diagnostic.profiled_testings.present?
+                          .list-ui   
+                            ._list-item
+                              ._item-content
+                                ._expandable
+                                  ._wrap
+                                    ._parent
+                                      - unless @diagnostic.testings.blank?
+                                        .list-ui
+                                          ._expandable             
+                                            - @tags.each do |tag|
+                                              .list-item._parent
+                                                ._drug-name                        
+                                                  %strong= tag.name
+                                                  %div
+                                                    = tag.test_requests.map{ |tr| tr.name }.join(", ") 
+                                                    
+                                      - unless @diagnostic.profiled_testings.blank?
+                                        .list-ui
+                                          ._expandable             
+                                            - @profiles.each do |profile, testings|
+                                              .list-item._parent
+                                                ._drug-name                        
+                                                  %strong= profile.name
+                                                  %div
+                                                    = testings.map{ |t| t.test.name }.join(", ") 
+                        - else  
+                          ._prompt-wrap
+                            ._prompt.required  
+                              Edit this request.     
+                      - unless @diagnostic.notes.blank?
+                        ._body
+                          .name 
+                            %strong Notes
+                          #{@diagnostic.notes} 
+                          
+              .col-md-6  
+                ._field-wrap
+                  ._header
+                    %h3
+                      - if @diagnostic.laboratory_id.blank?
+                        All Done? Send this request.
+                      - else
+                        Request sent to:
+                  ._inner-content                    
+                    ._content  
+                      - if @diagnostic.laboratory_id.blank?
+                        .input-container._highlight
+                          %span.name
+                            Send to Laboratory / Radiology                  
+                          %label._search
+                            %input{data: { url: api_v1_search_laboratories_path, param: "#{labType}", autocomplete: true, 'item-template' => '#pharmacy_ac_item' }, :placeholder => "Enter laboratory name", :class => 'required ds-radio ds-autocomplete' }
+                            = f.hidden_field :laboratory_id
+                            
+                        .input-container   
+                          .row
+                            .col-md-6
+                              %label.checkbox-inline
+                                %span.name
+                                  Send to Patient 
+                                = f.check_box :send_to_patient, :class => 'verify-checkbox required ds-radio' 
+
+                        .input-container
+                          .row
+                            .col-md-12
+                              %label
+                                %span.name
+                                  Verification Pin
+                                = @diagnostic.verification_pin  
+                      - else
+                        ._review
+                          ._block
+                            %span._title
+                              #{@diagnostic.test_center_type}
+                            ._contact-info
+                              %div #{@diagnostic.laboratory.name}
+                              %div #{@diagnostic.laboratory.phone_primary}
+                              %div #{@diagnostic.laboratory.email_primary}                          
+                          ._block
+                            %span._title
+                              Verification Pin
+                            %span
+                              = @diagnostic.verification_pin 
+                                                        
+                          
+            - unless @diagnostic.laboratory_id.blank? 
+              %hr
+              ._button-ui.text-center 
+                = link_to 'New Prescription', new_physician_patient_prescription_path(@diagnostic.patient), :class => '_button _small'                  
+                = link_to 'New Lab Request', new_physician_patient_diagnostic_path(@diagnostic.patient, anchor: "lab"), :class => '_button _small'                  
+                = link_to 'New Radiology', new_physician_patient_diagnostic_path(@diagnostic.patient, anchor: "radiology"), :class => '_button _small'                   
+           
+        - unless @diagnostic.laboratory_id.blank? 
+          %p.text-center
+            #{link_to "I am done with #{@diagnostic.patient.name}", new_physician_patient_path, :class => '_link bold-txt'}    
+            
+        - if @diagnostic.laboratory_id.blank?              
+          .row
+            .col-md-12
+              %span.action._large.pull-right._submit._normalize{:tabindex => 0} 
+                Done    
+                = f.submit
+
+
+              
+              
+            
+= render :partial => 'partials/modals/confirm_delete'  
+= render :partial => 'partials/modals/verify_contact', :locals => {:patient => @diagnostic.patient}

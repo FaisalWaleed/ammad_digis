@@ -1,0 +1,3 @@
+class TestCenter < Laboratory
+  
+end

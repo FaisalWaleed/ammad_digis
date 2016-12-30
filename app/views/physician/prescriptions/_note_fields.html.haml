@@ -1,0 +1,11 @@
+.input-container
+  .row
+    .col-md-12
+      = f.select :patient_note_type, PatientNoteType.all.map{ |t| [t.name, t.id] }, :include_blank => true, :prompt => "Select Type..."
+.input-container
+  .row
+    .col-md-12
+      = f.text_area :note, :placeholder => "Write a note..."
+      
+= f.hidden_field :author_type, :value => 'Physician'
+= f.hidden_field :author_id, :value => current_physician.id   

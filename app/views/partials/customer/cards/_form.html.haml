@@ -1,0 +1,49 @@
+            
+._body 
+  .input-container              
+    %label._full-input
+      %span.name
+        Card Holder Name
+      = f.text_field :name, :data => {"size" => "5"}  
+      
+  - unless @card  
+    .row
+      .col-md-8
+        .input-container            
+          %label._full-input
+            %span.name
+              Card Number
+            = f.text_field :number, :placeholder => "•••• •••• •••• ••••", :class => "required _credit", :autocomplete => "off"
+            .form-helper
+              Card number is required.   
+              
+      .col-md-3
+        .input-container            
+          %label._full-input
+            %span.name
+              CCV
+            = f.text_field :cvc, class: "required _cvv", :data => {"rule" => "3"}, :autocomplete => "off"
+            .form-helper
+              CVV is required. 
+
+  .input-container._label-only
+    %label._full-input
+      %span.name
+        Expiration   
+  .row                           
+    .col-md-8
+      .input-container            
+        %label._full-input
+          = f.select :exp_month, options_for_select(Date::MONTHNAMES.compact.each_with_index.map { |name,i| ["#{i+1} - #{name}", i+1] }), {:include_blank => "Month"}, :class => "required _cc-month"   
+          .form-helper
+            Expiration Date must be after the current month.                          
+          
+    .col-md-4
+      .input-container            
+        %label._full-input
+          = f.select :exp_year, options_for_select((Date.today.year..(Date.today.year+10)).to_a), {:include_blank => "Year"}, :class => "required _cc-year"
+          
+  %hr
+
+
+

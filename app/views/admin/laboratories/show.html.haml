@@ -1,0 +1,156 @@
+- content_for :title, "Laboratory"
+- content_for :page_title, "Laboratory: #{@laboratory.name}"
+   
+- content_for :notice do
+  - unless notice.blank?
+    .row
+      .col-md-7
+        ._msg.success
+          ._alert
+            .ds-icon._ic-info
+          = notice  
+.row
+  .col-md-7
+    ._medium
+      .row
+        .col-md-4
+          .input-container
+            %label._full-input
+              %span.name
+                User Photo
+            ._input-group
+              .focused   
+                .row
+                  .col-md-12
+                    ._image-holder
+                      - if @laboratory.avatar.url(:original).blank?
+                        %span.dg-icon.ic-gallery                          
+                      - else
+                        = image_tag @laboratory.avatar.url(:thumb)
+      %hr
+      .section
+        ._title
+          Lab Information
+        ._body 
+          .row
+            .col-md-12
+              .input-container
+                %label._full-input
+                  %span.name
+                    Laboratory Name
+                = @laboratory.name
+                    
+      .section
+        ._title
+          Primary Contact Information
+        ._body                 
+          .row
+            .col-md-6
+              .input-container
+                %label._full-input
+                  %span.name
+                    Contact First Name
+                = @laboratory.contact_firstname
+                    
+            .col-md-6
+              .input-container                
+                %label._full-input
+                  %span.name
+                    Contact Last Name        
+                = @laboratory.contact_lastname    
+                    
+          .row
+            .col-md-6
+              .input-container                    
+                %label._full-input
+                  %span.name
+                    Email address                
+                = @laboratory.email_primary                      
+
+            .col-md-6
+              .input-container                       
+                %label._full-input
+                  %span.name
+                    Phone number                
+                = @laboratory.phone_primary                    
+        
+      %hr 
+      .section
+        ._title
+          Address
+        ._body
+          .row
+            .col-md-4
+              .input-container
+                .row
+                  .col-md-12
+                    %label._full-input
+                      %span.name
+                        Street Address 1
+                    = @laboratory.address_street_1 
+                        
+              .input-container
+                .row
+                  .col-md-12
+                    %label._full-input
+                      %span.name
+                        Street Address 2 (opt.)
+                    = @laboratory.address_street_2
+                      
+            .col-md-4                                   
+              .input-container
+                .row
+                  .col-md-12
+                    %label._full-input
+                      %span.name
+                        Town
+                    = @laboratory.address_municipality
+                      
+              .input-container
+                .row
+                  .col-md-12
+                    %label._full-input
+                      %span.name
+                        Parish
+                    = @laboratory.address_territory
+                        
+            .col-md-4                                      
+              .input-container
+                .row
+                  .col-md-12
+                    %label._full-input
+                      %span.name
+                        Country
+                    = @laboratory.address_country
+                  
+          .row
+            .col-md-4
+              .input-container
+                %label._full-input
+                  %span.name
+                    Latitude
+                = @laboratory.latitude
+                  
+            .col-md-4
+              .input-container                
+                %label._full-input
+                  %span.name
+                    Longitude       
+                = @laboratory.longitude
+                
+      %hr
+      .section
+        ._title
+          App Settings
+        ._body              
+          .input-container              
+            %label._full-input
+              %span.name Active    
+            = @laboratory.active?? 'yes':'no'               
+    
+    
+      %hr
+      .row      
+        .col-md-4.col-md-offset-8
+          = link_to 'Edit', edit_admin_laboratory_path(@laboratory), :class => "action _default pull-right"    
+

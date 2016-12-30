@@ -1,0 +1,58 @@
+#client-test-details
+  .client-infobar-bg
+  .client-infobar
+    .section
+      ._body
+        .tab-content
+          .panel-body
+            .input-container
+              .row
+                .col-md-12
+                  %label._suggest
+                    %span.name
+                      Request Summary
+                    ._target._empty                 
+                      ._prompt-wrap
+                        ._prompt 
+                          Please select a test to begin.                           
+            %form                  
+              .preview-ui
+                ._field-wrap
+                  ._header
+                    %h3
+                      All Done? Send this request.
+                  ._inner-content                    
+                    ._content             
+                      .input-container
+                        %span.name
+                          Send to Test Center                  
+                        %label._search
+                          %input{data: { url: api_v1_search_laboratories_path, param: '', autocomplete: true, 'item-template' => '#pharmacy_ac_item' }, :placeholder => "", :class => 'required ds-radio ds-autocomplete _lab-select' }
+                          %input#laboratory_id{:type => 'hidden', :class => '_binded', :data => {'bind' => 'laboratory_id'}}
+                          .form-helper
+                            Please select a laboratory or send this to the patient.
+                          
+                      .input-container   
+                        %label.checkbox-inline
+                          %span.name
+                            Send to Patient 
+                          %input{:type => 'checkbox', :class => 'required ds-radio verify-checkbox _binded', :data => {'bind' => 'send_to_patient'}}
+                          %input{:type => 'hidden', :name => 'diagnostic_send_to_patient'}
+                          
+                      - unless @diagnostic.verification_pin.nil?
+                        .input-container
+                          %label
+                            %span.name
+                              Verification Pin
+                            = @diagnostic.verification_pin 
+                          
+                  .row      
+                    .col-md-8
+                      = link_to 'cancel', physician_patient_path(@diagnostic.patient), :class => "action _large _cancel"                                            
+
+                    .col-md-4
+                      .action._large.pull-right._prepare-form{:tabindex => '0', :data => {'form' => 'diagnostic-form'}}
+                        Done  
+                        
+                    
+                        

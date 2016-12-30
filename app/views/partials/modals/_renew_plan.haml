@@ -1,0 +1,76 @@
+#renew-plan-template
+  #dg-renew.modal._persistent.fade
+    .modal-dialog
+      .modal-content
+        ._controls
+          .container-fluid
+            .row
+              .col-xs-12
+                %h3.title Renew your Plan
+                .small-block
+                  Current Plan expires - 21/12/2015
+                %a.close{"aria-label" => "close", "data-dismiss" => "modal"}
+        ._contents
+          .container-fluid
+            .row
+              .col-xs-12
+                .inline-list.subscr-group
+                  %ul
+                    %li
+                      %label
+                        %span.action._small._active 12 months - $20,000
+                        %input{:name => "_subscr", :type => "radio"}/
+                    %li
+                      %label
+                        %span.action._small._clear 24 months - $37,500
+                        %input{:name => "_subscr", :type => "radio"}/
+                    %li
+                      %label
+                        %span.action._small._clear 36 months - $55,000
+                        %input{:name => "_subscr", :type => "radio"}/
+            .row
+              .col-xs-12
+                .section
+                  ._head
+                    %h3.title Card Information
+                  ._body
+                    .input-container
+                      .row
+                        .col-md-5
+                          %input{:placeholder => "Name", :type => "text"}/
+                        .col-md-2
+                          %label._select
+                            %select
+                              %option Visa
+                              %option Mastercard
+                    .input-container
+                      .row
+                        .col-md-6
+                          %input{:placeholder => "CARD NUMBER", :type => "text"}/
+                        .col-md-2
+                          %input{:placeholder => "CCV", :type => "text"}/
+                        .col-md-4
+                          %input{:placeholder => "EXP - MM/YYYY", :type => "text"}/
+                .section
+                  ._head
+                    %h3.title Billing Address
+                  ._body
+                    .input-container
+                      .row
+                        .col-md-4
+                          %input{:placeholder => "Address 1", :type => "text"}/
+                        .col-md-4
+                          %input{:placeholder => "Address 2", :type => "text"}/
+                        .col-md-4
+                          %input{:placeholder => "City", :type => "text"}/
+                    .input-container
+                      .row
+                        .col-md-3
+                          %label._select
+                            %select
+                              %option Parish
+                              %option St. Elizabeth
+                        .col-md-4
+                          %input{:placeholder => "Country", :type => "text"}/
+                ._footer
+                  %a.action._large._focus{"data-target" => "#dg-receipt", "data-toggle" => "modal"} PAY

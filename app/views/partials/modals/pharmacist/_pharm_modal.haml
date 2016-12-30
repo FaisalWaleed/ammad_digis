@@ -1,0 +1,9 @@
+.modal-loading
+  %p Fetching Data ...
+.modal-ready
+  #pharm-prescription-template._template
+    = render :partial => 'partials/modals/pharmacist/prescription'          
+  #pharm-message-template._template._remove
+    = render :partial => 'partials/modals/pharmacist/message'       
+  #pharm-transfer-template._template._remove
+    = render :partial => 'partials/modals/pharmacist/transfer' 

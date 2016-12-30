@@ -1,0 +1,2 @@
+module Physician::SubscriptionsHelper
+end

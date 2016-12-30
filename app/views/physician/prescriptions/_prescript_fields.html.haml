@@ -1,0 +1,67 @@
+.row.nested-fields.list-item._focus-wrapper._prescript-item{:class => ('_hasScript' if (f.object.posology_code) == '2')}
+  .col-md-12
+    .section
+      ._body
+        .focused
+          .input-container._flush
+            .row
+              .col-md-10.col-sm-10.col-xs-10
+                ._off-focus
+                  ._drug-title                
+                    - if f.object.drug.present?
+                      %span._drug-generic-name
+                        #{f.object.drug.label}
+                      %span._drug-dose
+                        = f.object.dose.presence
+                      %span._drug-unit                      
+                        = f.object.dosage_unit.name.humanize if f.object.dosage_unit.present?
+                      %span._drug-route
+                        = f.object.dosage_route.code if f.object.dosage_route.present?
+                      %span._drug-frequency
+                        = f.object.dosage_frequency.code if f.object.dosage_frequency.present? 
+                      %span._drug-duration
+                        - if f.object.duration_with_unit.presence.present?
+                          x
+                          #{f.object.duration_with_unit.presence  }
+                        
+                      %span._drug-form     
+                        - if f.object.free_flow_details.present?
+                          \ -
+                          #{ f.object.free_flow_details  }
+                        
+                      %span.pr
+                        Repeat:
+                        %span._drug-repeat
+                          = f.object.repeat_max.to_i
+                    - else
+                      Type drug name
+
+                ._on-focus
+                  .inline-list._offScript
+                    %ul
+                      %li._input
+                        = f.text_field :drug_name, data: { url: api_v1_search_drugs_path, autocomplete: true }, :placeholder => 'Type drug name', :class => 'medium-txt required ds-autocomplete'
+                        = f.hidden_field :drug_id, :class => 'prescript-drug-id'
+                      %li._expandable.disable_on_stat{ :style => ("display: none" if f.object.dosage_frequency_id == 1)}
+                        ._parent
+                          ._switch{ :class => ("hidden" if f.object.repeat_max != 0)}
+                            %span.dg-icon._ic-repeat._input-icon.text-center{'title' => 'Repeat'}  
+                        ._child{ :style => ("display: block" if f.object.repeat_max != 0)}
+                          = f.number_field :repeat_max, :placeholder => 'Repeat', :min => 0, :max => 6, :data => {:target => '._drug-repeat'}, :class => '_value-field _size-medium required'  
+                          
+                      - if f.object.drug.present?
+                        %li
+                          %span._show-more
+                            %span.dg-icon._ic-note._input-icon.text-center{'title' => 'Add Note'}   
+                          
+                  .inline-list._onScript 
+                    %ul                        
+                      %li 
+                        .input-container
+                          = f.text_field :free_flow_details, :placeholder => 'Free form script', :class => "medium-txt required _value-field", :data => {'target' => '._drug-form'}
+                  
+              .col-md-2.col-sm-2.col-xs-2
+                = link_to_remove_association '', f , :title => "Remove",:class => "dg-icon _ic-delete _input-icon  pull-right"
+
+          - if f.object.drug.present?
+            = render('dosage_fields', f: f) #if f.object.drug_id.present?   

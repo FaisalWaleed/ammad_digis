@@ -1,0 +1,22 @@
+!!!
+%html
+  %head
+    %script{:src => "https://use.typekit.net/ddt7bah.js"}
+    :javascript
+      try{Typekit.load({ async: true });}catch(e){}
+    %title Digiscripts
+    = stylesheet_link_tag 'application', media: 'screen', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'theme/css/print', media: 'print', 'data-turbolinks-track' => true    
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    /[if lt IE 9]  
+      = javascript_include_tag 'lib_ie/html5shiv-printshiv', 'data-turbolinks-track' => true 
+      = javascript_include_tag 'lib_ie/respond', 'data-turbolinks-track' => true     
+    = csrf_meta_tags
+  %body.dg
+    = render :partial => 'partials/no_script'   
+    = yield
+    /[if lt IE 9]
+      = javascript_include_tag 'lib_ie/rem.min'    
+    /[if lt IE 10]      
+      = javascript_include_tag 'lib_ie/placeholder'     
+      

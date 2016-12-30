@@ -1,0 +1,46 @@
+.row
+  = form_tag(:update_permission_patient_dashboard_index, method: :post, class: 'unauthorized-form') do
+    .col-md-12.col-sm-12.col-xs-12
+      .x_panel
+        .x_title
+          %h2
+            Button Example
+            %small Users
+          .pull-right
+            %a.btn.btn-primary{"data-target" => "#newTitle", "data-toggle" => "modal", :href => "", :title => "Add New"}
+              %i.fa.fa-plus
+            %button.btn.btn-danger{"data-toggle" => "tooltip", :onclick => "confirm('Are you sure?') ? $('.unauthorized-form').submit() : false;", :title => "Delete", :type => "button"}
+              %i.fa.fa-remove
+            = hidden_field_tag :permission_action, 'unauthorized'
+          .clearfix
+        .x_content
+          %p.text-muted.font-13.m-b-30
+            The Buttons extension for DataTables provides a common set of options, API methods and styling to display buttons on a page that will interact with a DataTable. The core library provides the based framework upon which plug-ins can built.
+          %table#datatable-buttons.table.table-striped.table-bordered
+            %thead
+              %tr
+                %th Name
+                %th Clinic Name
+                %th Office Address
+                %th Email Address
+                %th Phone Number
+                %th Area of Specialization
+                %th Actions
+            %tbody
+              - @authorized_physicians.each do |physician|
+                %tr
+                  %td
+                    = image_tag physician.avatar.url(:small)
+                    %br/
+                    = physician.name
+                  %td System Architect
+                  %td
+                    = physician.address_street_1
+                    %br/
+                    = physician.address_street_2
+                  %td= physician.email_primary
+                  %td= physician.phone_primary
+                  %td= physician.specialization.try(:name)
+                  %td
+                    = check_box_tag 'physician_ids[]', physician.id
+= render 'physicians_authorization'

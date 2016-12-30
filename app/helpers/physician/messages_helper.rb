@@ -1,0 +1,2 @@
+module Physician::MessagesHelper
+end

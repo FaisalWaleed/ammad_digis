@@ -1,0 +1,144 @@
+- content_for :title, "Location"
+- content_for :page_title, "Location: #{@technician.name}"
+
+- content_for :page_header do
+  .col-md-12.col-sm-12.col-xs-12
+    = render 'partials/technician_profile_inline', patient: @technician
+          
+- content_for :notice do
+  - unless notice.blank?
+    .row
+      .col-md-12
+        ._msg.success
+          ._alert
+            .ds-icon._ic-info
+          = notice  
+          
+.row
+  .col-md-12    
+    ._medium
+      .row
+        .col-md-7
+          .row
+            .col-md-2
+              .input-container
+                %label._full-input
+                  %span.name
+                    User Photo
+                ._input-group
+                  .focused   
+                    .row
+                      .col-md-12
+                        ._image-holder
+                          - if @technician.avatar.url(:original).blank?
+                            %span.dg-icon.ic-gallery                          
+                          - else
+                            = image_tag @technician.avatar.url(:thumb)   
+            .col-md-10
+              = link_to 'Edit', edit_test_center_technician_path(@technician), :class => "action _large pull-right"                            
+                  
+          %hr 
+          .section
+            ._title
+              Personal Information
+            ._body             
+              .row
+                .col-md-8
+                  .input-container
+                    %label._full-input
+                      %span.name
+                        Name
+                    = @technician.location.name
+          .section
+            ._title
+              Primary Contact Information 
+            ._body             
+              .row                    
+                .col-md-12
+                  .input-container                
+                    %label._full-input
+                      %span.name
+                        First Name      
+                    = @technician.firstname
+                .col-md-12
+                  .input-container                
+                    %label._full-input
+                      %span.name
+                        Last Name        
+                    = @technician.lastname
+                    
+          .section
+            ._title
+              Laboratory Contact Information 
+            ._body                     
+              .input-container
+                .row
+                  .col-md-12
+                    %label._full-input
+                      %span.name
+                        Email
+                    = @technician.email_primary
+              .input-container
+                .row
+                  .col-md-12
+                    %label._full-input
+                      %span.name
+                        Phone
+                    = @technician.phone_primary                        
+          .section
+            ._title
+              Address 
+            ._body                      
+              .row
+                .col-md-4
+                  .input-container
+                    .row
+                      .col-md-12
+                        %label._full-input
+                          %span.name
+                            Street Address 1
+                        = @technician.address_street_1
+                  .input-container
+                    .row
+                      .col-md-12
+                        %label._full-input
+                          %span.name
+                            Street Address 2 
+                        = @technician.address_street_2
+                .col-md-4                                   
+                  .input-container
+                    .row
+                      .col-md-12
+                        %label._full-input
+                          %span.name
+                            Town
+                        = @technician.address_municipality
+                  .input-container
+                    .row
+                      .col-md-12
+                        %label._full-input
+                          %span.name
+                            Parish
+                        = @technician.address_territory
+                        
+                .col-md-4                                       
+                  .input-container
+                    .row
+                      .col-md-12
+                        %label._full-input
+                          %span.name
+                            Country
+                        = @technician.address_country
+                               
+          %hr
+          .section
+            ._title
+              App Settings
+            ._body              
+              .input-container              
+                %label._full-input
+                  %span.name Active    
+                = @technician.active?? 'yes':'no'         
+
+
+

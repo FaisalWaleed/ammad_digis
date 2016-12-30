@@ -1,0 +1,35 @@
+#client-notification-list
+  .client-infobar-bg
+  .client-infobar
+    .section
+      ._body
+        .tab-content
+          %h3 
+            Notifications    
+                  
+          #notification_list
+            ._prompt-wrap
+              ._prompt 
+                No new notifications.            
+          = link_to 'See all messages', technician_messages_path, :class => 'bold-txt _link'      
+          
+#notification-message-template.hidden
+  .list-item{:data => { "target" => "#dg-messages", "toggle" => "modal", "url" => "{{url}}" }}
+    .row.inline-list
+      .col-md-2
+        ._profile-image
+          {{avatar}}
+      .col-md-10
+        ._title
+          %strong
+            {{agency}}            
+          ._meta.pull-right
+            {{date}}
+        ._content._small
+          {{message}}
+    
+:javascript
+  window.appIcon = "#{image_path 'logo_lg.png'}";
+          
+                  
+                      

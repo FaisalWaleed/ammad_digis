@@ -1,0 +1,43 @@
+- content_for :page_title do
+  Diagnostics
+  
+- content_for :client_class, '_showing-full-width _hide-header'
+          
+._medium  
+  %form
+    .row
+      .col-md-4
+        ._expandable
+          .row._parent       
+            .col-md-3
+              ._input-title
+                Search
+            .col-md-9
+              .input-container
+                %label._search
+                  %input{:id => 'table_search',:type => 'search'}     
+         
+  .row
+    .col-md-12 
+      %table.table._searchable{:data => {:name => "diagnostics", :options => "search-col-5-open", "default-col" => "open"}}
+        %thead
+          %tr
+            %th 
+            %th 
+            %th 
+            %th
+            %th
+            %th.hidden
+            %th.hidden
+
+        %tbody
+          = render :partial => 'index', :collection => @diagnostics, :as => :diagnostic
+                    
+- content_for :after_body do 
+  .hidden
+    #upload_field_template  
+      = render :partial => 'upload_preview_template'                 
+
+                    
+                  
+              

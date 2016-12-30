@@ -1,0 +1,48 @@
+- content_for :title, "Laboratories"
+- content_for :page_title, "Laboratories"
+
+- content_for :page_action do
+  = link_to 'New Laboratory', new_admin_laboratory_path, :class => 'action _default _focus'
+  
+- content_for :filter do  
+  .col-md-4
+    = form_tag :admin_laboratories, :method => :get do
+      .input-container
+        %label._full-input
+          = text_field_tag :term, @term, :class => "", :placeholder => "Search Laboratories"
+          .form-helper.text-right
+            press Enter 
+  
+._medium
+  .row
+    .col-md-12
+      %table.table
+        %thead
+          %tr
+            %th 
+              %span.title Name
+            %th 
+              %span.title Contact Name
+            %th
+              %span.title Contact Email
+            %th
+              %span.title Phone              
+            %th
+              %span.title Reg #            
+            %th.text-right
+              %span.title Actions      
+        %tbody
+          - @laboratories.order(name: :asc).each do |laboratory|
+            %tr
+              %td
+                = link_to laboratory.name, edit_admin_laboratory_path(laboratory)
+              %td= laboratory.contact_name
+              %td= laboratory.email_primary
+              %td= laboratory.phone_primary
+              %td= laboratory.reg_num
+              %td.text-right
+                = link_to '', admin_laboratory_path(laboratory), :method => :delete, :data => { :confirm => 'delete' }, :class => 'ds-icon _ic-delete'      
+      
+= paginate @laboratories
+
+

@@ -1,0 +1,20 @@
+- content_for :client_class do
+  #{' _patient-select-page'}
+
+- content_for :page_title, 'Select Patient'  
+  
+- content_for :page_header do
+  .col-md-12
+    #chd.text-center
+      = render 'partials/physician/shared/patient_select_inline'
+
+- content_for :after_body do
+  = render :partial => 'partials/physician/shared/patient_fields'      
+
+._medium 
+  .section.text-center
+    ._prompt-wrap
+      ._prompt 
+        Please enter your patient's details to 
+        %span
+          Get Started.  

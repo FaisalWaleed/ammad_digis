@@ -1,0 +1,49 @@
+
+._section
+  %h3.title Credit Card               
+._body 
+  .row
+    .col-md-12
+      .input-container              
+        %label._full-input
+          %span.name
+            Card Holder Name
+          = payer.text_field :payer_name, class: "required", :data => {"size" => "5"}  
+  .row          
+    .col-md-8
+      .input-container            
+        %label._full-input
+          %span.name
+            Card Number
+          = text_field_tag '', nil, :placeholder => "•••• •••• •••• ••••", :class => "required _credit", "data-stripe" => "number", :autocomplete => "off"
+          .form-helper
+            Card number is required.   
+            
+    .col-md-4
+      .input-container            
+        %label._full-input
+          %span.name
+            CCV
+          = text_field_tag '', nil, class: "required _cvv", :data => {"stripe" => "cvv", "rule" => "3"}, :autocomplete => "off"
+          .form-helper
+            CVV is required. 
+            
+  .row 
+    .col-md-12
+      .input-container._label-only
+        %label._full-input
+          %span.name
+            Expiration
+            
+  .row                           
+    .col-md-5
+      .input-container            
+        %label._full-input
+          = select_tag '', options_for_select(Date::MONTHNAMES.compact.each_with_index.map { |name,i| ["#{i+1} - #{name}", i+1] }), include_blank: "Month", :data => {"stripe" => "exp-month"}, class: "required _cc-month"    
+          .form-helper
+            Expiration Date must be after the current month.                          
+          
+    .col-md-3
+      .input-container            
+        %label._full-input
+          = select_tag '', options_for_select((Date.today.year..(Date.today.year+10)).to_a), include_blank: "Year", "data-stripe" => "exp-year", class: "required _cc-year" 

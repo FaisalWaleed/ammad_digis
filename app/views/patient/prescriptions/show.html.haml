@@ -1,0 +1,9 @@
+- content_for :page_title do
+  Prescription
+   
+- content_for :client_class, '_showing-full-width' 
+
+.row
+  .col-md-6.col-md-offset-3
+    %div.text-center
+      %h2 All done. This prescription has been sent to #{@prescription.pharmacy.name}.

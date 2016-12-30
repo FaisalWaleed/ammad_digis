@@ -1,0 +1,123 @@
+._medium
+  = form_for [:admin, @patient] do |f|
+    - content_for :notice do
+      - if @patient.errors.any?
+        .row
+          .col-md-7
+            - @patient.errors.full_messages.each do |msg|          
+              ._msg.error
+                ._alert
+                  .ds-icon._ic-info
+                = msg   
+    .row
+      .col-md-4
+        .input-container
+          %label._full-input
+            %span.name
+              User Photo
+          ._input-group
+            .focused   
+              .row
+                .col-md-12
+                  ._image-holder
+                    - if @patient.avatar.url(:original).blank?
+                      %span.dg-icon.ic-gallery                          
+                    - else
+                      = image_tag @patient.avatar.url(:thumb)          
+              .row          
+                .col-md-12
+                  %label._full-input
+                    ._file-input
+                      %span Upload photo
+                      = f.file_field :avatar                  
+                
+    %hr 
+    .section
+      ._title
+        Personal Information
+      ._body 
+        .row
+          .col-md-5
+            .input-container
+              %label._full-input
+                %span.name
+                  First Name
+                = f.text_field :firstname, :placeholder => "", :class => 'required'
+                .form-helper
+                  The patient's first name is required.                   
+                
+          .col-md-2
+            .input-container                
+              %label._full-input
+                %span.name
+                  M.I.        
+                = f.text_field :middlename, :placeholder => "", :class => '', :maxlength => "2"
+                
+          .col-md-5
+            .input-container                
+              %label._full-input
+                %span.name
+                  Last Name        
+                = f.text_field :lastname, :placeholder => "", :class => 'required'
+                .form-helper
+                  The patient's last name is required.                  
+              
+        .row        
+          .col-md-12
+            .input-container                
+              %label._date-input
+                %span.name
+                  Date of Birth           
+                = f.date_select :date_of_birth, {order: [:month, :day, :year], prompt: { day: 'Day', month: 'Month', year: 'Year' }, start_year: Date.today.year, end_year: Date.today.year - 100 }, {:class => 'required'}      
+                .form-helper
+                  The patient's Date of Birth is required.      
+                    
+        .row                  
+          .col-md-6
+            .input-container                
+              %label._full-input
+                %span.name
+                  Gender
+                = f.select :gender_id, Gender.all.map{ |g| [g.name, g.id] }, {:include_blank => 'Select Gender...'}, :class => 'required'
+                .form-helper
+                  The patient's gender is required.    
+                  
+    %hr
+    .section
+      ._title 
+        Contact Information
+      ._body   
+        .row
+          .col-md-6      
+            .input-container
+              %label._full-input
+                %span.name
+                  Email
+                = f.email_field :email_primary, :class => ""
+          .col-md-6                     
+            .input-container
+              %label._full-input
+                %span.name
+                  Phone
+                = f.text_field :phone_primary, :class => "_tel"             
+                  
+    %hr 
+    .section
+      ._title
+        Address
+      ._body 
+        .input-container          
+          %label._full-input
+            %span.name
+              Address            
+            = f.text_area :address_street_1, :class => "required"
+            .form-helper
+              The patient's address is required. 
+      
+                
+    %hr
+    .row      
+      .col-md-4.col-md-offset-8
+        .action._large._normalize.pull-right._submit    
+          Save
+          = f.submit ''   

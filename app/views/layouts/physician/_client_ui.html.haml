@@ -1,0 +1,34 @@
+- content_for :page_title do
+  New Prescription
+
+= render :partial => "layouts/physician/menu"         
+
+- content_for :client_class do
+  #{' _prescription-page '}#{' _showing-info-bar ' unless @prescription.has_saved_patient?}
+                
+#client-body
+  #client-header                    
+    #content-heading
+      .content-wrap
+        ._medium
+          .row
+            .col-md-12
+              #{yield :page_header}
+              #chd
+                - if @prescription.has_saved_patient? || @prescription.patient.new_record?
+                  -# %h2.active-channel-name New Prescription
+                  = render 'partials/physician/prescriptions/patient_select_inline'
+                - else @prescription.has_saved_patient?
+                  = render 'partials/patient_profile_inline', patient: @prescription.patient  
+  
+  #client-content
+    .content-wrap     
+      .row
+        .col-md-12                        
+          #prescription_form            
+            = render 'form'
+  - unless @prescription.has_saved_patient? || @prescription.patient.new_record?
+    = render 'layouts/physician/infobar', patient: @prescription.patient
+  = render 'layouts/physician/messagebar'
+= render :partial => 'partials/modals/confirm_delete'   
+

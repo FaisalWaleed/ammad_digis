@@ -1,0 +1,177 @@
+- content_for :page_title do
+  View Diagnostic Request
+   
+- content_for :client_class, '_showing-full-width' 
+
+- lab_type_ids = @diagnostic.test_type_ids
+
+.row
+  .col-md-6.col-md-offset-3
+    .row
+      .col-md-10.col-md-offset-1
+        .prescription-view
+          ._header
+            .row
+              .col-md-6
+                ._title
+                  RX #
+                  = @diagnostic.identifier
+              .col-md-6
+                ._sub-title
+                  = @diagnostic.ordinal_date
+
+          ._content
+            .row
+              .col-md-12
+                .profile-info.section
+                  ._section
+                    %span.name
+                      = @diagnostic.patient.name
+                  ._section.pull-right                      
+                    %span
+                      %span._age
+                        #{@diagnostic.patient.age}
+                        %span
+                          Y/O
+                      %span.bump._gender #{ @diagnostic.patient.gender_abbrev }
+                      
+                  .row
+                    .col-md-12
+                      ._body.focused
+                        .row
+                          .col-md-6.col-xs-12
+                            .ellipsis
+                              = @diagnostic.patient.address_street_1
+                          .col-md-6.col-xs-12.has-border
+                            .ellipsis
+                              = @diagnostic.patient.phone_primary
+                            .ellipsis{:title => (@diagnostic.patient.email_primary)}
+                              = @diagnostic.patient.email_primary                                                                                             
+                                
+            .row
+              .col-md-12
+                .section           
+                  ._body  
+                    - unless @diagnostic.testings.blank?
+                      .list-ui
+                        ._expandable             
+                          - @tags.each do |tag|
+                            .list-item._parent
+                              ._drug-name                        
+                                %strong= tag.name
+                                %div
+                                  = tag.test_requests.map{ |tr| tr.name }.join(", ") 
+                                
+                    - unless @diagnostic.profiled_testings.blank?
+                      .list-ui
+                        ._expandable             
+                          - @profiles.each do |profile, testings|
+                            .list-item._parent
+                              ._drug-name                        
+                                %strong= profile.name
+                                %div
+                                  = testings.map{ |t| t.test.name }.join(", ") 
+                            
+                  - unless @diagnostic.notes.blank?
+                    %p 
+                      ** #{@diagnostic.notes}              
+                          
+            .row
+              .col-md-12
+                ._title Physician:
+                .section
+                  ._fc-wrap
+                    %h4
+                      Dr. #{@diagnostic.physician.name}
+                    %div
+                      reg #
+                      = @diagnostic.physician.reg_num                          
+
+              .col-md-12
+                .section
+                  .focused
+                    .row
+                      .col-md-6.col-xs-12
+                        %div.ellipsis
+                          = @diagnostic.physician.address_street_1
+                        %div.ellipsis
+                          = "#{@diagnostic.physician.address_territory}, #{@diagnostic.physician.address_country}"
+                      .col-md-6.col-xs-12.has-border
+                        %div.ellipsis
+                          = @diagnostic.physician.phone_primary
+                        %div.ellipsis{:title => (@diagnostic.physician.email_primary)}
+                          = @diagnostic.physician.email_primary                                                                       
+                              
+            - if !@diagnostic.laboratory_id.blank?
+              %hr           
+              .row
+                .col-md-7
+                  .section
+                    ._fc-wrap
+                      %h4 
+                        Filled at 
+                        %strong= @diagnostic.laboratory.name
+                      %div
+                        reg #
+                        = @diagnostic.laboratory.reg_num
+                        
+                .col-md-5
+                  .section                        
+                    ._body
+                      .focused
+                        .row
+                          .col-md-12
+                            %div.ellipsis
+                              %strong= @diagnostic.created_at.strftime('%I:%M %P')
+                            %div
+                              = @diagnostic.created_at.strftime('%B %d, %Y')
+                              
+            - else
+              %hr
+              = form_for @diagnostic, :url => patient_diagnostic_path(@diagnostic) do |f|
+                .row
+                  .col-md-12
+                    .section._state
+                      ._title Select Laboratory / Radiology Center
+                      ._body
+                        .input-container
+                          .row
+                            .col-md-7
+                              %label._search
+                                = f.text_field :laboratory_name, :placeholder => "Enter laboratory's name", :data => { url: api_v1_search_laboratories_path, autocomplete: true,  param: lab_type_ids.uniq.join(','), 'item-template' => '#pharmacy_ac_item' }, :class => 'required ds-autocomplete'
+                                = f.hidden_field :laboratory_id, :id => 'laboratory_id'                              
+                            .col-md-5
+                              .action._large._normalize._fill._submit
+                                Send to Laboratory
+                                = f.submit ''
+                                
+            - if @diagnostic.laboratory
+              %hr/
+              .row  
+                .col-md-12
+                  ._title Sent to:
+                  ._section
+                    .row
+                      .col-md-12
+                        ._fc-wrap
+                          %h4
+                            #{@diagnostic.laboratory.name}
+                          %div
+                            reg #
+                            = @diagnostic.laboratory.reg_num                          
+
+              .row
+                .col-md-12
+                  .focused
+                    .row
+                      .col-md-6.col-xs-12
+                        %div.ellipsis
+                          = @diagnostic.laboratory.address_street_1
+                        %div.ellipsis
+                          = "#{@diagnostic.laboratory.address_territory}, #{@diagnostic.laboratory.address_country}"
+                      .col-md-6.col-xs-12.has-border
+                        %div.ellipsis
+                          = @diagnostic.laboratory.phone_primary
+                        %div.ellipsis
+                          = @diagnostic.laboratory.email_primary                                                                       
+

@@ -1,0 +1,257 @@
+Test Name,Tags,Test Type
+,,
+Acid phosphatase,Blood Chemistry,Laboratory
+Alkaline phosphatase,Blood Chemistry,Laboratory
+ALT/SGPT,Blood Chemistry,Laboratory
+Amylase,Blood Chemistry,Laboratory
+AST/SGOT,Blood Chemistry,Laboratory
+Bilirubin - Direct,Blood Chemistry,Laboratory
+Bilirubin - Total,Blood Chemistry,Laboratory
+Calcium,Blood Chemistry,Laboratory
+Cholesterol,Blood Chemistry,Laboratory
+Cholinesterase,Blood Chemistry,Laboratory
+CK-MB,Blood Chemistry,Laboratory
+CPK,Blood Chemistry,Laboratory
+Creatinine,Blood Chemistry,Laboratory
+Electrolytes,Blood Chemistry,Laboratory
+GGT,Blood Chemistry,Laboratory
+Globulins,Blood Chemistry,Laboratory
+Glucose – 2 hr,Blood Chemistry,Laboratory
+Glucose – Fasting,Blood Chemistry,Laboratory
+Glucose – OGTT (2 hr),Blood Chemistry,Laboratory
+Glucose – OGTT (3 hr),Blood Chemistry,Laboratory
+Glucose – OGTT (5 hr),Blood Chemistry,Laboratory
+Glucose – O'Sullivan's,Blood Chemistry,Laboratory
+Glucose – Random,Blood Chemistry,Laboratory
+HbA1c,Blood Chemistry,Laboratory
+LDH,Blood Chemistry,Laboratory
+Lipase,Blood Chemistry,Laboratory
+Lipids - Cholesterol,Blood Chemistry,Laboratory
+Lipids - HDL,Blood Chemistry,Laboratory
+Lipids - LDL,Blood Chemistry,Laboratory
+Lipids - Triglycerides,Blood Chemistry,Laboratory
+Lipoprotein Electrophoresis,Blood Chemistry,Laboratory
+Lithium,Blood Chemistry,Laboratory
+Magnesium,Blood Chemistry,Laboratory
+Phosphorous,Blood Chemistry,Laboratory
+Proteins - Albumin,Blood Chemistry,Laboratory
+Proteins - Globulins,Blood Chemistry,Laboratory
+Proteins - Total,Blood Chemistry,Laboratory
+Protein Electrophoresis,Blood Chemistry,Laboratory
+Salicylate,Blood Chemistry,Laboratory
+Triglycerides,Blood Chemistry,Laboratory
+Troponin I,Blood Chemistry,Laboratory
+Urea/BUN,Blood Chemistry,Laboratory
+Uric acid,Blood Chemistry,Laboratory
+Sodium,Blood Chemistry,Laboratory
+Potassium,Blood Chemistry,Laboratory
+Chloride,Blood Chemistry,Laboratory
+Bicarbonate,Blood Chemistry,Laboratory
+ACTH,Endocrinology,Laboratory
+Cortisol AM,Endocrinology,Laboratory
+Cortisol PM,Endocrinology,Laboratory
+DHEAS,Endocrinology,Laboratory
+Estradiol,Endocrinology,Laboratory
+FSH,Endocrinology,Laboratory
+FT3 - Free,Endocrinology,Laboratory
+FT3 - Total,Endocrinology,Laboratory
+Insulin,Endocrinology,Laboratory
+LH,Endocrinology,Laboratory
+Progesterone,Endocrinology,Laboratory
+Prolactin,Endocrinology,Laboratory
+PTH,Endocrinology,Laboratory
+T4 - Free,Endocrinology,Laboratory
+T4 - Total,Endocrinology,Laboratory
+Testosterone - Free,Endocrinology,Laboratory
+Testosterone - Total,Endocrinology,Laboratory
+TSH,Endocrinology,Laboratory
+β-hCG (Qualitative),Endocrinology,Laboratory
+β-hCG (Quantitative),Endocrinology,Laboratory
+Bleeding time,Haematology,Laboratory
+Blood film,Haematology,Laboratory
+CBC,Haematology,Laboratory
+Cross match,Haematology,Laboratory
+DCT,Haematology,Laboratory
+ESR,Haematology,Laboratory
+Ferritin,Haematology,Laboratory
+Fibrinogen,Haematology,Laboratory
+Folate,Haematology,Laboratory
+G6PD,Haematology,Laboratory
+Group & Rhesus,Haematology,Laboratory
+Hb,Haematology,Laboratory
+Hb Electrophoresis,Haematology,Laboratory
+IDCT,Haematology,Laboratory
+INR,Haematology,Laboratory
+Iron saturation,Haematology,Laboratory
+LE cells,Haematology,Laboratory
+Lupus Anticoagulant,Haematology,Laboratory
+MCH,Haematology,Laboratory
+MCHC,Haematology,Laboratory
+MCV,Haematology,Laboratory
+PCV,Haematology,Laboratory
+Platelets,Haematology,Laboratory
+PT,Haematology,Laboratory
+PTT,Haematology,Laboratory
+Reticulocytes,Haematology,Laboratory
+Sickle – Screen,Haematology,Laboratory
+TIBC,Haematology,Laboratory
+Vit. B12,Haematology,Laboratory
+WBC,Haematology,Laboratory
+ANA,Immmunology,Laboratory
+Anticardiolipin,Immmunology,Laboratory
+Anti-DNA,Immmunology,Laboratory
+ASTO,Immmunology,Laboratory
+C3/C4,Immmunology,Laboratory
+CD4,Immmunology,Laboratory
+CD8,Immmunology,Laboratory
+CRP,Immmunology,Laboratory
+dsDNA,Immmunology,Laboratory
+Febrile Agglutinins,Immmunology,Laboratory
+hsCRP,Immmunology,Laboratory
+RF/RA,Immmunology,Laboratory
+RNP,Immmunology,Laboratory
+Sm,Immmunology,Laboratory
+SS-A/Ro,Immmunology,Laboratory
+SS-B/La,Immmunology,Laboratory
+Viral load,Immmunology,Laboratory
+Chikungunya,Microbiology,Laboratory
+Chlamydia,Microbiology,Laboratory
+CMV - IgG,Microbiology,Laboratory
+CMV - IgM,Microbiology,Laboratory
+Culture and Sensitivity,Microbiology,Laboratory
+Dengue - IgG,Microbiology,Laboratory
+Dengue - IgM,Microbiology,Laboratory
+FTA-ABS,Microbiology,Laboratory
+Gonorrhea,Microbiology,Laboratory
+HAV antibodies,Microbiology,Laboratory
+HB c antibodies (HBcAb),Microbiology,Laboratory
+HB e antibodies (HBeAb),Microbiology,Laboratory
+HB e antigen (HBeAg),Microbiology,Laboratory
+HB s antibodies (HBsAb),Microbiology,Laboratory
+HB s antigen (HBsAg),Microbiology,Laboratory
+HCV antibodies,Microbiology,Laboratory
+HIV 1/2,Microbiology,Laboratory
+HSV 1 - IgG,Microbiology,Laboratory
+HSV 1 - IgM,Microbiology,Laboratory
+HSV 2 - IgG,Microbiology,Laboratory
+HSV 2 - IgM,Microbiology,Laboratory
+HTLV 1/2,Microbiology,Laboratory
+Influenza,Microbiology,Laboratory
+LGV-CFT,Microbiology,Laboratory
+Malaria,Microbiology,Laboratory
+MHA-TP,Microbiology,Laboratory
+Microscopy,Microbiology,Laboratory
+Microscopy/Gram stain,Microbiology,Laboratory
+"Ova, Cysts and Parasites",Microbiology,Laboratory
+Rubella - IgG,Microbiology,Laboratory
+Rubella - IgM,Microbiology,Laboratory
+Toxoplasma - IgG,Microbiology,Laboratory
+Toxoplasma - IgM,Microbiology,Laboratory
+Varicella-Zoster,Microbiology,Laboratory
+VDRL,Microbiology,Laboratory
+Widal,Microbiology,Laboratory
+Zik-V,Microbiology,Laboratory
+Amoeba,Miscellaneous,Laboratory
+Faecal Occult Blood,Miscellaneous,Laboratory
+Pap Smear,Miscellaneous,Laboratory
+Semenalysis,Miscellaneous,Laboratory
+Urinalysis,Miscellaneous,Laboratory
+Amphetamine,Special Chemistry,Laboratory
+CA-125,Special Chemistry,Laboratory
+Cannabis,Special Chemistry,Laboratory
+CEA,Special Chemistry,Laboratory
+Cocaine,Special Chemistry,Laboratory
+Digoxin,Special Chemistry,Laboratory
+Ethanol (Alcohol),Special Chemistry,Laboratory
+Heroin,Special Chemistry,Laboratory
+Lead,Special Chemistry,Laboratory
+Lithium,Special Chemistry,Laboratory
+Phenobarbitol,Special Chemistry,Laboratory
+Phenytoin (Dilantin),Special Chemistry,Laboratory
+PSA - Free,Special Chemistry,Laboratory
+PSA - Total,Special Chemistry,Laboratory
+Salicylates,Special Chemistry,Laboratory
+Tegretol (Carbamazepine),Special Chemistry,Laboratory
+Valproic Acid,Special Chemistry,Laboratory
+Amylase,Urine Chemistry,Laboratory
+Bence Jones Proteins,Urine Chemistry,Laboratory
+Creatinine,Urine Chemistry,Laboratory
+Potassium,Urine Chemistry,Laboratory
+Albumin,Urine Chemistry,Laboratory
+Sodium,Urine Chemistry,Laboratory
+Urea,Urine Chemistry,Laboratory
+β-hCG,Urine Chemistry,Laboratory
+17-KGS,Urine Chemistry - 24 hr,Laboratory
+17-KS,Urine Chemistry - 24 hr,Laboratory
+5-HIAA,Urine Chemistry - 24 hr,Laboratory
+Calcium,Urine Chemistry - 24 hr,Laboratory
+Cortisol,Urine Chemistry - 24 hr,Laboratory
+Creatinine clearance,Urine Chemistry - 24 hr,Laboratory
+Phosphorous,Urine Chemistry - 24 hr,Laboratory
+Protein,Urine Chemistry - 24 hr,Laboratory
+VMA,Urine Chemistry - 24 hr,Laboratory
+Skull,Plain X-ray,Radiology
+Chest,Plain X-ray,Radiology
+Cervical Spine,Plain X-ray,Radiology
+Lumbosacral,Plain X-ray,Radiology
+Pelvis,Plain X-ray,Radiology
+Abdominal,Plain X-ray,Radiology
+"Arm (Left, Right, Both)",Plain X-ray,Radiology
+"Forearm (Left, Right, Both)",Plain X-ray,Radiology
+"Hand (Left, Right, Both)",Plain X-ray,Radiology
+"Thigh (Left, Right, Both)",Plain X-ray,Radiology
+"Leg (Left, Right, Both)",Plain X-ray,Radiology
+"Foot (Left, Right, Both)",Plain X-ray,Radiology
+Abdominal,Ultrasound,Radiology
+Abdomino-Pelvic,Ultrasound,Radiology
+Breast,Ultrasound,Radiology
+Cranial,Ultrasound,Radiology
+KUB,Ultrasound,Radiology
+Obstetric,Ultrasound,Radiology
+Pelvic,Ultrasound,Radiology
+Scrotal,Ultrasound,Radiology
+Saline Infusion Sonogram,Ultrasound,Radiology
+Salivary Glands,Ultrasound,Radiology
+Ophthalmic,Ultrasound,Radiology
+Doppler,Ultrasound,Radiology
+Abdomen,Computed Tomography,Radiology
+Abdomen and Chest,Computed Tomography,Radiology
+Abdomen and Pelvis,Computed Tomography,Radiology
+"Chest, Abdomen and Pelvis",Computed Tomography,Radiology
+Chest,Computed Tomography,Radiology
+Brain,Computed Tomography,Radiology
+Brain and Pituitary Fossa,Computed Tomography,Radiology
+Brain and Orbits,Computed Tomography,Radiology
+Brain and Sinuses,Computed Tomography,Radiology
+Extremities,Computed Tomography,Radiology
+Neck,Computed Tomography,Radiology
+Pelvis,Computed Tomography,Radiology
+Spine,Computed Tomography,Radiology
+Temporal Bones,Computed Tomography,Radiology
+Cerebral,MDCT,Radiology
+Pulmonary,MDCT,Radiology
+Aortogram,MDCT,Radiology
+Lower Limb,MDCT,Radiology
+Facial Bones,MDCT,Radiology
+Urogram,MDCT,Radiology
+Virtual Colonoscopy,MDCT,Radiology
+Barium Meal,Fluoroscopy,Radiology
+Barium Enema,Fluoroscopy,Radiology
+Barium Swallow,Fluoroscopy,Radiology
+Barium Meal & Follow through,Fluoroscopy,Radiology
+Intravenous Pyelogram,Fluoroscopy,Radiology
+MCUG,Fluoroscopy,Radiology
+T-tube Cholangiogram,Fluoroscopy,Radiology
+Urethrogram,Fluoroscopy,Radiology
+Ascending,Fluoroscopy,Radiology
+Ascending and Descending,Fluoroscopy,Radiology
+Nephrostogram,Fluoroscopy,Radiology
+Renal Scan,Nuclear Scan,Radiology
+Lung Scan,Nuclear Scan,Radiology
+Bone Scan,Nuclear Scan,Radiology
+Thyroid Scan,Nuclear Scan,Radiology
+Hepatobiliary Scan,Nuclear Scan,Radiology
+Gastric Emptying,Nuclear Scan,Radiology
+Milk Scan,Nuclear Scan,Radiology
+Parathyroid,Nuclear Scan,Radiology
+Iodine (I131),Nuclear Scan,Radiology

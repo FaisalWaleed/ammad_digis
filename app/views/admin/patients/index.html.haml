@@ -1,0 +1,47 @@
+- content_for :title, "Patient"
+- content_for :page_title, "Patient"
+
+/ - content_for :page_action do
+/   = link_to 'New Patient', new_admin_patient_path, :class => 'action _default _focus'
+  
+- content_for :filter do  
+  .col-md-4
+    = form_tag :admin_patients, :method => :get do
+      .input-container
+        %label._full-input
+          = text_field_tag :term, @term, :class => "", :placeholder => "Search Patients"
+          .form-helper.text-right
+            press Enter 
+  
+._medium
+  .row
+    .col-md-12
+      %table.table
+        %thead
+          %tr
+            %th 
+              %span.title Name
+            %th 
+              %span.title Gender
+            %th 
+              %span.title Age
+            %th
+              %span.title Email
+            %th
+              %span.title Phone                          
+            %th.text-right
+              %span.title Actions           
+
+        %tbody
+          - @patients.order(lastname: :asc).each do |patient|
+            %tr
+              %td
+                = link_to "#{patient.lastname}, #{patient.firstname} #{patient.middlename}", edit_admin_patient_path(patient)
+              %td= patient.gender_name
+              %td= patient.age
+              %td= patient.email_primary
+              %td= patient.phone_primary
+              %td.text-right
+                = link_to '', admin_patient_path(patient), :method => :delete, :data => { :confirm => 'delete' }, :class => 'ds-icon _ic-delete'            
+                
+= paginate @patients

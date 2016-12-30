@@ -1,0 +1,86 @@
+- content_for :page_title do
+  Prescriptions
+
+- content_for :client_class, '_showing-full-width _hide-header'
+
+._medium  
+  = form_tag :physician_prescriptions, :method => :get do 
+    ._expandable
+      .row._parent       
+        .col-md-1
+          ._input-title
+            Search
+        .col-md-3
+          .input-container
+            %label._search
+              = search_field_tag :term, @term, :autocomplete => :off
+        .col-md-2
+          %div
+            %a.action._control{:data => {'id' => 'search-options'}}
+              Filter
+              
+      .row
+        .col-md-5
+          .option-ui
+            ._child{:data => {'id' => 'search-options'}}
+              ._wrap
+                .input-container                        
+                  %label._date-input
+                    %span.name
+                      Start Date
+                    = date_select :start_date, {order: [:month, :day, :year], prompt: { day: 'Day', month: 'Month', year: 'Year' }, start_year: Date.today.year, end_year: Date.today.year - 100 }                    
+                .input-container                        
+                  %label._date-input
+                    %span.name
+                      End Date
+                    = date_select :end_date, {order: [:month, :day, :year], prompt: { day: 'Day', month: 'Month', year: 'Year' }, start_year: Date.today.year, end_year: Date.today.year - 100 }
+                    
+                .action._large._normalize._focus{:tabindex => '0'}     
+                  Search Now
+                  = submit_tag 'Search Now' 
+  .row
+    .col-md-12
+      - unless @prescriptions.blank?
+        %table.table
+          %thead
+            %tr
+              %th 
+              %th 
+              %th 
+              %th
+              %th         
+              %th.text-right             
+          %tbody
+            - @prescriptions.each do |prescription|
+              %tr
+                %td                
+                  = link_to physician_prescription_path(prescription) do
+                    RX ##{prescription.identifier}              
+                %td= prescription.patient.name
+                %td= prescription.created_at.strftime '%m/%d/%Y'                 
+                %td
+                  %span{:title => prescription.drugs.map(&:generic_name).join(', '), :data => {'tooltip' => ''}}
+                    #{pluralize(prescription.prescripts.length, 'item')}
+                %td
+                  - unless prescription.pharmacy.blank?
+                    = prescription.pharmacy.name
+                  - else
+                    - if prescription.printed? 
+                      %strong
+                        Printed
+                %td.text-right   
+                  - if prescription.pharmacy.blank? && !prescription.printed?                
+                    = link_to "", physician_prescription_path(prescription), :method => :delete, :data => {:confirm => 'delete'}, :class => 'dg-icon _ic-delete'
+      - else
+        ._prompt-wrap
+          ._prompt 
+            - unless @term.blank?
+              No prescriptions found with 
+              %span
+                #{@term}.             
+            - else             
+              No prescriptions have been created.                 
+  .row
+    .col-md-12
+      .pull-right
+        = paginate @prescriptions

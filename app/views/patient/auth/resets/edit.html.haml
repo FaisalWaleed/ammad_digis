@@ -1,0 +1,18 @@
+- content_for :page_title do
+  Update your password
+
+%div
+  %a#toregister.hiddenanchor
+  %a#tologin.hiddenanchor
+  #wrapper
+    #login.animate.form
+      %section.login_content
+        = form_tag patient_password_reset_path, :method => :put, :autocomplete => "off" do
+          = hidden_field_tag :token, @patient.perishable_token
+          %h1 Update Password
+          %div
+            = password_field_tag :password, "", :class => 'allow-submit form-control _password required', :placeholder => "Your new password"
+          %div
+            = password_field_tag :password_confirmation, "", :class => '_confirm-password form-control required', :placeholder => "Confirm your new password"
+          %div
+            %button.btn.btn-default.submit{:name => "update_password", :type => "submit", :value => "lost"} Update Password

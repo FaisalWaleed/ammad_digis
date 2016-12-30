@@ -1,0 +1,62 @@
+!!!
+%html
+  %head
+    %script{:src => "https://use.typekit.net/ddt7bah.js"}
+    :javascript
+      try{Typekit.load({ async: true });}catch(e){}  
+    %title
+      Digiscripts - Pharmacy - 
+      = yield :page_title
+      
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = yield :page_js
+    /[if lt IE 9]  
+      = javascript_include_tag 'lib_ie/svg', 'data-turbolinks-track' => true       
+      = javascript_include_tag 'lib_ie/html5shiv-printshiv', 'data-turbolinks-track' => true 
+      = javascript_include_tag 'lib_ie/respond', 'data-turbolinks-track' => true         
+    = csrf_meta_tags
+  %body.dg{"data-msg-source" => pharmacist_messages_path(:json)}
+    = render :partial => 'partials/no_script'   
+    #client-ui{:class => (yield :client_class)}                                            
+      = render :partial => "layouts/pharmacist/menu"      
+      #client-body
+        #client-header              
+          #content-heading
+            .content-wrap
+              ._medium
+                .row
+                  #{yield :page_header}
+                  #{yield :page_action}         
+              
+        #client-content                        
+          .content-wrap
+            - unless current_pharmacy
+              ._medium 
+                .row
+                  .col-md-12
+                    ._prompt-wrap
+                      ._prompt                     
+                        You have no pharmacies assigned to you.               
+                
+            = yield
+            
+        = render 'layouts/pharmacist/messagebar'
+              
+    = yield :after_body
+    #dg-pharm-prescription.modal._persistent{ 'data-remote' => 'true' }
+      .modal-dialog
+        .modal-content 
+        
+    #dg-pharm-message-template
+      #dg-messages.modal._persistent.fade{ 'data-remote' => 'true' }
+        .modal-dialog
+          .modal-content  
+          
+    = render :partial => 'partials/modals/pharmacist/validaterx'    
+    = render :partial => 'partials/modals/confirm_delete'                  
+                      
+    /[if lt IE 9]
+      = javascript_include_tag 'lib_ie/rem.min'   
+    /[if lt IE 10]      
+      = javascript_include_tag 'lib_ie/placeholder'                         

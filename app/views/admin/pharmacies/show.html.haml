@@ -1,0 +1,158 @@
+- content_for :title, "Pharmacy"
+- content_for :page_title, "Pharmacy: #{@pharmacy.name}"
+   
+- content_for :notice do
+  - unless notice.blank?
+    .row
+      .col-md-7
+        ._msg.success
+          ._alert
+            .ds-icon._ic-info
+          = notice  
+.row
+  .col-md-7
+    ._medium
+      .row
+        .col-md-4
+          .input-container
+            %label._full-input
+              %span.name
+                Logo
+            ._input-group
+              .focused   
+                .row
+                  .col-md-12
+                    ._image-holder
+                      - if @pharmacy.avatar.url(:original).blank?
+                        %span.dg-icon.ic-gallery                          
+                      - else
+                        = image_tag @pharmacy.avatar.url(:thumb)                               
+              
+      %hr     
+      .section
+        ._title
+          Pharmacy Information
+        ._body 
+          .row
+            .col-md-12
+              .input-container
+                %label._full-input
+                  %span.name
+                    Pharmacy Name
+                = @pharmacy.name
+                    
+      %hr 
+      .section
+        ._title
+          Primary Contact Information
+        ._body 
+          .row
+            .col-md-6
+              .input-container
+                %label._full-input
+                  %span.name
+                    First Name
+                = @pharmacy.contact_firstname               
+                
+            .col-md-6
+              .input-container                
+                %label._full-input
+                  %span.name
+                    Last Name        
+                = @pharmacy.contact_lastname  
+
+          .row
+            .col-md-6      
+              .input-container
+                %label._full-input
+                  %span.name
+                    Email
+                = @pharmacy.email_primary
+                    
+            .col-md-6      
+              .input-container
+                %label._full-input
+                  %span.name
+                    Phone
+                = @pharmacy.phone_primary                 
+        
+      %hr 
+      .section
+        ._title
+          Address
+        ._body 
+          .row
+            .col-md-4
+              .input-container
+                .row
+                  .col-md-12
+                    %label._full-input
+                      %span.name
+                        Street Address 1
+                    = @pharmacy.address_street_1    
+                      
+              .input-container
+                .row
+                  .col-md-12
+                    %label._full-input
+                      %span.name
+                        Street Address 2 (opt.)
+                    = @pharmacy.address_street_2
+                      
+            .col-md-4                                   
+              .input-container
+                .row
+                  .col-md-12
+                    %label._full-input
+                      %span.name
+                        Town
+                    = @pharmacy.address_municipality                      
+                      
+              .input-container
+                .row
+                  .col-md-12
+                    %label._full-input
+                      %span.name
+                        Parish
+                    = @pharmacy.address_territory 
+                        
+            .col-md-4                                      
+              .input-container
+                .row
+                  .col-md-12
+                    %label._full-input
+                      %span.name
+                        Country
+                    = @pharmacy.address_country
+        
+          .row
+            .col-md-4
+              .input-container
+                %label._full-input
+                  %span.name
+                    Latitude
+                = @pharmacy.latitude
+                  
+            .col-md-4
+              .input-container                
+                %label._full-input
+                  %span.name
+                    Longitude       
+                = @pharmacy.longitude  
+                
+      %hr
+      .section
+        ._title
+          App Settings
+        ._body              
+          .input-container              
+            %label._full-input
+              %span.name Active    
+            = @pharmacy.active?? 'yes':'no'                
+                
+      %hr
+      .row      
+        .col-md-4.col-md-offset-8
+          = link_to 'Edit', edit_admin_pharmacy_path(@pharmacy), :class => "action _default pull-right"    
+
+

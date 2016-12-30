@@ -1,0 +1,51 @@
+- content_for :page_title do
+  Prescriptions
+  
+- content_for :client_class, '_showing-full-width _hide-header'
+          
+._medium  
+  %form
+    .row
+      .col-md-8
+        .inline-list#prescription-state
+          %ul          
+            %li
+              %a.action._small.active._psc-state{'data-state' => 'open'} 
+                %span.menu-label To Be Filled
+                -#%span._msg-count._circle
+            %li
+              %a.action._small._psc-state{'data-state' => 'ready'} 
+                %span.menu-label Ready               
+                -#%span._msg-count._circle
+     
+      .col-md-4
+        ._expandable
+          .row._parent       
+            .col-md-3
+              ._input-title
+                Search
+            .col-md-9
+              .input-container
+                %label._search
+                  %input{:id => 'table_search',:type => 'search'}     
+         
+  .row
+    .col-md-12 
+      %table.table._searchable{:data => {:name => "prescriptions", :options => "search-col-5-open", "default-col" => "open"}}
+        %thead
+          %tr
+            %th 
+            %th 
+            %th 
+            %th
+            %th
+            %th.hidden
+            %th.hidden
+
+        %tbody
+          = render :partial => 'index', :collection => @dispense_orders, :as => :order
+                
+
+                    
+                  
+              

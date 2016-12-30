@@ -1,0 +1,52 @@
+- content_for :page_title do
+  Patients
+  
+- content_for :client_class, '_showing-full-width _hide-header'
+          
+._medium  
+  = form_tag :pharmacy_disbursements, :method => :get do
+    ._expandable
+      .row._parent       
+        .col-md-1
+          ._input-title
+            Search
+        .col-md-3
+          .input-container                        
+            %label._date-input
+              = text_field_tag :start_date, @start_date, :data => {'cms-date' => true}, :placeholder => "Start Date"        
+        .col-md-3              
+          .input-container                        
+            %label._date-input
+              = text_field_tag :end_date, @end_date, :data => {'cms-date' => true}, :placeholder => "End Date"
+        .col-md-3
+          .action._large._normalize._focus{:tabindex => '0'}     
+            Search Now
+            = submit_tag 'Search Now'   
+              
+        .col-md-2.text-right
+          = link_to 'Print', pharmacy_disbursements_path(print: '', :start_date => @start_date, :end_date => @end_date), :target => '_blank', :class => "action _large"  
+          
+  .row
+    .col-md-12
+      - unless @disbursements.blank?
+        %table.table
+          %thead
+            %tr
+              %th Annotation
+              %th Date
+              %th Pharmacist
+              %th Pharmacy
+
+          %tbody
+            = render :partial => 'index', :collection => @disbursements, :as => :disbursement                
+      - else
+        ._prompt-wrap
+          ._prompt 
+            - unless @term.blank?
+              No disbursements found with 
+              %span
+                #{@term}.             
+            - else             
+              No disbursements found.                  
+              
+

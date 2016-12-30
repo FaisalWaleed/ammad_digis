@@ -1,0 +1,3 @@
+Hi #{ @physician.firstname },
+
+= link_to "activate account", physician_activation_url(:activation_code => @physician.perishable_token)

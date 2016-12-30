@@ -1,0 +1,60 @@
+- if @dispense_order
+  ._header
+    ._controls                      
+      %a.back.dg-icon._ic-back{:tabindex => "-1"}  
+    ._title
+      RE: RX # #{@dispense_order.prescription.identifier}
+                                
+  ._contents
+    = form_for :message, :url => pharmacist_prescription_send_message_path(@dispense_order), :html => { :id => 'prescription_question' } do |f|
+      .row
+        .col-md-12
+          .section
+            ._body
+              .row
+                .col-md-12
+                  %h3
+                    To:
+                    = @dispense_order.physician.name
+                  %h3
+                    Contact:
+                    = @dispense_order.physician.phone_primary
+              %hr                                
+      .row
+        .col-md-10
+          .section
+            ._body 
+              ._notes
+                ._meta
+                /
+                  10/08/2016 - 3:21PM
+      .row                          
+        .col-md-12
+          .section                        
+            ._body
+              .input-container
+                .row
+                  .col-md-12
+                    %label._full-input
+                      %span.name
+                        Ask a question
+                    = f.text_area :body, :placeholder => "Enter your response here."
+                                    
+      ._footer
+        .inline-list
+          %ul
+            %li
+              .input-container
+                %label._select
+                  =# f.select :mark_as_resolved, [['RESPONSE DISABLED', false], ['NEEDS RESPONSE', true]]
+                  /= Luechen: I took the liberty of trying a checkbox, since a select here is kinda ugly
+                  = f.check_box :require_response, :style => 'display: inline'
+                  %span NEEDS RESPONSE
+            %li
+              %a#prescription_send_message.action._large._focus SEND
+
+                
+          
+                            
+                                  
+    

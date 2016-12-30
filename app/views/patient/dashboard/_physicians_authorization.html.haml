@@ -1,0 +1,42 @@
+= form_tag :update_permission_patient_dashboard_index, method: :post do
+  #newTitle.modal.fade{"aria-labelledby" => "newTitleLabel", :role => "dialog", :tabindex => "-1"}
+    .modal-dialog.modal-lg{:role => "document"}
+      .modal-content
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4#newTitleLabel.modal-title Search Physician
+        .modal-body
+          .form-group
+          .form-group
+            = hidden_field_tag :permission_action, 'authorized'
+            %table#all-physicians.table.table-striped.table-bordered
+              %thead
+                %tr
+                  %th Name
+                  %th Clinic Name
+                  %th Office Address
+                  %th Email Address
+                  %th Phone Number
+                  %th Area of Specialization
+                  %th Actions
+              %tbody
+                - @physicians.each do |physician|
+                  %tr
+                    %td
+                      = image_tag physician.avatar.url(:small)
+                      %br/
+                      = physician.name
+                    %td System Architect
+                    %td
+                      = physician.address_street_1
+                      %br/
+                      = physician.address_street_2
+                    %td= physician.email_primary
+                    %td= physician.phone_primary
+                    %td= physician.specialization.try(:name)
+                    %td
+                      = check_box_tag 'physician_ids[]', physician.id
+        .modal-footer
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+          %button#applyNow.btn.btn-primary{:name => "AddTitle", :type => "submit", :value => "AddIt"} Access Product

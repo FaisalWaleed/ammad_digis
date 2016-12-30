@@ -1,0 +1,40 @@
+.row
+  .col-md-6.col-xs-12
+    .x_panel
+      .x_title
+        %h2
+          Personal Information
+          %small Edit information here
+        .clearfix
+      .x_content
+        %br/
+        = form_for @patient, url: update_info_patient_dashboard_index_path do |f|
+          .col-md-4.col-sm-4.col-xs-12.form-group.has-feedback
+            = f.text_field :firstname, :disabled => "disabled", :placeholder => "First Name", class: 'form-control'
+            %span.fa.fa-user.form-control-feedback.right{"aria-hidden" => "true"}
+          .col-md-4.col-sm-4.col-xs-12.form-group.has-feedback
+            = f.text_field :lastname, :disabled => "disabled", :placeholder => "Last Name", class: 'form-control'
+            %span.fa.fa-user.form-control-feedback.right{"aria-hidden" => "true"}
+          .col-md-4.col-sm-4.col-xs-12.form-group.has-feedback
+            = f.text_field :middlename, :disabled => "disabled", :placeholder => "Middle Name", class: 'form-control'
+            %span.fa.fa-user.form-control-feedback.right{"aria-hidden" => "true"}
+          .col-md-12.form-group.has-feedback
+            = f.text_field :address_street_1, :disabled => "disabled", :placeholder => "Your Address", class: 'form-control has-feedback-left'
+            %span.fa.fa-home.form-control-feedback.left{"aria-hidden" => "true"}
+          .col-md-6.col-sm-6.col-xs-12.form-group.has-feedback
+            = f.text_field :date_of_birth, :disabled => "disabled", :placeholder => "Date of Birth", class: 'form-control has-feedback-left'
+            %span.fa.fa-building.form-control-feedback.left{"aria-hidden" => "true"}
+          .col-md-6.col-sm-6.col-xs-12.form-group.has-feedback
+            = f.text_field :gender_id, value: @patient.gender.try(:name), :disabled => "disabled", :placeholder => "Gender", class: 'form-control has-feedback-left'
+            %span.fa.fa-location-arrow.form-control-feedback.left{"aria-hidden" => "true"}
+          .col-md-6.col-sm-6.col-xs-12.form-group.has-feedback
+            = f.email_field :email_primary, :placeholder => "Email Address", class: 'form-control'
+            %span.fa.fa-envelope.form-control-feedback.right{"aria-hidden" => "true"}
+          .col-md-6.col-sm-6.col-xs-12.form-group.has-feedback
+            = f.text_field :phone_mobile, :placeholder => "Mobile Phone", class: 'form-control'
+            %span.fa.fa-phone.form-control-feedback.right{"aria-hidden" => "true"}
+          .ln_solid
+          .form-group
+            .col-md-9.col-sm-9.col-xs-12.col-md-offset-3
+              = link_to 'Cancel', patient_root_url, class: 'btn btn-primary'
+              = f.submit 'Update Information!', class: 'btn btn-success'

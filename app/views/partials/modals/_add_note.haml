@@ -1,0 +1,33 @@
+#add-note-template
+  #dg-add-note.modal._persistent.fade
+    .modal-dialog
+      .modal-content
+        ._controls
+          .container-fluid
+            .row
+              .col-xs-12
+                %h3.title Add A Note
+                %a.close{"aria-label" => "close", "data-dismiss" => "modal"}
+        ._contents
+          #error_explanation
+            -#= render 'add_note_errors'
+            
+          %form.patient-data
+            .container-fluid
+              .row
+                .col-xs-12
+                  .section
+                    ._body
+                      .inline-list
+                        %ul
+                          %li DRUGNAME
+                          %li 10MG
+                          %li ROUTE
+                          %li EVERY 12 HOURS
+                          %li X5
+                      .input-container
+                        .row
+                          .col-md-12
+                            %textarea{:placeholder => "Note", :name => 'patient[general_note]'}
+                  ._footer
+                    %a.action._large._focus.submit-btn SAVE

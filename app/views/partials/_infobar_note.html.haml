@@ -1,0 +1,7 @@
+._notes{'data-id' => note.id}
+  ._meta
+    = note.created_at.strftime '%m/%d/%Y - %I:%M%p'
+  %p._content._small
+    #{note.note} 
+  %hr                     
+

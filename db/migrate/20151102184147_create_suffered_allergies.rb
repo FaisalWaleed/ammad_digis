@@ -1,0 +1,11 @@
+class CreateSufferedAllergies < ActiveRecord::Migration
+  def change
+    create_table :suffered_allergies do |t|
+      t.integer :patient_id
+      t.integer :common_allergy_id
+      t.boolean :current, :default => false, :null => false
+
+      t.timestamps null: false
+    end
+  end
+end

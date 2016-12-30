@@ -1,0 +1,41 @@
+- content_for :title, "Tests"
+- content_for :page_title, "Tests"
+
+- content_for :page_action do
+  = link_to 'New Test', new_admin_test_path, :class => 'action _default _focus'
+  
+- content_for :filter do  
+  .col-md-4
+    = form_tag :admin_tests, :method => :get do
+      .input-container
+        %label._full-input
+          = text_field_tag :term, @term, :class => "", :placeholder => "Search Tests"
+          .form-helper.text-right
+            press Enter 
+  
+._medium
+  .row
+    .col-md-12
+      %table.table
+        %thead
+          %tr
+            %th 
+              %span.title Name
+            %th 
+              %span.title Test type
+            %th 
+              %span.title Tags
+            %th.text-right
+              %span.title Actions  
+        %tbody
+          - @tests.each do |test|
+            %tr
+              %td
+                = link_to test.name, edit_admin_test_path(test)
+              %td= test.test_type.name rescue nil
+              %td= test.test_tags.map(&:name).join(',')
+              %td.text-right
+                = link_to '', admin_test_path(test), :method => :delete, :data => { :confirm => 'delete' }, :class => 'ds-icon _ic-delete'               
+
+
+= paginate @tests

@@ -1,0 +1,92 @@
+#patient-history-template
+  #dg-patient-history.modal._persistent.fade
+    .modal-dialog
+      .modal-content
+        ._controls
+          .container-fluid
+            .row
+              .col-xs-12
+                %h3.title Patient History
+                %a.close{"aria-label" => "close", "data-dismiss" => "modal"}
+        ._contents
+          .container-fluid
+            .row
+              .col-md-10
+                .profile-info.section
+                  ._section
+                    .row
+                      .col-md-9
+                        %h3.pl #{patient.name}
+                        %span.pr
+                          %span.bump._gender #{patient.gender.name.first rescue nil}
+                          %span._age #{patient.age.to_i} Y/O
+                        
+                  ._body
+                    .row._anchored
+                      .col-md-9
+                        .focused
+                          .row
+                            .col-md-6.col-xs-12
+                              = patient.address_street_1
+                              %br/
+                              #{patient.address_territory}, #{patient.address_country}
+                            .col-md-6.col-xs-12.has-border
+                              %div
+                                = patient.phone_primary
+                              %div
+                                = patient.email_primary
+                
+                      = link_to 'Edit', edit_physician_patient_path(patient), :class => "action _large"   
+            
+            .row
+              .col-md-12
+                .section
+                  ._body
+                    .list-ui
+                      ._list-item
+                        .row._anchored
+                          .col-md-7
+                            .focused
+                              .row
+                                .col-md-6.col-xs-12                    
+                                  Z4B86ZZP
+                                .col-md-6.col-xs-12.has-border  
+                                  NOV 05 2015              
+                        %table.table.bordered
+                          %tbody
+                            %tr
+                              %td Nolpaza GR 
+                              %td Pantoprazole 
+                              %td 500mg
+                              %td PO
+                              %td bid / bd x 7/7
+                              %td._extend
+                                %a.action._small._fill._focus Note
+                                ._tooltip._right
+                                  .note-wrapper
+                                    %p 
+                                      Hello World
+                                      
+                      ._list-item
+                        .row._anchored
+                          .col-md-7
+                            .focused
+                              .row
+                                .col-md-6.col-xs-12                    
+                                  Z4B86ZZP
+                                .col-md-6.col-xs-12.has-border  
+                                  NOV 05 2015              
+                        %table.table.bordered
+                          %tbody
+                            %tr
+                              %td Nolpaza GR 
+                              %td Pantoprazole 
+                              %td 500mg
+                              %td PO
+                              %td bid / bd x 7/7
+                              %td._extend
+                                %a.action._small._fill._focus Note
+                                ._tooltip._right
+                                  .note-wrapper
+                                    %p 
+                                      Hello World    

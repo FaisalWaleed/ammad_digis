@@ -1,0 +1,106 @@
+- if @disbursement
+  :css 
+    ._scakjdka {
+      background-image: url("#{asset_path(@disbursement.physician.signature.url(:original))}");
+    }
+  ._header
+    ._title
+      RX # #{ @disbursement.prescription.identifier }
+    ._sub-title
+      = @disbursement.prescription.ordinal_date     
+    .pull-right     
+      ._controls                      
+        %a.exit.dg-icon._ic-close{:tabindex => "-1", "aria-label" => "close", "data-dismiss" => "modal"}      
+        
+  ._contents
+    .wrapper
+      .row
+        .col-md-12
+          .profile-info.section
+            ._section
+              .row
+                .col-md-8
+                  %h3
+                    = @disbursement.patient.name
+                  %span
+                    %span.bump._gender
+                      = @disbursement.patient.gender_abbrev
+                    %span._age
+                      = @disbursement.patient.age
+                      Y/O
+                  
+            ._body
+              .row
+                .col-md-8
+                  .focused
+                    .row
+                      .col-md-6.col-xs-12
+                        %div.ellipsis._double
+                          = @disbursement.patient.address_street_1
+                      .col-md-6.col-xs-12.has-border
+                        %div.ellipsis
+                          = @disbursement.patient.phone_primary
+                        %div.ellipsis
+                          = @disbursement.patient.email_primary
+
+    .wrapper 
+      .row
+        .col-md-12
+          .section
+            ._body   
+              .list-ui                       
+                .list-item  
+                  ._item-line
+                    ._drug-name
+                      - unless @disbursement.prescript.free_flow?
+                        #{@disbursement.prescript.strfrx}
+                        - unless @disbursement.prescript.free_flow_details.blank?
+                          \- #{@disbursement.prescript.free_flow_details}                                  
+                      - else 
+                        #{@disbursement.prescript.free_flow_details}  
+                      - unless @disbursement.prescript.repeating?
+                        %strong 
+                          Repeat: #{@disbursement.prescript.repeat_max}                                                          
+                  
+                  ._content                                                
+                    .inline-list
+                      ._drug-name.bold-txt
+                        Disbursed
+                      %p._small
+                        = @disbursement.annotation
+                        %br
+                        %span.italic-txt.bold-txt
+                          #{@disbursement.created_at.strftime('%d/%m/%Y')} by #{@disbursement.pharmacist.name} (#{ @disbursement.pharmacy.name })
+
+            - if @disbursement.prescription.allow_generic?
+              %p 
+                %strong
+                  ** Generic approved              
+              
+    .wrapper             
+      ._prescript-id        
+      ._issued
+        ._issued-by
+          Issued by Dr. #{@disbursement.physician.name}
+        ._issued-date 
+          
+      ._info
+        ._reg-num
+          %strong
+            reg#:
+          #{@disbursement.physician.reg_num}                  
+        ._physician-phone
+          %strong
+            phone:         
+          #{ @disbursement.physician.phone_primary }
+        ._physician-email
+          %strong
+            email:         
+          #{ @disbursement.physician.email_primary }
+      ._scakjdka
+        = image_tag 'signature.gif'
+            
+              
+      
+                        
+                              

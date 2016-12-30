@@ -1,0 +1,48 @@
+- content_for :title, "Pharmacies"
+- content_for :page_title, "Pharmacies"
+
+- content_for :page_action do
+  = link_to 'New Pharmacy', new_admin_pharmacy_path, :class => 'action _default _focus'
+  
+- content_for :filter do  
+  .col-md-4
+    = form_tag :admin_pharmacies, :method => :get do
+      .input-container
+        %label._full-input
+          = text_field_tag :term, @term, :class => "", :placeholder => "Search Pharmacies"
+          .form-helper.text-right
+            press Enter 
+  
+._medium
+  .row
+    .col-md-12
+      %table.table
+        %thead
+          %tr
+            %th 
+              %span.title Name
+            %th 
+              %span.title Contact Name
+            %th
+              %span.title Contact Email
+            %th
+              %span.title Phone              
+            %th
+              %span.title Reg #            
+            %th.text-right
+              %span.title Actions      
+        %tbody
+          - @pharmacies.each do |pharmacy|
+            %tr
+              %td
+                = link_to pharmacy.name, edit_admin_pharmacy_path(pharmacy)
+              %td= pharmacy.contact_name
+              %td= pharmacy.email_primary
+              %td= pharmacy.phone_primary
+              %td= pharmacy.reg_num
+              %td.text-right
+                = link_to '', admin_pharmacy_path(pharmacy), :method => :delete, :data => { :confirm => 'delete' }, :class => 'ds-icon _ic-delete'      
+        
+
+
+

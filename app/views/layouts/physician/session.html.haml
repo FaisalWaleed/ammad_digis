@@ -1,0 +1,40 @@
+!!!
+%html
+  %head
+    %script{:src => "https://use.typekit.net/ddt7bah.js"}
+    :javascript
+      try{Typekit.load({ async: true });}catch(e){}
+    %title Digiscripts - Physician | #{yield :page_title}
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    /[if lt IE 9]  
+      = javascript_include_tag 'lib_ie/svg', 'data-turbolinks-track' => true       
+      = javascript_include_tag 'lib_ie/html5shiv-printshiv', 'data-turbolinks-track' => true 
+      = javascript_include_tag 'lib_ie/respond', 'data-turbolinks-track' => true      
+    = csrf_meta_tags
+  %body.dg{:class => (yield :client_class)}
+    = render :partial => 'partials/no_script' 
+    #auth-ui
+      #auth-header
+        #auth-heading
+          .content-wrap
+            .row
+              #{yield :page_header}
+              #{yield :page_action}        
+      #auth-body
+        #auth-content
+          .content-wrap          
+            = yield    
+    /[if lt IE 9]
+      = javascript_include_tag 'lib_ie/rem.min'   
+    /[if lt IE 10]      
+      = javascript_include_tag 'lib_ie/placeholder' 
+    :javascript
+      var $buoop = {vs:{i:9,f:25,o:12.1,s:7},c:2,reminder: 0, url: 'http://outdatedbrowser.com/'};  
+      function $buo_f(){ 
+      var e = document.createElement("script"); 
+      e.src = "//browser-update.org/update.min.js"; 
+      document.body.appendChild(e);
+      };
+      try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
+      catch(e){window.attachEvent("onload", $buo_f)}        

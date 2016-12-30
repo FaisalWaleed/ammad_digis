@@ -1,0 +1,43 @@
+- content_for :client_class, '_page-medium' 
+
+- content_for :page_title do
+  #{current_test_center.name} - Cards
+
+- content_for :page_header do
+  .col-md-8
+    #chd
+      %h2.active-channel-name My Cards  
+  .col-md-4
+    = link_to 'add new', new_test_center_card_path, :class => "action _large _focus pull-right"      
+    
+._medium      
+  .row
+    .col-md-12
+      - unless @cards.blank?
+        %table.table
+          %thead
+            %tr
+              %th
+              %th
+              %th
+              %th
+      
+          %tbody
+            - @cards.each do |card|
+              %tr{ :class => (@stripe_customer.default_source != card.id ? '_reveal-link' : '') }
+                %td
+                  %span
+                    = card.brand
+                %td
+                  **** **** **** #{card.last4}
+                %td.text-right
+                  - if @stripe_customer.default_source != card.id
+                    = button_to 'Default', test_center_card_default_path(card.id), :class => "_set _hidden"
+                  - else
+                    ._set
+                      Default
+                        
+                %td.text-right   
+                  = link_to "", test_center_card_path(card.id), :method => :delete, :data => {:confirm => 'delete'}, :class => 'dg-icon _ic-delete'  
+      
+

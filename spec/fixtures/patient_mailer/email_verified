@@ -1,0 +1,3 @@
+PatientMailer#email_verified
+
+Hi, find me in app/views/patient_mailer/email_verified

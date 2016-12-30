@@ -1,0 +1,43 @@
+- content_for :title, "Admins"
+- content_for :page_title, "Admins"
+
+- content_for :page_action do
+  = link_to 'New Admin', new_admin_admin_path,  :class => 'action _default _focus'
+  
+- content_for :filter do  
+  .col-md-4
+    = form_tag :admin_admins, :method => :get do
+      .input-container
+        %label._full-input
+          = text_field_tag :term, @term, :class => "", :placeholder => "Search Admins"
+          .form-helper.text-right
+            press Enter 
+  
+._medium
+  .row
+    .col-md-12
+      %table.table
+        %thead
+          %tr
+            %th 
+              %span.title Name
+            %th 
+              %span.title Email
+            %th 
+              %span.title Superadmin
+            %th 
+              %span.title Active
+            %th.text-right 
+              %span.title Actions
+
+        %tbody
+          - @admins.order(lastname: :asc).each do |admin|
+            %tr
+              %td
+                = link_to edit_admin_admin_path(admin) do
+                  #{admin.lastname}, #{admin.firstname}
+              %td= admin.email
+              %td= admin.superadmin?? 'Yes' : 'No'
+              %td= admin.active?? 'Yes' : 'No'
+              %td.text-right
+                = link_to '', admin_admin_path(admin), :method => :delete, :data => { :confirm => 'delete' }, :class => 'ds-icon _ic-delete'

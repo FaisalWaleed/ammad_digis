@@ -1,0 +1,11 @@
+- content_for :page_title do
+  Edit #{@pharmacist.name} 
+    
+- content_for :page_header do
+  .col-md-12.col-sm-12.col-xs-12
+    = render 'partials/pharmacist_profile_inline', patient: @pharmacist
+
+.row
+  .col-md-12    
+    ._medium
+      = render 'form'

@@ -1,0 +1,51 @@
+%p#notice= notice
+
+%p
+  %b Firstname:
+  = @pharmacist.firstname
+%p
+  %b Lastname:
+  = @pharmacist.lastname
+%p
+  %b Middlename:
+  = @pharmacist.middlename
+%p
+  %b Gender:
+  = @pharmacist.gender_id
+%p
+  %b Date of birth:
+  = @pharmacist.date_of_birth
+%p
+  %b Address street 1:
+  = @pharmacist.address_street_1
+%p
+  %b Address street 2:
+  = @pharmacist.address_street_2
+%p
+  %b Address municipality:
+  = @pharmacist.address_municipality
+%p
+  %b Address territory:
+  = @pharmacist.address_territory
+%p
+  %b Address postal code:
+  = @pharmacist.address_postal_code
+%p
+  %b Address country:
+  = @pharmacist.address_country
+%p
+  %b Email primary:
+  = @pharmacist.email_primary
+%p
+  %b Phone primary:
+  = @pharmacist.phone_primary
+%p
+  %b Reg num:
+  = @pharmacist.reg_num
+%p
+  %b Avatar:
+  = @pharmacist.avatar
+
+= link_to 'Edit', edit_pharmacist_pharmacist_path(@pharmacist)
+\|
+= link_to 'Back', pharmacist_pharmacists_path

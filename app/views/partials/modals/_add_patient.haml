@@ -1,0 +1,119 @@
+#add-patient-template
+  #dg-add-patient.modal._persistent.fade
+    .modal-dialog
+      .modal-content
+        ._controls
+          .container-fluid
+            .row
+              .col-xs-12
+                %h3.title Add Patient
+                %a.close{"aria-label" => "close", "data-dismiss" => "modal"}
+        ._contents
+          #error_explanation
+            = render 'add_patient_errors'
+            
+          %form.patient-data
+            .container-fluid
+              .row
+                .col-xs-12
+                  .section
+                    ._body
+                      .tab-ui
+                        / beginTabs
+                        .tabs.fluid-tab{:role => "tabpanel"}
+                          / beginTabHeader
+                          .tab-header.hidden-xs
+                            %ul.nav{:role => "tablist"}
+                              %li.active{:role => "presentation"}
+                                %a.action._large.tab-control{"aria-controls" => "contact-info", "data-toggle" => "tab", :href => "#contact-info", :role => "tab"} Contact Details
+                              %li{:role => "presentation"}
+                                %a.action._large.tab-control{"aria-controls" => "medical", "data-toggle" => "tab", :href => "#medical", :role => "tab"} Medical Info
+                              %li{:role => "presentation"}
+                                %a.action._large.tab-control{"aria-controls" => "notes", "data-toggle" => "tab", :href => "#notes", :role => "tab"} Notes                                
+                          / beginTabContainer
+                          .tab-content
+                            .panel-group.ac-group-outline{"aria-multiselectable" => "true", :role => "tablist"}
+                              / beginTabContent
+                              #contact-info.tab-pane.tab-content.active.fade.in.panel{:role => "tabpanel"}
+                                #contact-heading.panel-heading.visible-xs{:role => "tab"}
+                                  %h4.panel-title
+                                    %a{"aria-controls" => "contact-collapse", "aria-expanded" => "true", "data-parent" => "#tab-accordion", "data-toggle" => "collapse", :href => "#contact-collapse"} Contact Details
+                                #contact-collapse.panel-collapse.collapse.in{"aria-labelledby" => "contact-heading", :role => "tabpanel"}
+                                  .panel-body
+                                    .input-container
+                                      .row
+                                        .col-md-4
+                                          %input.firstname{:placeholder => "First Name", :type => "text", :name => 'patient[firstname]'}/
+                                        .col-md-4
+                                          %input.middlename{:placeholder => "Middle Name", :type => "text", :name => 'patient[middlename]'}/
+                                        .col-md-4
+                                          %input.lastname{:placeholder => "Last Name", :type => "text", :name => 'patient[lastname]'}/
+                                    .input-container
+                                      .row
+                                        .col-md-3
+                                          %label._select
+                                            = select_tag 'patient[gender_id]', options_for_select(Gender.all.map{ |g| [g.name, g.id] })
+                                        .col-md-4
+                                          %input{:placeholder => "DOB", :type => "date", :name => 'patient[date_of_birth]'}/
+                                    .input-container
+                                      .row
+                                        .col-md-6
+                                          %input.address1{:placeholder => "Address Line 1", :type => "text", :name => 'patient[address_street_1]'}/
+                                        .col-md-6
+                                          %input.address2{:placeholder => "Parish", :type => "text", :name => 'patient[address_territory]'}/ 
+                                    .input-container
+                                      .row
+                                        .col-md-6
+                                          %input.phone{:placeholder => "Primary Telephone", :type => "tel", :name => 'patient[phone_primary]'}/
+                                        .col-md-6
+                                          %input.email{:placeholder => "Primary Email", :type => "email", :name => 'patient[email_primary]'}/
+                                          
+                              / endTabContent
+                              / beginTabContent
+                              #medical.tab-pane.tab-content.fade.panel{:role => "tabpanel"}
+                                #medical-heading.panel-heading.visible-xs{:role => "tab"}
+                                  %h4.panel-title
+                                    %a.collapsed{"aria-controls" => "medical-collapse", "aria-expanded" => "false", "data-parent" => "#tab-accordion", "data-toggle" => "collapse", :href => "#medical-collapse"} Medical Info
+                                #medical-collapse.panel-collapse.collapse{"aria-labelledby" => "medical-heading", :role => "tabpanel"}
+                                  .panel-body
+                                    .input-container
+                                      .row
+                                        .col-md-12
+                                          %label._suggest
+                                            %span.name
+                                              Conditions
+                                            ._target
+                                              ._selected
+                                                %span Old
+                                                %span Beer Head                                                    
+                                              %textarea
+                                    .input-container                                            
+                                      .row
+                                        .col-md-12
+                                          %label._suggest
+                                            %span.name
+                                              Allergies
+                                            ._target
+                                              ._selected
+                                                %span Pollen
+                                                %span Nuts                                                  
+                                              %textarea                                               
+                                        
+                              / endTabContent
+                              / beginTabContent
+                              #notes.tab-pane.tab-content.fade.panel{:role => "tabpanel"}
+                                #notes-heading.panel-heading.visible-xs{:role => "tab"}
+                                  %h4.panel-title
+                                    %a.collapsed{"aria-controls" => "notes-collapse", "aria-expanded" => "false", "data-parent" => "#tab-accordion", "data-toggle" => "collapse", :href => "#notes-collapse"} Notes
+                                #notes-collapse.panel-collapse.collapse{"aria-labelledby" => "notes-heading", :role => "tabpanel"}
+                                  .panel-body
+                                    .input-container
+                                      .row
+                                        .col-md-12
+                                          %textarea{:placeholder => "Notes", :name => 'patient[general_note]'}   
+                                        
+                              / endTabContent                              
+                              / endTabContainer
+                        / endTabs                        
+                  ._footer
+                    %a.action._large._focus.submit-btn SAVE

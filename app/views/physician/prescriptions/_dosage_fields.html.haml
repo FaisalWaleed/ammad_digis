@@ -1,0 +1,27 @@
+.input-container.dosage_fields._flush._on-focus 
+  .row._hideScript
+    .col-md-12
+      .inline-list
+        %ul
+          %li
+            = f.number_field :dose, :placeholder => 'Dose', :min => 0, :data => {:target => '._drug-dose'}, :class => '_size-small _value-field required' 
+          - unless f.object.drug.dosage_units.length.zero?
+            %li
+              = f.object.drug.dosage_units.first.name.humanize.pluralize   
+              = f.hidden_field :dosage_unit_id, :value => f.object.drug.dosage_units.first.id       
+              
+          %li
+            ._select
+              = f.select :dosage_route_id, f.object.drug.dosage_routes.all.map { |u| [ u.code, u.id ] }, {:include_blank => true, :prompt => 'Route', :selected => ((f.object.drug.dosage_routes.length == 1) && f.object.drug.dosage_routes.first.id)}, {:data => {'target' => '._drug-route'}, :class => '_value-field required'}
+              
+          %li.dosage_frequency
+            ._select
+              = f.select :dosage_frequency_id, DosageFrequency.all.map { |u| [ u.code, u.id ] }, {:include_blank => true, :prompt => 'Frequency'}, {:data => {'target' => '._drug-frequency'}, :class => '_value-field required'}
+              
+          %li.disable_on_stat{ :style => ("display: none" if f.object.dosage_frequency_id == 1)}
+            = f.text_field :duration_with_unit, data: { url: api_v1_search_dosage_duration_units_path, autocomplete: true, 'target' => '._drug-duration' }, :placeholder => 'Duration', :class => '_size-medium _value-field required'  
+            
+      
+._more._on-focus
+  .input-container._flush
+    = f.text_area :note, :placeholder => 'Note'

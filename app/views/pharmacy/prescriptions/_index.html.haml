@@ -1,0 +1,15 @@
+%tr.clickable{"data-target" => "#dg-pharm-prescription", "data-toggle" => "modal", "data-url" => pharmacy_prescription_path(order)}
+  %td 
+    RX# #{order.prescription.identifier}
+  %td #{order.patient.name}
+  %td #{order.created_at.strftime("%d/%m/%Y")} 
+  %td #{pluralize(order.dispensables.length, 'item')}
+  %td.last.text-right
+    %a._notification{:class => (order.message_status.dasherize rescue '')}
+      %span._msg-count._circle
+        = order.messages.size
+      %span #{ 'Messages'.pluralize(order.messages.size) }
+  %td.hidden
+    = order.status
+  %td.hidden
+    = order.physician.name

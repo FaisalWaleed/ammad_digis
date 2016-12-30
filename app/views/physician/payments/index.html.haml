@@ -1,0 +1,47 @@
+- content_for :page_title do
+  Payments
+
+- content_for :client_class, '_showing-full-width _hide-header'
+
+- content_for :page_header do
+  .col-md-8
+    #chd
+      %h2.active-channel-name Account Payments  
+                                                           
+._medium  
+  .row
+    .col-md-12
+      - unless current_physician.payments.blank?
+        %table.table
+          %thead
+            %tr
+              %th Date
+              %th Comments
+              %th.text-right Amount      
+              %th.text-right             
+          %tbody
+            - current_physician.payments.order(paid_at: :desc).each do |payment|
+              %tr
+                %td= payment.paid_at.strftime("%d/%m/%Y")                    
+                %td
+                  %span{:style => "text-transform: capitalize;"}
+                    = payment.merchant_response_status
+                %td.text-right 
+                  = number_to_currency payment.amount
+                %td.text-right
+                  = link_to physician_payment_path(payment), :class => "_link", :title => "Print", :target => "_blank" do
+                    %span.dg-icon._ic-print
+                    
+      - else
+        ._prompt-wrap
+          ._prompt 
+            - unless @term.blank?
+              No payments found with 
+              %span
+                #{@term}.             
+            - else             
+              No payments have been made.                 
+  .row
+    .col-md-12
+      .pull-right
+/         = paginate current_physician.payments

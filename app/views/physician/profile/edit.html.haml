@@ -1,0 +1,19 @@
+- content_for :client_class, '_page-medium'
+
+- content_for :page_title do
+  Edit Profile and Account Settings
+    
+- content_for :page_header do
+  .col-md-12.col-sm-12.col-xs-12
+    .profile-info.section                         
+      .row
+        .col-sm-12
+          ._section
+            %span.name Dr. #{@physician.name}
+              
+
+.row
+  .col-md-12    
+    ._medium
+      = render 'form'
+

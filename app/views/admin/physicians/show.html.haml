@@ -1,0 +1,169 @@
+- content_for :title, "Physician"
+- content_for :page_title, "Physician: #{@physician.name}"
+   
+- content_for :notice do
+  - unless notice.blank?
+    .row
+      .col-md-7
+        ._msg.success
+          ._alert
+            .ds-icon._ic-info
+          = notice  
+.row
+  .col-md-7
+    ._medium
+      .row
+        .col-md-4
+          .input-container
+            %label._full-input
+              %span.name
+                User Photo
+            ._input-group
+              .focused   
+                .row
+                  .col-md-12
+                    ._image-holder
+                      - if @physician.avatar.url(:original).blank?
+                        %span.dg-icon.ic-gallery                          
+                      - else
+                        = image_tag @physician.avatar.url(:thumb)                               
+              
+      %hr 
+      .section
+        ._title
+          Personal Information
+        ._body             
+          .row
+            .col-md-5
+              .input-container
+                %label._full-input
+                  %span.name
+                    First Name
+                = @physician.firstname      
+                    
+            .col-md-2
+              .input-container                
+                %label._full-input
+                  %span.name
+                    M.I.        
+                = @physician.middlename
+                  
+            .col-md-5
+              .input-container                
+                %label._full-input
+                  %span.name
+                    Last Name        
+                = @physician.lastname
+                    
+          .row                        
+            .col-md-6
+              .input-container                
+                %label._full-input
+                  %span.name
+                    Gender
+                = @physician.gender_name                  
+                  
+                  
+      %hr
+      .section
+        ._title 
+          Contact Information
+        ._body  
+          .row
+            .col-md-6      
+              .input-container
+                %label._full-input
+                  %span.name
+                    Email
+                = @physician.email_primary
+                  
+            .col-md-6      
+              .input-container
+                %label._full-input
+                  %span.name
+                    Phone
+                = @physician.phone_primary
+                  
+      %hr 
+      .section
+        ._title
+          Address
+        ._body 
+          .row
+            .col-md-4
+              .input-container
+                .row
+                  .col-md-12
+                    %label._full-input
+                      %span.name
+                        Street Address 1
+                    = @physician.address_street_1
+                      
+              .input-container
+                .row
+                  .col-md-12
+                    %label._full-input
+                      %span.name
+                        Street Address 2 (opt.)
+                    = @physician.address_street_2
+                      
+            .col-md-4                                   
+              .input-container
+                .row
+                  .col-md-12
+                    %label._full-input
+                      %span.name
+                        Town
+                    = @physician.address_municipality    
+                        
+              .input-container
+                .row
+                  .col-md-12
+                    %label._full-input
+                      %span.name
+                        Parish
+                    = @physician.address_territory
+                  
+            .col-md-4                  
+              .input-container
+                .row
+                  .col-md-12
+                    %label._full-input
+                      %span.name
+                        Country
+                    = @physician.address_country                     
+                  
+      %hr
+      .section
+        ._title
+          Registration Information 
+        ._body   
+          .row
+            .col-md-8   
+              .input-container                       
+                %label._full-input
+                  %span.name
+                    Area of Specialization              
+                = @physician.specialization_name
+                                    
+              .input-container                       
+                %label._full-input
+                  %span.name
+                    Registration number              
+                = @physician.reg_num
+                  
+      %hr
+      .section
+        ._title
+          App Settings
+        ._body              
+          .input-container              
+            %label._full-input
+              %span.name Active    
+            = @physician.active?? 'yes':'no'
+          
+      %hr
+      .row      
+        .col-md-4.col-md-offset-8
+          = link_to 'Edit', edit_admin_physician_path(@physician), :class => "action _default pull-right"
+

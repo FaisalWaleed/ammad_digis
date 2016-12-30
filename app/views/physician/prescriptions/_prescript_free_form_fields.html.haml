@@ -1,0 +1,41 @@
+.row.nested-fields.list-item._focus-wrapper._prescript-item
+  .col-md-12
+    .section
+      ._body
+        .focused
+          .input-container._flush._no-bottom
+            .row
+              .col-md-10.col-sm-10.col-xs-10
+                ._off-focus
+                  ._drug-title                
+                    %span._drug-generic-name
+                      - if f.object.free_flow_details.present?
+                        #{f.object.free_flow_details}
+                      - else
+                        Type drug details
+                    %span.pr
+                      Repeat:
+                      %span._drug-repeat
+                        = f.object.repeat_max.to_i
+
+                ._on-focus
+                  .row
+                    .col-md-11             
+                      = f.text_field :free_flow_details, :placeholder => 'Type drug details', :data => {:target => '._drug-generic-name'}, :class => '_value-field medium-txt required'
+                      = f.hidden_field :free_flow, :value => true                      
+                    .col-md-1
+                      .inline-list
+                        %ul
+                          %li
+                            %span._show-more
+                              %span.dg-icon._ic-note._input-icon.text-center{'title' => 'Add Note'}    
+                    
+              .col-md-2.col-sm-2.col-xs-2
+                = link_to_remove_association '', f , :title => "Remove",:class => "dg-icon _ic-delete _input-icon  pull-right"
+                
+          ._more._on-focus    
+            .row
+              .col-md-12
+                .input-container._flush
+                  = f.text_area :note, :placeholder => 'Note'                
+

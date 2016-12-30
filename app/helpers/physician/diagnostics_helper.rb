@@ -1,0 +1,2 @@
+module Physician::DiagnosticsHelper
+end

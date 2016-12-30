@@ -1,0 +1,23 @@
+#alert-template
+  .alert-ui#alert-container
+    .alert-dialog
+      ._wrap
+        ._header
+          ._title 
+            Are you sure?
+          ._controls
+            %span.dg-icon._ic-close{:tabindex => "-1"}
+              
+        ._content
+          %p Are you sure you want to delete this?
+        ._footer
+          ._controls
+            %ul
+              %li
+                %span.action._active._ok._large._fill{:tabindex => "0"}
+                  Delete
+              %li
+                %span.action._cancel
+                  Cancel
+
+    .alert-bg     

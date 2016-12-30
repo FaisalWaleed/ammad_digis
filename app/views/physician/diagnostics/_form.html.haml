@@ -1,0 +1,39 @@
+= form_for [:physician, @patient, @diagnostic], :data => {'target' => 'diagnostic-form', 'form-empty' => "You haven't added any tests to this request."}, :html => {:class => "_form-has-options"} do |f|
+  - if @diagnostic.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@diagnostic.errors.count, "error")} prohibited this diagnostic from being saved:"
+      %ul
+        - @diagnostic.errors.full_messages.each do |msg|
+          %li= msg
+
+  = f.hidden_field :patient_id
+  = f.hidden_field :send_to_patient, :data => {'bind' => 'send_to_patient'}
+  = f.hidden_field :verification_pin
+  = f.hidden_field :laboratory_id, :data => {'bind' => 'laboratory_id'}
+  
+  ._medium
+    - if @diagnostic.id
+      ._button-ui    
+        - @diagnostic.test_types.uniq.each do |type|
+          %span._button._active{:data => {'name' => "._#{ type.name.parameterize }", 'type-id' => "#{type.id}"}}
+            = type.name
+      - @diagnostic.test_types.uniq.each do |type|
+        = render :partial => 'test_type_fields', :object => type, :as => :test_type, :locals => { f: f }            
+            
+    - else
+      ._button-ui
+        - TestType.all.each do |type|
+          %span._button._toggle{:data => {'name' => "._#{ type.name.parameterize }", 'type-id' => "#{type.id}"}}
+            = type.name
+      - TestType.all.each do |type|
+        = render :partial => 'test_type_fields', :object => type, :as => :test_type, :locals => { f: f }
+    
+    %hr
+    .input-container
+      %label._full-input
+        %span.name
+          Notes
+        = f.text_area :notes
+        
+= render :partial => 'partials/modals/verify_contact', :locals => {:patient => @diagnostic.patient}
+

@@ -1,0 +1,54 @@
+- content_for :page_title do
+  Technicians
+  
+- content_for :client_class, '_showing-full-width _hide-header'
+          
+._medium  
+  = form_tag :test_center_technicians, :method => :get do 
+    ._expandable
+      .row._parent       
+        .col-md-1
+          ._input-title
+            Search
+        .col-md-3
+          .input-container
+            %label._search
+              = search_field_tag :term, @term, :autocomplete => :off
+        .col-md-8
+          = link_to 'add new', new_test_center_technician_path, :class => "action _large _focus pull-right"
+    
+  .row
+    .col-md-12
+      - unless @technicians.blank?
+        %table.table
+          %thead
+            %tr
+              %th 
+              %th
+              %th
+              %th
+          %tbody
+            - @technicians.each do |technician|
+              %tr
+                %td
+                  ._thumb
+                    = image_tag technician.avatar.url(:small)
+                %td
+                  = link_to technician.location.name, edit_test_center_technician_path(technician) rescue nil
+                %td= technician.email_primary
+                %td= technician.phone_primary
+      - else
+        ._prompt-wrap
+          ._prompt 
+            - unless @term.blank?
+              No locations found with 
+              %span
+                #{@term}.             
+            - else             
+              No locations have been created.                  
+              
+  .row
+    .col-md-12
+      .pull-right
+        -#= paginate(@technicians)
+

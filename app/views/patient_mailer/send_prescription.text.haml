@@ -1,0 +1,6 @@
+Hi #{ @patient.firstname },
+  
+Prescription #: #{@prescription.identifier}
+Security Pin: #{@prescription.verification_pin}
+
+URL: #{url_for patient_login_url(type: :prescription)}

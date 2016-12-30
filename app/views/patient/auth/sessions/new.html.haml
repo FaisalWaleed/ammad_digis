@@ -1,0 +1,102 @@
+- content_for :page_title do
+  Send RX
+
+
+/ .row
+/   .col-md-4.col-md-offset-4.col-sm-4.col-sm-offset-4.col-xs-12.col-xs-offset-0
+/     ._medium
+/       = form_for :prescription, :url => patient_authenticate_path do |f|
+/         = hidden_field_tag :type, @type_name
+/         .section
+/           ._section
+/             ._logo
+/               .row
+/                 .col-md-6.col-md-offset-3.col-sm-6.col-sm-offset-3.col-xs-6.col-xs-offset-3
+/                   = image_tag 'logo_lg.svg', "data-svg-fallback" => image_path('logo_lg.png')
+/             - unless flash.blank?
+/               = render 'partials/notice_flash'   
+/           ._body
+/             .input-container
+/               .row
+/                 .col-md-12
+/                   %label._full-input 
+/                     = f.text_field :identifier, :placeholder => "#{ @type_name.humanize } ID", :class => "required"
+/                     .form-helper
+/                       Your #{ @type_name } ID is required.
+/             .input-container
+/               .row              
+/                 .col-md-12
+/                   %label._full-input
+/                     = f.text_field :verification_pin, :placeholder => "PIN", :class => "required"
+/                     .form-helper
+/                       The verification PIN is required.                  
+                            
+/             .input-container
+/               .row              
+/                 .col-md-12
+/                   .action._huge._fill._normalize._submit
+/                     Get #{ @type_name.humanize }
+/                     = f.submit ''
+
+%div
+  %a#toregister.hiddenanchor
+  %a#tologin.hiddenanchor
+  #wrapper
+    #login.animate.form
+      %section.login_content
+        = form_for :patient_session, :url =>  patient_login_path do |f|
+          - unless flash.blank?
+            = render 'partials/notice_flash'
+          %h1 Login Form
+          %div
+            = f.text_field :email_primary, :placeholder => "Email", :tabindex => "1", :autofocus => "autofocus", :class => "required form-control"
+          %div
+            = f.password_field :password, :placeholder => "Password", :class => "required form-control"
+          %div
+            = f.submit 'Login', class: 'btn btn-default'
+            %a.to_register{:href => "#toregister"} Lost your password?
+          .clearfix
+          .separator
+            %p.change_link
+              New to site?
+              %a.to_register{:href => "register.html"} Create Account
+            .clearfix
+            %br/
+            %div
+              %h1
+                %i.fa.fa-paw
+                DigiScripts
+              %p
+                © DigiScripts. All rights reserved.
+                %br/
+                Powered By:
+                %a{:href => "http://snowballmedia.com", :target => "_blank", :title => "Snowball Media"} Snowball Media and Advertising
+        / form
+        / content
+    #register.animate.form
+      %section.login_content
+        = form_tag patient_password_resets_path, :autocomplete => "off" do   
+          %h1 Recover Password
+          %div
+            %input#email.form-control{:autocomplete => "off", :name => "email", :placeholder => "Username", :required => "", :type => "email"}/
+          %div
+            %button.btn.btn-default.submit{:name => "lost", :type => "submit", :value => "lost"} Get New Password
+          %p.change_link You will receive a link to create a new password via email.
+          .clearfix
+          .separator
+            %p.change_link
+              Already a member ?
+              %a.to_register{:href => "#signin"} Log in
+            .clearfix
+            %br/
+            %div
+              %h1
+                %i.fa.fa-paw
+                DigiScripts
+              %p
+                © DigiScripts. All rights reserved.
+                %br/
+                Powered By:
+                %a{:href => "http://snowballmedia.com", :target => "_blank", :title => "Snowball Media"} Snowball Media and Advertising
+        / form
+      / content

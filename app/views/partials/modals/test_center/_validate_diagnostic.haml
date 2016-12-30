@@ -1,0 +1,44 @@
+#diagnostic-validate-template
+  .alert-ui#ds-getdiagnostic
+    .alert-dialog
+      ._wrap                          
+        = form_for Diagnostic.new, :url => technician_diagnostic_import_path do |f|                               
+          ._header
+            ._title    
+              Add Diagnostic Request  
+            ._controls
+              %span.dg-icon._ic-close{:tabindex => "-1"}     
+          ._content
+            .section
+              ._body.code-ui 
+                .input-container
+                  .row
+                    .col-md-12
+                      %label._full-input
+                        = f.text_field :identifier, :placeholder => "Diagnostic ID", :class => "required"
+                        .form-helper
+                          The request's ID is required.                          
+                .input-container
+                  .row
+                    .col-md-12
+                      %label._full-input
+                        = f.text_field :verification_pin, :placeholder => "PIN", :class => "required"
+                        .form-helper
+                          The request's PIN is required.                             
+                                   
+          ._footer
+            ._controls
+              %ul
+                %li
+                  %span.action._large._fill._submit._ok
+                    Verify
+                %li
+                  %span.action._cancel
+                    Cancel
+
+    .alert-bg   
+                
+          
+                            
+                                  
+    

@@ -1,0 +1,18 @@
+#image-cropper-template
+  #dg-cropper.modal._persistent.fade
+    .modal-dialog
+      .modal-content  
+        ._header 
+          ._title._has-right-control
+            Edit user photo
+          .pull-right            
+            ._controls                      
+              %a.exit.dg-icon._ic-close{:tabindex => "-1", "aria-label" => "close", "data-dismiss" => "modal"}    
+                                                      
+        ._img
+        ._footer.text-right 
+          .row
+            .col-md-12
+              %a.action._large._focus._crop{:tabindex => '0'} Set profile photo
+
+      

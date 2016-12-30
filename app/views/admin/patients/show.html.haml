@@ -1,0 +1,109 @@
+- content_for :title, "Patient"
+- content_for :page_title, "Patient: #{@patient.name}"
+   
+- content_for :notice do
+  - unless notice.blank?
+    .row
+      .col-md-7
+        ._msg.success
+          ._alert
+            .ds-icon._ic-info
+          = notice  
+.row
+  .col-md-7
+    ._medium
+      .row
+        .col-md-4
+          .input-container
+            %label._full-input
+              %span.name
+                User Photo
+            ._input-group
+              .focused   
+                .row
+                  .col-md-12
+                    ._image-holder
+                      - if @patient.avatar.url(:original).blank?
+                        %span.dg-icon.ic-gallery                          
+                      - else
+                        = image_tag @patient.avatar.url(:thumb)                      
+                  
+      %hr 
+      .section
+        ._title
+          Personal Information
+        ._body 
+          .row
+            .col-md-5
+              .input-container
+                %label._full-input
+                  %span.name
+                    First Name
+                = @patient.firstname
+                 
+                  
+            .col-md-2
+              .input-container                
+                %label._full-input
+                  %span.name
+                    M.I.        
+                = @patient.middlename
+                  
+            .col-md-5
+              .input-container                
+                %label._full-input
+                  %span.name
+                    Last Name        
+                = @patient.lastname               
+                
+          .row        
+            .col-md-12
+              .input-container                
+                %label._full-input
+                  %span.name
+                    Date of Birth           
+                = @patient.date_of_birth
+                
+          .row                  
+            .col-md-6
+              .input-container                
+                %label._full-input
+                  %span.name
+                    Gender
+                = @patient.gender_name 
+                    
+      %hr
+      .section
+        ._title 
+          Contact Information
+        ._body   
+          .row
+            .col-md-6      
+              .input-container
+                %label._full-input
+                  %span.name
+                    Email
+                = @patient.email_primary
+                
+            .col-md-6                     
+              .input-container
+                %label._full-input
+                  %span.name
+                    Phone
+                = @patient.phone_primary           
+                    
+      %hr 
+      .section
+        ._title
+          Address
+        ._body 
+          .input-container          
+            %label._full-input
+              %span.name
+                Address            
+            = @patient.address_street_1 
+      
+      %hr
+      .row      
+        .col-md-4.col-md-offset-8
+          = link_to 'Edit', edit_admin_patient_path(@patient), :class => "action _default pull-right"  

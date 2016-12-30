@@ -1,0 +1,65 @@
+- if @prescription.errors.any?
+  .row
+    .col-md-12
+      ._msg.error
+        - @prescription.errors.full_messages.each do |msg|
+          %div #{msg}         
+          
+= form_for [:physician, @patient, @prescription], :html => {:class => "data-form _form-required #{('ext-ready' unless @prescription.has_saved_patient?)}", :data => {"form-empty" => "Your prescription form seems to not have any drugs. Please add a drug to enable saving."}} do |f|
+  = f.hidden_field :identifier
+  = f.hidden_field :id
+  
+  ._medium 
+    ._form_paused
+      .section.text-center
+        ._prompt-wrap
+          ._prompt 
+            Please enter patient details to 
+            %span
+              Get Started.  
+          
+    .on-form-ready
+      - if @prescription.has_saved_patient?
+        #patient_details
+          .row
+            .col-md-12
+              .section
+                #patient_fields
+                  = render 'patient_fields', f: f    
+      - else
+        = f.hidden_field :patient_id
+                  
+        
+        
+      #prescripts.list-ui._prescript-ui
+        = f.fields_for :prescripts do |ps|
+          - if ps.object.free_flow?         
+            = render 'prescript_free_form_fields', f: ps
+          - else
+            = render 'prescript_fields', f: ps
+      .text-center
+        .inline-list
+          %ul
+            %li        
+              = link_to_add_association 'Add Drug - Template', f, :prescripts, :data => {"association-insertion-node" => "#prescripts","association-insertion-method" => "append" }, :class => "action _large _add-drug #{("_show" unless @prescription.has_saved_patient?)}"
+            %li   
+              = link_to_add_association 'Add Drug - Free Form', f, :prescripts, :data => {"association-insertion-node" => "#prescripts","association-insertion-method" => "append" }, :partial => 'prescript_free_form_fields', :class => "action _large _add-free-flow #{("_show" unless @prescription.has_saved_patient?)}"  
+
+  .row.on-form-ready     
+    .col-md-4.col-md-offset-8
+      .action._large._normalize.pull-right._submit
+        Next
+        = f.submit ''
+
+        
+- content_for :page_title do
+  = @prescription.identifier    
+  
+:javascript
+  (function($) {
+    $(document).on('page:load', function(e) {
+      if(!$("#prescripts ._prescript-item._focused").length){
+        $('#prescription_form ._add-drug.add_fields').trigger('click');
+      }
+    });
+  })(jQuery);

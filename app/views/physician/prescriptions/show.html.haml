@@ -1,0 +1,20 @@
+- content_for :page_title do
+  #{@prescription.identifier}
+  
+- content_for :client_class, '_showing-info-bar _prescription-page'
+    
+- content_for :page_header do
+  .col-md-12
+    = render 'partials/patient_profile_inline', patient: @prescription.patient
+
+.row
+  .col-md-12                                  
+    #pharmacy_details{:class => ("insurer_yes pharmacy_yes" if @prescription.pharmacy_id.present?)}            
+      = render partial: 'pharmacy_fields'
+          
+- content_for :append_body do
+  = render 'layouts/physician/infobar', patient: @prescription.patient  
+- content_for :after_body do
+  = render :partial => 'partials/modals/add_note'
+  = render :partial => 'partials/modals/patient_history', :locals => {:patient => @prescription.patient} 
+

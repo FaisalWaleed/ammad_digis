@@ -1,0 +1,64 @@
+- content_for :page_title do
+  Gregory House
+    
+- content_for :page_header do
+  .col-md-6.col-md-offset-1.col-xs-12
+    #chd
+      %h2.active-channel-name Thanks for your Payment 
+
+
+- content_for :page_action do
+  .col-md-4.col-sm-4.col-xs-12
+    .section
+      ._body              
+        = link_to 'Back', physician_subscriptions_path(), :class => "action _large _focus pull-right"
+    
+.row
+  .col-md-12               
+    ._medium
+      .row
+        .col-md-12                        
+          .profile-info.section
+            ._section
+              .row
+                .col-md-8
+                  %h3.pl Dr. Gregory House
+                  %span.pr
+                    Reg #14131332
+                  
+            ._body
+              .row
+                .col-md-8
+                  .focused
+                    .row
+                      .col-md-6.col-xs-12
+                        4 Office Ave
+                        %br/
+                        St. Andrew, Jamaica
+                      .col-md-6.col-xs-12.has-border
+                        %div
+                          876 514 3231
+                        %div
+                          james@mrdr.com
+                .col-md-4
+                  .focused.center-content
+                    .text 
+                      21/7/2015 at 8:45 am
+                      %br/
+                      Invoice # 17281                        
+             
+
+      .section
+        ._body
+          ._notes
+            %p
+              12 months Easy Script Subscription
+            %p
+              Total: $20,000    
+    
+      %hr
+      .row      
+        .col-md-4.col-md-offset-8
+          .action._large._normalize.pull-right._focus#print{:data => "content"}
+            Print                  
+

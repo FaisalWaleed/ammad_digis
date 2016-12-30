@@ -1,0 +1,183 @@
+- if @dispense_order
+  :css 
+    ._scakjdka {
+      background-image: url("#{asset_path(@dispense_order.physician.signature.url(:original))}");
+    }
+  ._header
+    ._title
+      RX # #{@dispense_order.prescription.identifier} 
+    ._sub-title
+      #{@dispense_order.prescription.ordinal_date}         
+    .pull-right     
+      ._controls                      
+        %a.exit.dg-icon._ic-close{:tabindex => "-1", "aria-label" => "close", "data-dismiss" => "modal"}      
+        
+  ._contents
+    .wrapper
+      .row
+        .col-md-12
+          .profile-info.section
+            ._section
+              .row
+                .col-md-8
+                  %h3= @dispense_order.patient.name
+                  %span
+                    %span.bump._gender= @dispense_order.patient.gender_abbrev
+                    %span._age
+                      = @dispense_order.patient.age
+                      Y/O
+                .col-md-4
+                  = link_to 'print', pharmacist_prescription_path(@dispense_order, print: ''), :target => '_blank', :class => "action _lowercase _active _small pull-right"
+            ._body
+              .row
+                .col-md-8
+                  .focused
+                    .row
+                      .col-md-6.col-xs-12
+                        %strong Address 
+                        %div.ellipsis._double
+                          #{ @dispense_order.patient.address_street_1 }
+                      .col-md-6.col-xs-12.has-border
+                        %strong Contact 
+                        - unless @dispense_order.patient.phone_primary.blank?
+                          %div.ellipsis
+                            #{@dispense_order.patient.phone_primary}
+                        %div.ellipsis
+                          #{@dispense_order.patient.email_primary}
+                                                 
+                .col-md-4
+                  .center-content
+                    .text.text-center
+                      - if @dispense_order.messages.present?
+                        ._msg-block{"class" => @dispense_order.message_status.dasherize}
+                          = pluralize(@dispense_order.messages.length, 'Message')
+                          
+                      %a.action._large._nav._active{"data-target" => "#pharm-message-template", "class" => @dispense_order.message_status.dasherize}
+                        - unless @dispense_order.message_status.blank?
+                          #{@dispense_order.message_status.humanize}
+                        - else                          
+                          ask a question
+    .wrapper 
+      .row
+        .col-md-12
+          .section
+            ._body   
+              .list-ui
+                ._expandable                            
+                  = form_for @dispense_order, :as => :prescription, :url => pharmacist_prescription_ready_path(@dispense_order), :html => {:id => "dispense-order-form"} do |f|
+                    = hidden_field_tag 'dispense_order[prescription_id]', @dispense_order.prescription.id
+                    = f.fields_for :dispensables do |builder|
+                      - d = builder.object
+                      
+                      .list-item._parent{ :class => d.status }  
+                        ._item-line
+                          %label{:class => '_control', "data-id" => builder.options[:child_index]}
+                            ._drug-name
+                              - unless d.prescript.free_flow?
+                                #{d.prescript.strfrx}
+                                - unless d.prescript.free_flow_details.blank?
+                                  \- #{d.prescript.free_flow_details}                                  
+                              - else 
+                                #{d.prescript.free_flow_details}  
+                              - if d.prescript.repeating?
+                                %strong 
+                                  Repeat: #{d.prescript.repeats_remaining}                                     
+                            - if @dispense_order.status == 'open' || @fillable
+                              ._check                       
+                                .checkbox
+                                  = builder.check_box :process, :checked => false, :disabled => (!d.unfilled?), :class => "required ds-radio _line-item-id", :data => { id: d.id }
+                            = builder.hidden_field :id                        
+                        
+                        ._content._child{"data-id" => builder.options[:child_index]} 
+                          - unless d.prescript.note.blank?                         
+                            ._notes
+                              ._title
+                                Physician's notes
+                              %p._small
+                                #{d.prescript.note rescue nil}                
+                                  
+                          .inline-list
+                            - if d.disbursements.length.nonzero?
+                              ._title
+                                #{ d.fully_filled? ? 'Previously Disbursed':'Disbursing'}
+                            - d.disbursements.each do |db|
+                              %p._small
+                                = db.annotation
+                                %br
+                                %span.italic-txt.bold-txt
+                                  #{db.created_at.strftime('%d/%m/%Y')} by #{db.pharmacist.name} (#{ db.pharmacy.name })
+                          
+                            - if !d.fully_filled? || @fillable
+                              ._title
+                                Disbursement Note
+                              = builder.fields_for :disbursements, d.disbursements.build do |db|
+                                = db.hidden_field :pharmacist_id, :value => current_pharmacist.id
+                                = db.hidden_field :pharmacy_id, :value => current_pharmacy.id
+                                .row
+                                  .col-md-8
+                                    .input-container
+                                      %label._full-input
+                                        = db.text_field :annotation, :placeholder => 'Annotation...', :class => "required"
+                                  .col-md-4
+                                    .input-container
+                                      %label.checkbox._labelled
+                                        = builder.check_box :fully_filled, :checked => true
+                                        %span
+                                          Fully filled?
+
+            - if @dispense_order.prescription.allow_generic?
+              %p 
+                %strong
+                  ** Generic approved
+            %p
+              %strong
+                Insurance: 
+              #{@dispense_order.prescription.insurer_names.join(', ').presence || 'None selected'}
+              
+      ._scakjdka
+        = image_tag 'signature.gif'              
+              
+    .wrapper             
+      ._prescript-id        
+      ._issued
+        ._issued-by
+          Issued by Dr. #{@dispense_order.physician.name}
+        ._issued-date 
+          
+      ._info
+        ._reg-num
+          %strong
+            reg#:
+          #{@dispense_order.physician.reg_num}                  
+        ._physician-phone
+          %strong
+            phone:         
+          #{ @dispense_order.physician.phone_primary }
+        ._physician-email
+          %strong
+            email:         
+          #{ @dispense_order.physician.email_primary }
+            
+  ._footer.text-right        
+    .row
+      .col-md-12
+        - unless @dispense_order.message_status.dasherize == 'waiting-on-dr' 
+          - unless @dispense_order.locked?
+            %a.action._large{"data-target" => "#pharm-transfer-template", "data-url" => pharmacist_prescription_transfer_path(@dispense_order.id)}
+              Send Elsewhere
+            
+          - if @dispense_order.ready? && !@fillable
+            - unless @dispense_order.delivered?
+              %a.update-prescription-status.action._large._focus{"data-url" => pharmacist_prescription_delivered_path(@dispense_order), "data-state" => @dispense_order.status}
+                Delivered
+          
+          - elsif @dispense_order.processing?
+            - unless @dispense_order.delivered?          
+              %a.update-prescription-status.action._large._focus{"data-url" => pharmacist_prescription_ready_path(@dispense_order), "data-state" => @dispense_order.status}
+                Ready
+          
+          - else
+            - unless @dispense_order.delivered?
+              %a.fill-prescription.action._large._focus{"data-url" => pharmacist_prescription_ready_path(@dispense_order), "data-state" => @dispense_order.status}
+                Fill
+            

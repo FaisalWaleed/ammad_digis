@@ -1,0 +1,44 @@
+#receipt-template
+  #dg-receipt.modal._persistent.fade
+    .modal-dialog
+      .modal-content
+        ._controls
+          .container-fluid
+            .row
+              .col-xs-12
+                %h3.title Thanks for your payment
+                %a.close{"aria-label" => "close", "data-dismiss" => "modal"}
+        ._contents
+          .container-fluid
+            .row
+              .col-xs-12
+                .section
+                  ._body
+                    .row._section
+                      .col-md-7
+                        %h3.title James Core
+                        .row
+                          .col-md-6.col-xs-12
+                            4 Office Ave
+                            %br/
+                            St. Andrew, Jamaica
+                          .col-md-6.col-xs-12.has-border
+                            %div
+                              876 514 3231
+                            %div
+                              james@mrdr.com
+                      .col-md-5
+                        .focused
+                          21/7/2015 at 8:45 am
+                          %br/
+                          Invoice # 17281
+                .section
+                  ._body
+                    ._section
+                      ._notes
+                        %p
+                          12 months Easy Script Subscription
+                        %p
+                          Total: $20,000
+                ._footer
+                  %a.action._large._focus PRINT

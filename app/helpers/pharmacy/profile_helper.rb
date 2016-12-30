@@ -1,0 +1,2 @@
+module Pharmacy::ProfileHelper
+end

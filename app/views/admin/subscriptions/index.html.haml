@@ -1,0 +1,48 @@
+- content_for :title, "Subscriptions"
+- content_for :page_title, "Subscriptions"
+
+- content_for :filter do  
+  .col-md-4
+    = form_tag :admin_subscriptions, :method => :get do
+      .input-container
+        %label._full-input
+          = text_field_tag :term, @term, :class => "", :placeholder => "Search Subscriptions"
+          .form-helper.text-right
+            press Enter 
+            
+._medium
+  .row
+    .col-md-12
+      %table.table
+        %thead
+          %tr
+            %th
+              %span.title #
+            %th 
+              %span.title Subscriber
+            %th 
+              %span.title Type
+            %th 
+              %span.title Plan              
+            %th 
+              %span.title Subscription period
+            %th 
+              %span.title Expires              
+            %th 
+              %span.title Active
+            %th.text-right 
+              %span.title Actions
+
+        %tbody
+          - @subscriptions.each do |subscription|
+            %tr
+              %td= subscription.identifier
+              %td= link_to subscription.subscriber.name, edit_admin_subscription_path(subscription) 
+              %td= subscription.subscriber_type
+              %td= subscription.plan.name rescue 'plan removed'              
+              %td #{pluralize(subscription.subscription_period_amount, subscription.subscription_period_unit.singularize)}
+              %td= subscription.expire_at              
+              %td= subscription.active?? 'Yes' : 'No'
+              %td.text-right
+                = link_to '', admin_subscription_path(subscription), :method => :delete, :data => { :confirm => 'delete' }, :class => 'ds-icon _ic-delete'
+

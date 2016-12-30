@@ -1,0 +1,83 @@
+= form_for @pharmacy, :url => pharmacy_register_path do |f|
+  .section
+    ._section
+      ._logo
+        .row
+          .col-md-6.col-md-offset-3.col-sm-6.col-sm-offset-3.col-xs-6.col-xs-offset-3
+            = image_tag 'logo_lg.svg', "data-svg-fallback" => image_path('logo_lg.png')
+      %h1.title Create a Pharmacy Account
+      %p._small
+        Sign up in 30 seconds. No credit card required. 
+        
+      - unless flash.blank?
+        = render 'partials/notice_flash'    
+        
+
+    ._body
+      .input-container
+        .row
+          .col-md-12
+            %label._full-input
+              = f.text_field :name, :class => "required", :tabindex => "0", :autofocus => "autofocus", :placeholder => "Name"
+              .form-helper
+                Pharmacy name is required 
+                
+      .input-container           
+        .row
+          .col-md-12    
+            %label._full-input
+              = f.text_field :phone_primary, :class => "required _tel", :placeholder => "Phone"
+              .form-helper
+                Your phone number is required.                   
+
+      .input-container
+        .row               
+          .col-md-12
+            %label._full-input               
+              = f.email_field :email_primary, :placeholder => 'Email', :class => "required _cloud"
+              .form-helper
+                Your email is required. This isn't a valid email.                                                 
+                
+      .input-container
+        .row               
+          .col-md-12
+            %label._full-input                      
+              = f.password_field :password, :placeholder => 'Password', :class => "_password required" 
+              .form-helper
+                Please create a password       
+              
+          
+      .input-container
+        .row                         
+          .col-md-12
+            %label._full-input             
+              = f.password_field :password_confirmation, :placeholder => 'Confirm Password', :class => "_confirm-password required" 
+              .form-helper
+                Password must match the one typed before.  
+    
+      .input-container
+        .row
+          .col-md-12
+            %label.checkbox
+              = f.check_box :terms_of_service, :class => "inline required"
+              %span.name 
+                I agree to the Digiscript 
+                %a._link{:href => "#"}
+                  terms of service.     
+              .form-helper
+                You must read and accept the terms of service.      
+                
+      .row
+        .col-md-12
+          .action._huge._fill._normalize._submit{:tabindex => 0}
+            Create my account
+            = submit_tag ''                     
+      
+  .row
+    .col-md-12
+      %p._small
+        Already have a Pharmacy's account? 
+        #{link_to "Log in here", pharmacy_login_path, :class => "_link"}.              
+                                
+
+

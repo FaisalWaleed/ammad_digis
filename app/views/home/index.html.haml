@@ -1,0 +1,21 @@
+.container
+  .row
+    .col-md-12
+      %h1 Digiscripts
+      %hr
+      .inline-list
+        %ul
+          %li
+            = link_to 'Physician Dashboard', physician_root_path, :class => 'action'
+          %li
+            = link_to 'Patient Dashboard', patient_root_path, :class => 'action'
+          %li
+            = link_to 'Pharmacy Dashboard', pharmacy_root_path, :class => 'action'            
+          %li
+            = link_to 'Pharmacist Dashboard', pharmacist_login_path, :class => 'action'
+          %li
+            = link_to 'Laboratories Dashboard', test_center_root_path, :class => 'action'             
+          %li
+            = link_to 'Technician Dashboard', technician_root_path, :class => 'action'    
+          %li
+            = link_to 'Admin Dashboard', admin_root_path, :class => 'action'

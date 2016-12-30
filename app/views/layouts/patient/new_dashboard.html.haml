@@ -1,0 +1,217 @@
+!!!
+%html{:lang => "en", style: 'background-color: #2A3F54;'}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    / Meta, title, CSS, favicons, etc.
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false
+    = javascript_include_tag 'application', 'data-turbolinks-track' => false
+    = stylesheet_link_tag    'theme/css/custom', media: 'all'
+
+    %title
+      Digiscripts | #{yield :page_title}
+
+    / %link{:href => "css/maps/jquery-jvectormap-2.0.3.css", :rel => "stylesheet", :type => "text/css"}/
+    / %link{:href => "css/floatexamples.css", :rel => "stylesheet", :type => "text/css"}/
+    /[if lt IE 9]  
+      = javascript_include_tag 'lib_ie/svg', 'data-turbolinks-track' => true       
+      = javascript_include_tag 'lib_ie/html5shiv-printshiv', 'data-turbolinks-track' => true 
+      = javascript_include_tag 'lib_ie/respond', 'data-turbolinks-track' => true          
+    = csrf_meta_tags
+  %body.nav-md
+    .container.body
+      .main_container
+        .col-md-3.left_col
+          .left_col.scroll-view
+            .navbar.nav_title{:style => "border: 0;"}
+              = link_to patient_dashboard_index_path, class: 'site_title' do
+                %i.fa.fa-paw
+                %span DigiScripts!
+            .clearfix
+            / menu prile quick info
+            .profile
+              .profile_pic
+                = image_tag current_patient.avatar.url(:small), class: 'img-circle profile_img'
+              .profile_info
+                %span Welcome,
+                %h2
+                  = current_patient.name
+                  %br/
+            / /menu prile quick info
+            %br/
+            / sidebar menu
+            #sidebar-menu.main_menu_side.hidden-print.main_menu
+              .menu_section
+                %h3 General
+                %ul.nav.side-menu
+                  %li
+                    = link_to patient_dashboard_index_path do
+                      %i.fa.fa-home
+                      Home
+                  %li
+                    %a
+                      %i.fa.fa-cogs
+                      Account
+                      %span.fa.fa-chevron-down
+                    %ul.nav.child_menu
+                      %li
+                        = link_to 'Edit Profile', edit_patient_dashboard_path(current_patient)
+                      %li
+                        = link_to 'Change Password', change_password_patient_dashboard_index_path
+                      %li
+                        = link_to 'Permission', permissions_patient_dashboard_index_path
+                  %li
+                    = link_to patient_history_patient_dashboard_index_path do
+                      %i.fa.fa-user
+                      Patient History
+                  %li
+                    = link_to patient_logout_path do
+                      %i.fa.fa-power-off
+                      Logout
+            / /sidebar menu
+            / /menu footer buttons
+            .sidebar-footer.hidden-small
+              %a{"data-placement" => "top", "data-toggle" => "tooltip", :title => "Home"}
+                %span.fa.fa-home{"aria-hidden" => "true"}
+              %a{"data-placement" => "top", "data-toggle" => "tooltip", :title => ""}
+                %span  
+              %a{"data-placement" => "top", "data-toggle" => "tooltip", :title => ""}
+                %span  
+              %a{"data-placement" => "top", "data-toggle" => "tooltip", :title => "Logout"}
+                %span.fa.fa-power-off{"aria-hidden" => "true"}
+            / /menu footer buttons
+        / top navigation
+        .top_nav
+          .nav_menu
+            %nav{:role => "navigation"}
+              .nav.toggle
+                %a#menu_toggle
+                  %i.fa.fa-bars
+              %ul.nav.navbar-nav.navbar-right
+                %li
+                  %a.user-profile.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "javascript:;"}
+                    = image_tag current_patient.avatar.url(:small)
+                    = current_patient.name
+                    %span.fa.fa-angle-down
+                  %ul.dropdown-menu.dropdown-usermenu.animated.fadeInDown.pull-right
+                    %li
+                      = link_to 'Profile', profile_patient_dashboard_index_path
+                    %li
+                      %a{:href => "javascript:;"}
+                        %span.badge.bg-red.pull-right 50%
+                        %span Settings
+                    %li
+                      %a{:href => "javascript:;"} Help
+                    %li
+                      = link_to patient_logout_path do
+                        %i.fa.fa-sign-out.pull-right
+                        Log Out
+                %li.dropdown{:role => "presentation"}
+                  %a.dropdown-toggle.info-number{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "javascript:;"}
+                    %i.fa.fa-envelope-o
+                    %span.badge.bg-green 6
+                  %ul#menu1.dropdown-menu.list-unstyled.msg_list.animated.fadeInDown{:role => "menu"}
+                    %li
+                      %a
+                        %span.image
+                          %img{:alt => "Profile Image", :src => "images/img.jpg"}/
+                        %span
+                          %span John Smith
+                          %span.time 3 mins ago
+                        %span.message
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                    %li
+                      %a
+                        %span.image
+                          %img{:alt => "Profile Image", :src => "images/img.jpg"}/
+                        %span
+                          %span John Smith
+                          %span.time 3 mins ago
+                        %span.message
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                    %li
+                      %a
+                        %span.image
+                          %img{:alt => "Profile Image", :src => "images/img.jpg"}/
+                        %span
+                          %span John Smith
+                          %span.time 3 mins ago
+                        %span.message
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                    %li
+                      %a
+                        %span.image
+                          %img{:alt => "Profile Image", :src => "images/img.jpg"}/
+                        %span
+                          %span John Smith
+                          %span.time 3 mins ago
+                        %span.message
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                    %li
+                      .text-center
+                        %a{:href => "inbox.html"}
+                          %strong See All Alerts
+                          %i.fa.fa-angle-right
+        / /top navigation
+        / page content
+        .right_col{:role => "main", style: 'min-height: 100vh;'}
+          .clearfix
+          = render 'partials/flash'
+          .clearfix
+          = yield
+        / /page content
+        / footer content
+        %footer
+          .pull-right
+            © DigiScripts. All rights reserved. - Powered By:
+            %a{:href => "http://snowballmedia.com", :target => "_blank", :title => "Snowball Media"} Snowball Media and Advertising
+          .clearfix
+        / /footer content
+    #custom_notifications.custom-notifications.dsp_none
+      %ul.list-unstyled.notifications.clearfix{"data-tabbed_notifications" => "notif-group"}
+      .clearfix
+      #notif-group.tabbed_notifications
+    /[if lt IE 9]
+      = javascript_include_tag 'lib_ie/rem.min'   
+    /[if lt IE 10]      
+      = javascript_include_tag 'lib_ie/placeholder'
+
+    / / gauge js
+    / %script{:src => "js/gauge/gauge.min.js", :type => "text/javascript"}
+    / %script{:src => "js/gauge/gauge_demo.js", :type => "text/javascript"}
+    / / bootstrap progress js
+    / %script{:src => "js/progressbar/bootstrap-progressbar.min.js"}
+    / %script{:src => "js/nicescroll/jquery.nicescroll.min.js"}
+    / / icheck
+    / %script{:src => "js/icheck/icheck.min.js"}
+    / / daterangepicker
+    / %script{:src => "js/moment/moment.min.js", :type => "text/javascript"}
+    / %script{:src => "js/datepicker/daterangepicker.js", :type => "text/javascript"}
+    / / chart js
+    / %script{:src => "js/chartjs/chart.min.js"}
+    / %script{:src => "js/custom.js"}
+    / / flot js
+    / /[if lte IE 8] <script type="text/javascript" src="js/excanvas.min.js"></script>
+    / %script{:src => "js/flot/jquery.flot.js", :type => "text/javascript"}
+    / %script{:src => "js/flot/jquery.flot.pie.js", :type => "text/javascript"}
+    / %script{:src => "js/flot/jquery.flot.orderBars.js", :type => "text/javascript"}
+    / %script{:src => "js/flot/jquery.flot.time.min.js", :type => "text/javascript"}
+    / %script{:src => "js/flot/date.js", :type => "text/javascript"}
+    / %script{:src => "js/flot/jquery.flot.spline.js", :type => "text/javascript"}
+    / %script{:src => "js/flot/jquery.flot.stack.js", :type => "text/javascript"}
+    / %script{:src => "js/flot/curvedLines.js", :type => "text/javascript"}
+    / %script{:src => "js/flot/jquery.flot.resize.js", :type => "text/javascript"}
+    / / worldmap
+    / %script{:src => "js/maps/jquery-jvectormap-2.0.3.min.js", :type => "text/javascript"}
+    / %script{:src => "js/maps/gdp-data.js", :type => "text/javascript"}
+    / %script{:src => "js/maps/jquery-jvectormap-world-mill-en.js", :type => "text/javascript"}
+    / %script{:src => "js/maps/jquery-jvectormap-us-aea-en.js", :type => "text/javascript"}
+    / / pace
+    / %script{:src => "js/pace/pace.min.js"}
+    / / skycons
+    / %script{:src => "js/skycons/skycons.min.js"}
+    / /datepicker
+    / /footer content

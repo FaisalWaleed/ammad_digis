@@ -1,0 +1,40 @@
+#_tech-review
+  - if @diagnostic
+    ._header
+      ._controls                      
+        %a.back.dg-icon._ic-back{:tabindex => "-1"}   
+      ._title
+        #{@diagnostic.identifier} Submitted Results         
+            
+    ._contents  
+      .row
+        .col-md-12
+          .profile-info.section
+            %h3
+              %span.bold-tx To:
+              = @diagnostic.physician.name
+            %p
+              %span.bold-txt Contact:
+              = @diagnostic.physician.phone_primary                                 
+                        
+      .row
+        .col-md-12
+          .section
+            ._body 
+              - if @diagnostic.attachments.present?
+                %table.table._minimal
+                  %thead
+                    %tr
+                      %th
+                        Files Sent
+                      %th
+                        Date uploaded
+                  %tbody
+                    - @diagnostic.attachments.each do |attachment|
+                      %tr
+                        %td
+                          = link_to (attachment.title.nil? || attachment.title == '' ? "#{@diagnostic.patient.name} - #{attachment.file_file_name}" : attachment.title), attachment.file.url, :target => '_blank'
+                        %td
+                          #{attachment.file_updated_at.strftime '%m/%d/%Y %I:%M %p'}   
+
+    

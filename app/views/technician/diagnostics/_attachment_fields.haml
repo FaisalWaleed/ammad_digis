@@ -1,0 +1,27 @@
+.nested-fields.list-item
+  ._item-content 
+    .row._parent
+      .col-md-11._show-more
+        ._title
+          - if f.object && f.object.title.present?
+            = f.object.title 
+          - else 
+            #{@diagnostic.patient.name} - #{f.object.file_file_name}
+      .col-md-1.text-right
+        = link_to_remove_association '', f , :title => "Remove", :class => "dg-icon _ic-delete _input-icon", :data => {"dz-remove" => '', 'confirm' => 'delete', 'no-link' => true}
+    .row._more
+      .col-md-12
+        ._wrap
+          .input-container
+            %label._full-input
+              = f.text_field :title, :placeholder => 'Title...'
+          .row
+            .col-md-12
+              .input-container           
+                - if f.object && f.object.file_file_name.present?
+                  = link_to "#{@diagnostic.patient.name} - #{f.object.file_file_name}", f.object.file.url(), :target => '_blank'
+                  
+                  
+
+              
+       

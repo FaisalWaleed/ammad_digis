@@ -1,0 +1,61 @@
+- content_for :page_title do
+  Patients
+  
+- content_for :client_class, '_showing-full-width _hide-header'
+          
+._medium  
+  = form_tag :physician_patients, :method => :get do 
+    ._expandable
+      .row._parent       
+        .col-md-1
+          ._input-title
+            Search
+        .col-md-3
+          .input-container
+            %label._search
+              = search_field_tag :term, @term, :autocomplete => :off
+        .col-md-8
+          = link_to 'add new', new_physician_patient_path, :class => "action _large _focus pull-right"
+    
+  .row
+    .col-md-12
+      - unless @patients.blank?
+        %table.table
+          %thead
+            %tr
+              %th 
+              %th
+              %th
+              %th
+              %th       
+          %tbody
+            - @patients.each do |patient|
+              %tr
+                %td
+                  ._thumb
+                    = image_tag patient.avatar.url(:small)
+                %td
+                  = link_to patient.name, physician_patient_path(patient)
+                %td= patient.gender.name
+                %td
+                  #{patient.age} Y/O
+                %td
+                  - unless patient.prescriptions.blank? 
+                    #{pluralize(patient.prescriptions.length,'prescription')} - last #{patient.prescriptions.first.created_at.strftime '%B %-d %Y'}
+                  - else 
+                    No prescriptions
+      - else
+        ._prompt-wrap
+          ._prompt 
+            - unless @term.blank?
+              No patients found with 
+              %span
+                #{@term}.             
+            - else             
+              No patients have been created.                  
+              
+  .row
+    .col-md-12
+      .pull-right
+        = paginate(@patients)
+

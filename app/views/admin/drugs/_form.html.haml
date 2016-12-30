@@ -1,0 +1,77 @@
+._medium
+  = form_for [:admin, @drug] do |f|
+    - content_for :notice do
+      - if @drug.errors.any?
+        .row
+          .col-md-7
+            - @drug.errors.full_messages.each do |msg|          
+              ._msg.error
+                ._alert
+                  .ds-icon._ic-info
+                = msg   
+            
+    .row
+      .col-md-12
+        .input-container          
+          %label._full-input
+            %span.name
+              Trade Name
+            = f.text_field :trade_name, :class => "required", :data => {"size" => "2"}
+            .form-helper
+              Plan name is required.            
+            
+    .row
+      .col-md-12
+        .input-container            
+          %label._full-input
+            %span.name
+              Generic Name 
+            = f.text_field :generic_name, :class => ""           
+
+    .row
+      .col-md-12
+        .input-container            
+          %label._full-input
+            %span.name
+              Drug Format 
+            = f.select :drug_format_id, DrugFormat.all.map{ |f| [f.name, f.id] }, {:prompt => 'Select Format...', :include_blank => true}, :class => "required"
+            .form-helper
+              Drug format is required.              
+
+    %hr
+    .section
+      ._section
+        ._title
+          Routes
+        ._body         
+          .row
+            .col-md-8
+              .input-container._inline
+                %label._full-input
+                  %input._filter{:type => 'text', :placeholder => 'Search', :data => {'target' => "#routes"}}                         
+          .row
+            .col-md-12{:id => "routes"} 
+              .input-container                   
+                = hidden_field_tag 'drug[dosage_route_ids][]'      
+                - DosageRoute.all.each do |t|              
+                  %label.checkbox-inline
+                    = check_box_tag 'drug[dosage_route_ids][]', t.id, f.object.dosage_route_ids.include?(t.id)
+                    %span.name
+                      = t.code_with_name 
+                        
+    .row
+      .col-md-12
+        .input-container          
+          %label._full-input
+            %span.name
+              Dosages
+            = f.text_field :dosages, :class => "required"    
+            .form-helper
+              Dosages is required.              
+
+    %hr
+    .row      
+      .col-md-4.col-md-offset-8
+        .action._large._normalize.pull-right._submit    
+          Save
+          = f.submit '' 

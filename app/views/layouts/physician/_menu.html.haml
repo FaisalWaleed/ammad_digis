@@ -1,0 +1,61 @@
+#client-sidebar-bg
+#client-sidebar
+  .row
+    .col-md-12
+      ._menu-toggle
+        %span.dg-icon._ic-menu
+      ._menu-wrap._logo
+        .client-image
+          .image-holder
+            = link_to (image_tag 'logo.svg', "data-svg-fallback" => image_path('logo.png')), new_physician_patient_path
+      ._menu-wrap._menu-links
+        .menu-group
+          %ul
+            %li
+              = active_link_to new_physician_patient_path, :active => :inclusive do
+                %span.menu-label Dashboard
+            %li
+              = active_link_to physician_prescriptions_path, :active => [['physician/prescriptions'], ['index','show','edit']] do
+                %span.menu-label Prescriptions            
+            %li
+              = active_link_to physician_test_results_path, :active => [['physician/test_results','physician/diagnostics'], ['index','show','new','edit']] do
+                %span.menu-label Diagnostics                        
+                
+            
+      ._menu-wrap._right
+        .notification-group
+          %ul
+            %li
+              %a{:href => "javascript:void"}
+                %span._show-notifications._msg-count._notification{"data-notification" => "messages"} #{current_physician.unread_messages_count}  
+            %li._seperator._left
+            %li.list-item
+              %a._show-more._stage
+                ._profile-image
+                  = image_tag current_physician.avatar.url(:small)
+                %span.menu-label 
+                  #{current_physician.name rescue 'Doctor'}
+              %div._more
+                %ul
+                  %li
+                    = active_link_to physician_patients_path, :active => [['physician/patients'], ['index','show','edit']] do
+                      %span.menu-label All Patients                
+                  %li
+                    = active_link_to physician_subscriptions_path do
+                      %span.menu-label Subscription                       
+                  %li
+                    = active_link_to physician_profile_edit_path do
+                      %span.menu-label Profile                    
+                  %li
+                    = link_to physician_logout_path do
+                      %span.menu-label Logout
+  
+#notice-container  
+  ._notice-wrap
+    ._ui
+      - unless flash.blank? 
+        = render 'partials/notice_flash'        
+      = yield :notice_list     
+                    
+      
+          

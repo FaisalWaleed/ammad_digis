@@ -1,0 +1,49 @@
+- content_for :title, "Drug"
+- content_for :page_title, "Drug: #{@drug.trade_name}"
+   
+- content_for :notice do
+  - unless notice.blank?
+    .row
+      .col-md-7
+        ._msg.success
+          ._alert
+            .ds-icon._ic-info
+          = notice  
+.row
+  .col-md-7
+    ._medium
+      .row
+        .col-md-12
+          .input-container          
+            %label._full-input
+              %span.name
+                Trade Name
+            = @drug.trade_name
+              
+      .row
+        .col-md-12
+          .input-container            
+            %label._full-input
+              %span.name
+                Generic Name 
+            = @drug.generic_name        
+
+      .row
+        .col-md-12
+          .input-container            
+            %label._full-input
+              %span.name
+                Drug Format 
+            = @drug.drug_format_name
+              
+      .row
+        .col-md-12
+          .input-container          
+            %label._full-input
+              %span.name
+                Dosages
+            = @drug.dosages  
+      %hr
+      .row      
+        .col-md-4.col-md-offset-8
+          = link_to 'Edit', edit_admin_drug_path(@drug), :class => "action _default pull-right"    

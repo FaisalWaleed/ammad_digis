@@ -1,0 +1,156 @@
+= form_for :test_center, :url => test_center_profile_update_path do |f|
+  .section
+    .row
+      .col-md-12
+        .row
+          .col-md-4.col-md-offset-4
+            .input-container
+              ._input-group
+                .focused   
+                  .row
+                    .col-md-12
+                      ._image-holder
+                        - if @test_center.avatar.url(:original).blank?
+                          %span.dg-icon.ic-gallery                          
+                        - else
+                          = image_tag @test_center.avatar.url(:thumb)          
+                  .row          
+                    .col-md-12
+                      %label._full-input
+                        ._file-input
+                          %span Upload logo
+                          = f.file_field :avatar        
+                          
+        ._section
+          %h3.title Laboratory Information 
+        ._body  
+          .row
+            .col-md-12
+              .input-container                    
+                %label._full-input
+                  %span.name
+                    Name
+                  = f.text_field :name, :class => "required", :data => {"size" => "2"}
+                  .form-helper
+                    Laboratory's name is required.                                                                          
+ 
+        ._section
+          %h3.title Primary Contact Information
+        ._body
+          .row
+            .col-md-6
+              .input-container                    
+                %label._full-input
+                  %span.name
+                    First name
+                  = f.text_field :contact_firstname, :class => "required", :data => {"size" => "2"}
+                  .form-helper
+                    Contact's first name is required.
+
+            .col-md-6
+              .input-container                       
+                %label._full-input
+                  %span.name
+                    Last name
+                  = f.text_field :contact_lastname, :class => "required", :data => {"size" => "2"}
+                  .form-helper
+                    Contact's last name is required.                                                                                                              
+
+          .row
+            .col-md-6
+              .input-container                    
+                %label._full-input
+                  %span.name
+                    Email address                
+                  = f.text_field :email_primary, :class => "required"
+                  .form-helper
+                    Contact's email is required. This isn't a valid email.                          
+
+            .col-md-6
+              .input-container                       
+                %label._full-input
+                  %span.name
+                    Phone number                
+                  = f.text_field :phone_primary, :class => "required _tel"
+                  .form-helper
+                    Contact's phone number is required.                                                                                                              
+
+    ._section
+      %h3.title Address    
+    ._body 
+      .row
+        .col-md-6
+          .input-container
+            %label._full-input
+              %span.name
+                Address line 1                
+              = f.text_field :address_street_1, :class => "required"
+              .form-helper
+                Laboratory's address line 1 is required.        
+                
+        .col-md-6                 
+          .input-container
+            %label._full-input
+              %span.name
+                Address line 2 (optional)           
+              = f.text_field :address_street_2
+                   
+      .row
+        .col-md-6                                  
+          .input-container
+            %label._full-input
+              %span.name
+                Town                
+              = f.text_field :address_municipality, :class => "required"
+              .form-helper
+                Laboratory's town is required.  
+                
+        .col-md-6
+          .input-container
+            %label._full-input
+              %span.name
+                Parish           
+              = f.select :address_territory, PARISHES, {:include_blank => "Select a parish"}, :class => "required"
+              .form-helper
+                Laboratory's parish is required.   
+      .row          
+        .col-md-6         
+          .input-container
+            %label._full-input
+              %span.name
+                Country             
+              = f.country_select :address_country, :priority_countries => ["JM", "US"], :selected => "JM", :class => "required"
+              .form-helper
+                Laboratory's country is required.     
+
+    ._section
+      %h3.title Digiscripts    
+    ._body     
+      .row
+        .col-md-6
+          .input-container
+            %label._full-input
+              %span.name
+                Password               
+              = f.password_field :password, :class => "_password required _optional", :placeholder => '••••••••••••'
+              .form-helper
+                Please create a password                  
+          .input-container
+            %label._full-input
+              %span.name
+                Confirm password            
+              = f.password_field :password_confirmation, :class => "_confirm-password required _optional", :placeholder => '••••••••••••' 
+              .form-helper
+                Password must match the one typed before. 
+                  
+
+  .row      
+    .col-md-8
+      = link_to 'cancel', test_center_diagnostics_path, :class => "action _large _cancel"      
+    .col-md-4
+      .action._large._normalize.pull-right._submit{:tabindex => '0'}    
+        Save
+        = f.submit ''   
+
+- content_for :after_body do     
+  = render 'partials/modals/modal'

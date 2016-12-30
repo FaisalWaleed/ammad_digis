@@ -1,0 +1,46 @@
+!!!
+%html
+  %head
+    %script{:src => "https://use.typekit.net/ddt7bah.js"}
+    :javascript
+      try{Typekit.load({ async: true });}catch(e){}  
+    %title
+      Digiscripts - Pharmacy - 
+      = yield :page_title
+      
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = yield :page_js
+    /[if lt IE 9]  
+      = javascript_include_tag 'lib_ie/svg', 'data-turbolinks-track' => true       
+      = javascript_include_tag 'lib_ie/html5shiv-printshiv', 'data-turbolinks-track' => true 
+      = javascript_include_tag 'lib_ie/respond', 'data-turbolinks-track' => true         
+    = csrf_meta_tags
+  %body.dg
+    = render :partial => 'partials/no_script'   
+    #client-ui{:class => (yield :client_class)}                                            
+      = render :partial => "layouts/pharmacy/menu"      
+      #client-body
+        #client-header              
+          #content-heading
+            .content-wrap
+              ._medium
+                .row
+                  #{yield :page_header}
+                  #{yield :page_action}         
+              
+        #client-content                        
+          .content-wrap
+            = yield
+              
+    = yield :after_body
+    #dg-pharm-disbursement.modal._persistent{ 'data-remote' => 'true' }
+      .modal-dialog
+        .modal-content 
+        
+    = render :partial => 'partials/modals/confirm_delete'                  
+                      
+    /[if lt IE 9]
+      = javascript_include_tag 'lib_ie/rem.min'   
+    /[if lt IE 10]      
+      = javascript_include_tag 'lib_ie/placeholder'                         

@@ -1,0 +1,113 @@
+- if @diagnostic
+  ._header
+    ._title
+      #{@diagnostic.identifier}
+    ._sub-title
+      = @diagnostic.created_at.strftime("%B #{@diagnostic.created_at.day.ordinalize} %Y")     
+    .pull-right     
+      ._controls                      
+        %a.exit.dg-icon._ic-close{:tabindex => "-1", "aria-label" => "close", "data-dismiss" => "modal"}      
+        
+  ._contents
+    .wrapper
+      .row
+        .col-md-12
+          .profile-info.section
+            ._section
+              .row
+                .col-md-8
+                  %h3 #{@diagnostic.patient.name}
+                  %span
+                    %span.bump._gender #{@diagnostic.patient.gender_abbrev}
+                    %span._age
+                      #{@diagnostic.patient.age}
+                      Y/O
+                  
+            ._body
+              .row
+                .col-md-8
+                  .focused
+                    .row
+                      .col-md-6.col-xs-12
+                        %div.ellipsis
+                          #{@diagnostic.patient.address_street_1}
+                        %div.ellipsis
+                          #{@diagnostic.patient.address_territory}, #{@diagnostic.patient.address_country}
+                      .col-md-6.col-xs-12.has-border
+                        %div.ellipsis
+                          #{@diagnostic.patient.phone_primary}
+                        %div.ellipsis
+                          #{@diagnostic.patient.email_primary}
+                                                  
+                .col-md-4
+                  .center-content
+                    .text.text-center
+                      - if @diagnostic.messages.present?
+                        ._msg-block{"class" => @diagnostic.message_status.dasherize}
+                          = pluralize(@diagnostic.messages.length, 'Message')
+                          
+                      %a.action._large._nav._active{"data-target" => "#tech-message-template", "class" =>  @diagnostic.message_status.dasherize}
+                        - unless @diagnostic.message_status.blank?
+                          #{@diagnostic.message_status.humanize}
+                        - else                          
+                          ask a question
+    .wrapper 
+      .row
+        .col-md-12
+          .section
+            ._body  
+              - unless @diagnostic.testings.blank?
+                .list-ui
+                  ._expandable             
+                    - @tags.each do |tag|
+                      .list-item._parent
+                        ._drug-name                        
+                          %strong= tag.name
+                          %div
+                            = tag.test_requests.map{ |tr| tr.name }.join(", ") 
+                          
+              - unless @diagnostic.profiled_testings.blank?
+                .list-ui
+                  ._expandable             
+                    - @profiles.each do |profile, testings|
+                      .list-item._parent
+                        ._drug-name                        
+                          %strong= profile.name
+                          %div
+                            = testings.map{ |t| t.test.name }.join(", ") 
+                          
+                      
+            - unless @diagnostic.notes.blank?
+              %p 
+                ** #{@diagnostic.notes} 
+              
+    .wrapper             
+      ._prescript-id        
+      ._issued
+        ._issued-by
+          Requested by Dr. #{@diagnostic.physician.name}
+        ._issued-date 
+          
+      ._info
+        ._reg-num
+          %strong
+            REG# 
+          #{@diagnostic.physician.reg_num}                  
+        ._physician-phone
+          %strong
+            phone:         
+          #{ @diagnostic.physician.phone_primary }
+        ._physician-email
+          %strong
+            email:         
+          #{ @diagnostic.physician.email_primary }
+            
+  ._footer.text-right        
+    .row
+      .col-md-12   
+        %a.action._large._focus._nav{"data-target" => "#tech-upload-template"}
+          UPLOAD TEST RESULTS
+              
+    
+                      
+                            

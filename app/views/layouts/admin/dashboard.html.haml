@@ -1,0 +1,51 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %link{:href => "/resources/images/favicon.html", :rel => "shortcut icon"}/
+    %title #{ yield :title } | Digiscript Admin
+    %script{:src => "//use.typekit.net/ddt7bah.js", :type => "text/javascript"}
+    :javascript
+      try{Typekit.load();}catch(e){}      
+    = stylesheet_link_tag    'admin/application', media: 'screen', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'theme/css/print', media: 'print', 'data-turbolinks-track' => true       
+    = javascript_include_tag 'admin/application', 'data-turbolinks-track' => true
+    /[if lt IE 9]  
+      = javascript_include_tag 'lib_ie/svg', 'data-turbolinks-track' => true       
+      = javascript_include_tag 'lib_ie/html5shiv-printshiv', 'data-turbolinks-track' => true 
+      = javascript_include_tag 'lib_ie/respond', 'data-turbolinks-track' => true        
+    = csrf_meta_tags
+  %body.dg-admin
+    #admin-ui{:class => (yield :client_class)}                      
+      #admin-body
+        #admin-sidebar
+          = render :partial => "layouts/admin/menu"  
+        #admin-content 
+          .content-header 
+            .row
+              .col-md-6.col-sm-6.col-xs-12
+                %h1._page-title 
+                  #{ yield :page_title }
+              .col-md-6.col-sm-6.col-xs-12
+                .text-right
+                  #{yield :page_tools}
+                  #{yield :page_action}
+                  
+            ._page-filter
+              .row
+                #{ yield :filter }    
+                  
+          .content-wrap
+            ._notice-wrap
+              = yield :notice               
+            = yield
+    .no-print            
+      = yield :append_body              
+    .no-print            
+      = yield :after_body
+      = render :partial => 'partials/modals/confirm_delete' 
+    /[if lt IE 9]
+      = javascript_include_tag 'lib_ie/rem.min'   
+    /[if lt IE 10]      
+      = javascript_include_tag 'lib_ie/placeholder'      

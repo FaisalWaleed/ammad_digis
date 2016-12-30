@@ -1,0 +1,177 @@
+#client-patient-details
+  .client-infobar-bg
+  .client-infobar
+    .section
+      ._body
+        .tab-ui
+          / beginTabs
+          .tabs.fluid-tab{:role => "tabpanel"}
+            / beginTabHeader
+            .tab-header.hidden-xs
+              %ul.nav{:role => "tablist"}
+                %li.active{:role => "presentation"}
+                  %a.tab-control{"aria-controls" => "xsd12", "data-toggle" => "tab", :href => "#xsd12", :role => "tab"} Background
+                %li{:role => "presentation"}
+                  %a.tab-control{"aria-controls" => "xsd13", "data-toggle" => "tab", :href => "#xsd13", :role => "tab"} History
+                %li{:role => "presentation"}
+                  %a.tab-control{"aria-controls" => "xsd14", "data-toggle" => "tab", :href => "#xsd14", :role => "tab"} Notes                                
+            / beginTabContainer
+            .tab-content
+              .panel-group.ac-group-outline{"aria-multiselectable" => "true", :role => "tablist"}
+                / beginTabContent
+                #xsd12.tab-pane.tab-content.active.fade.in.panel{:role => "tabpanel"}
+                  #xsd12-heading.panel-heading.visible-xs{:role => "tab"}
+                    %h4.panel-title
+                      %a{"aria-controls" => "xsd12-collapse", "aria-expanded" => "true", "data-parent" => "#tab-accordion", "data-toggle" => "collapse", :href => "#xsd12-collapse"} BACKGROUND
+                  #xsd12-collapse.panel-collapse.collapse.in{"aria-labelledby" => "xsd12-heading", :role => "tabpanel"}
+                    .panel-body
+                      - if patient
+                        .input-container
+                          .row
+                            .col-md-12
+                              %label._suggest{"data-name" => "patient[illnesses][]", "data-url" => physician_patient_path(patient), "data-type" => 'illnesses'}
+                                %span.name
+                                  Conditions
+                                ._target
+                                  ._selected
+                                    - patient.common_illnesses.each do |c|
+                                      .vc
+                                        .vl
+                                          = c.name
+                                          .vx
+                                        = hidden_field_tag 'patient[illnesses][]', c.name
+                                    .va.vc
+                                      .vl
+                                  = text_area_tag :illness_name, '', data: { url: api_v1_search_illnesses_path, autocomplete: true}, :placeholder => 'Add a condition...'
+                        %hr
+                        .input-container                                            
+                          .row
+                            .col-md-12
+                              %label._suggest{"data-name" => "patient[allergies][]", "data-url" => physician_patient_path(patient), "data-type" => 'allergies'}
+                                %span.name
+                                  Allergies
+                                ._target
+                                  ._selected
+                                    - patient.common_allergies.each do |c|
+                                      .vc
+                                        .vl
+                                          = c.name
+                                          .vx
+                                        = hidden_field_tag 'patient[allergies][]', c.name
+                                    .va.vc
+                                      .vl                                      
+                                  = text_area_tag :allergy_name, '', data: { url: api_v1_search_allergies_path, autocomplete: true}, :placeholder => 'Add an allergy...'
+                            
+                / endTabContent
+                / beginTabContent
+                #xsd13.tab-pane.tab-content.fade.panel{:role => "tabpanel"}
+                  #xsd13-heading.panel-heading.visible-xs{:role => "tab"}
+                    %h4.panel-title
+                      %a.collapsed{"aria-controls" => "xsd13-collapse", "aria-expanded" => "false", "data-parent" => "#tab-accordion", "data-toggle" => "collapse", :href => "#xsd13-collapse"} PRESCRIPTIONS
+                  #xsd13-collapse.panel-collapse.collapse{"aria-labelledby" => "xsd13-heading", :role => "tabpanel"} 
+                    .panel-body
+                      .row
+                        .col-md-12
+                          .section                            
+                            ._body
+                              %h3 Prescriptions
+                              .list-ui
+                                - if patient
+                                  - if patient.prescriptions.blank?
+                                    .info
+                                      No prescriptions
+                                      
+                                  - unless patient.prescriptions.blank? 
+                                    - patient.prescriptions.order(created_at: :desc).last(3).each do |p|
+                                      ._list-item
+                                        ._item-content
+                                          ._identifier    
+                                            ._title
+                                              = link_to "RX ##{p.identifier}", physician_prescription_path(p)
+                                            ._date
+                                              = p.created_at.strftime('%m/%d/%Y') rescue nil
+                                          ._expandable
+                                            - p.prescripts.each do |d|
+                                              - if d.drug
+                                                ._wrap
+                                                  ._parent
+                                                    - unless d.free_flow? 
+                                                      #{d.strfrx}     
+                                                      - unless d.free_flow_details.blank?
+                                                        \ -
+                                                        #{d.free_flow_details}                                                      
+                                                    - else
+                                                      #{d.free_flow_details}
+                                                    - unless d.repeat_max == 0
+                                                      %div
+                                                        Repeat: #{d.repeat_max}       
+                              - unless patient.prescriptions.blank? 
+                                = link_to "See all prescriptions for #{patient.name}", physician_patient_prescriptions_path(patient), :class => "bold-txt _link"
+                          .section                            
+                            ._body
+                              %h3 Diagnostics  
+                              .list-ui
+                                - if patient
+                                  - if patient.diagnostics.blank?
+                                    No diagnostics
+                                    
+                                  - patient.diagnostics.unarchived_for_physician.order(updated_at: :desc).last(3).each do |d|
+                                    ._list-item
+                                      ._item-content
+                                        ._identifier    
+                                          ._title
+                                            = link_to "REQ ##{d.identifier}", physician_diagnostic_path(d)
+                                          ._date
+                                            = d.created_at.strftime('%m/%d/%Y') rescue nil
+                                          - if d.ready_for_review?
+                                            = link_to 'Results', physician_test_result_path(d), :class => "_link bold-txt grn-txt pr"                                             
+                                        ._expandable
+                                          - TestTag.with_diagnostic(d).each do |tag|
+                                            .list-item._parent
+                                              ._drug-name                        
+                                                %strong= tag.name
+                                                %div
+                                                  = tag.test_requests.map{ |tr| tr.name }.join(", ") 
+                                                  
+                                        ._expandable
+                                          - d.profiled_testings.group_by(&:test_profile).each do |profile, testings|
+                                            .list-item._parent
+                                              ._drug-name                        
+                                                %strong= profile.name
+                                                %div
+                                                  = testings.map{ |t| t.test.name }.join(", ")                                                   
+                              
+                          
+                / endTabContent
+                / beginTabContent
+                #xsd14.tab-pane.tab-content.fade.panel{:role => "tabpanel"}
+                  #xsd14-heading.panel-heading.visible-xs{:role => "tab"}
+                    %h4.panel-title
+                      %a.collapsed{"aria-controls" => "xsd14-collapse", "aria-expanded" => "false", "data-parent" => "#tab-accordion", "data-toggle" => "collapse", :href => "#xsd14-collapse"} NOTES
+                  #xsd14-collapse.panel-collapse.collapse{"aria-labelledby" => "xsd14-heading", :role => "tabpanel"}
+                    .panel-body
+                      
+                      - if patient
+                        = form_for patient, :url => physician_patient_create_note_path(patient), :html => { :id => :patient_notes_form } do |f|   
+                          .input-container
+                            = f.fields_for :notes, PatientNote.new do |n|
+                              = n.hidden_field :author_id, :value => current_physician.id
+                              = n.hidden_field :author_type, :value => 'Physician'
+                              .row
+                                .col-md-12
+                                  .input-container
+                                    %label._full-input
+                                      = n.text_area :note, :class => 'required', :placeholder => "Enter note here..."
+                              .row
+                                .col-sm-12.text-right
+                                  .action._small._normalize._submit{:tabindex => 0} 
+                                    %span
+                                      Save Note
+                                    = f.submit 'Add Note'
+                        %hr
+                        #patient_notes
+                          = render :partial => 'partials/infobar_note', :collection => patient.notes.reverse, :as => :note
+                          
+                / endTabContent                              
+                / endTabContainer
+          / endTabs  

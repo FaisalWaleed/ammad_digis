@@ -1,0 +1,33 @@
+- content_for :page_title do
+  Archived Prescriptions
+  
+- content_for :client_class, '_showing-full-width _hide-header'
+          
+._medium  
+  .row
+    .col-md-12 
+      - unless @dispense_orders.blank?    
+        %table.table
+          %thead
+            %tr
+              %th 
+              %th 
+              %th 
+              %th
+              %th
+              %th.hidden
+              %th.hidden
+
+          %tbody
+            = render :partial => 'index', :collection => @dispense_orders, :as => :order
+                
+      - else
+        ._prompt-wrap
+          ._prompt 
+            - unless @term.blank?
+              No archived prescriptions found with 
+              %span
+                #{@term}.             
+            - else             
+              No archived prescriptions.           
+              

@@ -1,0 +1,44 @@
+- content_for :title, "Drugs"
+- content_for :page_title, "Drugs"
+
+- content_for :page_action do
+  = link_to 'New Drug', new_admin_drug_path, :class => 'action _default _focus'
+  
+- content_for :filter do  
+  .col-md-4
+    = form_tag :admin_drugs, :method => :get do
+      .input-container
+        %label._full-input
+          = text_field_tag :term, @term, :class => "", :placeholder => "Search Drugs"
+          .form-helper.text-right
+            press Enter 
+  
+._medium
+  .row
+    .col-md-12
+      %table.table
+        %thead
+          %tr
+            %th 
+              %span.title Trade Name
+            %th 
+              %span.title Generic Name
+            %th 
+              %span.title Drug Format
+            %th
+              %span.title Dosages           
+            %th.text-right
+              %span.title Actions           
+        %tbody
+          - @drugs.each do |drug|
+            %tr
+              %td
+                = link_to drug.trade_name, edit_admin_drug_path(drug)
+              %td= drug.generic_name
+              %td= drug.drug_format_name
+              %td= drug.dosages
+              %td.text-right
+                = link_to '', admin_drug_path(drug), :method => :delete, :data => { :confirm => 'delete' }, :class => 'ds-icon _ic-delete'        
+
+      
+= paginate @drugs

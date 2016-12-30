@@ -1,0 +1,19 @@
+- content_for :client_class, '_page-mobile'
+
+- content_for :page_title do
+  #{current_physician.name}
+    
+- content_for :page_header do
+  .col-md-12.col-xs-12
+    #chd.text-center
+      %h2.active-channel-name 
+        - if @active_subscription.blank? || @active_subscription.due_for_renewal?   
+          Renew your subscription
+        - else
+          Purchase a subscription
+
+.row
+  .col-md-12
+    ._medium
+      = render 'form_renew'
+              

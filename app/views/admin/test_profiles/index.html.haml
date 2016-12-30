@@ -1,0 +1,39 @@
+- content_for :title, "Test Profile"
+- content_for :page_title, "Test Profile"
+
+- content_for :page_action do
+  = link_to 'New Test Profile', new_admin_test_profile_path, :class => 'action _default _focus'
+  
+- content_for :filter do  
+  .col-md-4
+    = form_tag :admin_test_profiles, :method => :get do
+      .input-container
+        %label._full-input
+          = text_field_tag :term, @term, :class => "", :placeholder => "Search Profiles"
+          .form-helper.text-right
+            press Enter 
+  
+._medium
+  .row
+    .col-md-12
+      %table.table
+        %thead
+          %tr
+            %th 
+              %span.title Name
+            %th 
+              %span.titleTest Type
+            %th.text-right
+              %span.title Actions  
+
+        %tbody
+          - @test_profiles.each do |test_profile|
+            %tr
+              %td
+                = link_to test_profile.name, edit_admin_test_profile_path(test_profile)              
+              %td
+                = test_profile.test_type.name rescue nil
+              %td.text-right
+                = link_to '', admin_test_profile_path(test_profile), :method => :delete, :data => { :confirm => 'delete' }, :class => 'ds-icon _ic-delete'                
+
+

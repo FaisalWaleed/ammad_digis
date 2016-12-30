@@ -1,0 +1,225 @@
+= form_for [:physician, @prescription], :html => {:class => 'data-form'} do |f|
+  = hidden_field_tag :prescription_id, @prescription.id  
+  %input#ds_has_items.required._god-mode{:type => 'hidden',:disabled => true, :value => "#{'true' if !@prescription.prescripts.blank?}"}  
+  .channel.channel-write._remove
+    = f.hidden_field :identifier
+    
+    - if @prescription.errors.any?
+      #error_explanation._msg
+        %p= "#{pluralize(@prescription.errors.count, "error")} prohibited this prescription from being saved:"
+        %ul
+          - @prescription.errors.full_messages.each do |msg|
+            %li= msg
+    
+    ._medium 
+      - if @prescription.has_saved_patient?
+        #patient_details
+          .row
+            .col-md-12
+              .section
+                #patient_fields
+                  = render 'patient_fields', f: f    
+      - else
+        = f.hidden_field :patient_id                          
+        
+      #prescripts.list-ui
+        = f.fields_for :prescripts do |ps|
+          = render 'prescript_fields', f: ps
+      = link_to_add_association 'Add Another', f, :prescripts, :data => {"association-insertion-node" => "#prescripts","association-insertion-method" => "append" }, :class => "action _large _center #{("_show" unless @prescription.has_saved_patient?)}"  
+
+    .row      
+      .col-md-4.col-md-offset-8
+        .action._large._normalize.pull-right._focus
+          Save
+          = f.submit '' 
+          
+  
+  .channel.channel-review
+    ._medium  
+      .preview-ui
+        .row   
+          .col-md-6
+            .row._select-pharmacy
+              .col-md-12
+                ._header
+                  ._wrap 
+                    %span._identifier RX ##{@prescription.identifier}
+                    %span._items
+                      #{pluralize(@prescription.prescripts.length,'item')}
+                    - if !@prescription.pharmacy.present? && !@prescription.printed?                          
+                      %span._edit
+                        = link_to "", edit_physician_prescription_path(@prescription), :class => 'dg-icon _ic-edit'                                      
+                        
+            .row#prescriptions-preview
+              .col-md-12
+                .section
+                  ._body
+                    ._info                
+                      %strong
+                        Created on
+                      %span
+                        #{@prescription.created_at.strftime '%m/%d/%Y %I:%M %p' }                  
+                    - unless @prescription.prescripts.blank?
+                      .list-ui                  
+                        -# @prescription.prescripts.each_with_index do |prescript, index|
+                        = f.fields_for :prescripts do |p|
+                          = p.hidden_field :duration_with_unit
+                          - prescript = p.object
+                          ._list-item
+                            ._item-content
+                              ._expandable
+                                ._wrap
+                                  ._parent
+                                    - unless prescript.free_flow? 
+                                      #{prescript.strfrx}
+                                      - unless prescript.free_flow_details.blank?
+                                        \ - 
+                                        #{prescript.free_flow_details}
+                                    - else 
+                                      #{prescript.free_flow_details}
+                                      
+                                    - unless prescript.repeat_max == 0
+                                      %div
+                                        Repeat: #{prescript.repeat_max}                                       
+                                      
+                                    %div{:colspan => '2'}
+                                      - unless prescript.note.blank? 
+                                        .row
+                                          .col-md-12
+                                            .section 
+                                              ._notes
+                                                %p._small
+                                                  = prescript.note rescue nil                             
+                    - else  
+                      ._prompt-wrap
+                        ._prompt.required  
+                          Edit this prescription.    
+                          
+          .col-md-6  
+            ._field-wrap
+              ._header
+                %h3
+                  - if @prescription.pharmacy_id.blank? && !@prescription.printed?     
+                    All Done? Send this prescription.
+                  - else
+                    Prescription sent to:
+              ._inner-content                    
+                ._content  
+                  - if @prescription.pharmacy_id.blank? && !@prescription.printed?                  
+                    .input-container
+                      %label._full-input
+                        %span.name
+                          Select Insurance   
+                        ._select._multiple._insurer_ids
+                          = f.select :insurer_ids, Insurer.all.map{ |i| [i.name, i.id] }, {:include_blank => false}, {:multiple => true}
+                    
+                    .input-container                    
+                      %label.checkbox-inline
+                        %span.name
+                          Allow Generic 
+                        = f.check_box :allow_generic                    
+                    
+                    .input-container
+                      %span.name
+                        Send to Pharmacy    
+                      = link_to 'or Print', physician_prescription_path(@prescription, print: ''), :class => "_badge _before-print"  
+                      %label._search
+                        = f.text_field :pharmacy_name, data: { url: api_v1_search_pharmacies_path, autocomplete: true, 'item-template' => '#pharmacy_ac_item' }, :placeholder => "", :class => 'required ds-radio ds-autocomplete' 
+                        = f.hidden_field :pharmacy_id
+                        
+                    .input-container   
+                      .row
+                        .col-md-12
+                          - if @prescription.patient.phone_verified? || @prescription.patient.email_verified?
+                            %label.checkbox-inline
+                              %span.name
+                                Send to Patient 
+                              = f.check_box :send_to_patient, :class => 'required ds-radio'                           
+                            ._saved
+                              .row
+                                .col-md-10
+                                  %div
+                                    %strong Phone 
+                                    %span #{@prescription.patient.phone_primary}
+                                  %div                
+                                    %strong Email
+                                    %span #{@prescription.patient.email_primary}
+                                .col-md-2
+                                  ._align
+                                    %span._badge.verify-info
+                                      Edit
+                                      
+                          - else
+                            %label.checkbox-inline
+                              %span.name
+                                Send to Patient 
+                              = f.check_box :send_to_patient, :class => 'verify-checkbox required ds-radio'                            
+                                                        
+                    .input-container
+                      .row
+                        .col-md-12
+                          %label
+                            %span.name
+                              Verification Pin
+                            = @prescription.verification_pin  
+                  - else
+                    ._review
+                      - unless @prescription.printed?
+                        ._block
+                          %span._title
+                            Pharmacy
+                          ._contact-info
+                            %div #{@prescription.pharmacy_name}
+                            %div #{@prescription.pharmacy.address_street_1}
+                            %div #{@prescription.pharmacy.address_street_2}
+                            %div #{@prescription.pharmacy.address_municipality}
+                            %div #{@prescription.pharmacy.address_country}
+                            %div #{@prescription.pharmacy.phone_primary}, #{@prescription.pharmacy.email_primary}
+                      - else
+                        ._block
+                          %span._title
+                            Prescription printed
+                          ._contact-info
+                            %div 
+                              = link_to 'Print again', physician_prescription_path(@prescription, print: ''), :class => "_badge"  
+                      ._block
+                        %span._title
+                          Created on
+                        %span
+                          = @prescription.created_at.strftime '%m/%d/%Y %I:%M %p'                    
+                      ._block
+                        %span._title
+                          Insurance 
+                        %span
+                          #{@prescription.insurer_names.join(', ').presence || 'None selected'}                          
+                          
+                      ._block
+                        %span._title
+                          Verification Pin
+                        %span
+                          = @prescription.verification_pin 
+                      - if @prescription.allow_generic?
+                        ._block 
+                          ** Generic approved
+                          
+        - if !@prescription.pharmacy_id.blank? || @prescription.printed?
+          %hr
+          ._button-ui.text-center 
+            = link_to 'New Prescription', new_physician_patient_prescription_path(@prescription.patient), :class => '_button _small'                  
+            = link_to 'New Lab Request', new_physician_patient_diagnostic_path(@prescription.patient, anchor: "lab"), :class => '_button _small'                  
+            = link_to 'New Radiology', new_physician_patient_diagnostic_path(@prescription.patient, anchor: "radiology"), :class => '_button _small'                         
+      
+    - if !@prescription.pharmacy_id.blank? || @prescription.printed? 
+      %p.text-center
+        #{link_to "I am done with #{@prescription.patient.name}", new_physician_patient_path, :class => '_link bold-txt'}    
+      
+    - if @prescription.pharmacy_id.blank? && !@prescription.printed?              
+      .row
+        .col-md-12
+          %span#prescription_set_pharmacy.action._large.pull-right._submit{:tabindex => 0} 
+            Done
+      
+      
+- content_for :after_body do
+  = render :partial => 'partials/modals/verify_contact', :locals => {:patient => @prescription.patient}
+                      

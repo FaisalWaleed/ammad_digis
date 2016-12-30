@@ -1,0 +1,46 @@
+%form#patient_info.profile-info.section{ data: { 'target-form' => 'form#new_prescription' } }
+  %ul
+    %li._name
+      ._section        
+        .input-container._inline
+          %label._full-input
+            %input#prescription_patient_attributes_name._name-field.required{:type => 'text', :name => "patient[name]", :value => (@patient.name rescue nil), :placeholder => 'Type patient name', :tabindex => "1", :autofocus => "autofocus", data: { url: api_v1_search_patients_path, autocomplete: true, 'item-template' => '#patient_ac_item', 'parent' => '._prescription-page'}} 
+            %input#patient_id{:type => "hidden", :name => "prescription[patient_id]", :value => (@patient.id rescue nil)} 
+            .form-helper
+              Please enter the patient's name.             
+    %li._gender
+      ._section._ui-toggle
+        %label._handle._checked{:tabindex => "2"}
+          %span F
+          %input{:type => "radio", :name => 'patient[gender_id]', :value => '1', :checked => 'checked'}
+        %label._handle{:tabindex => "2"} 
+          %span M 
+          %input{:type => "radio", :name => 'patient[gender_id]', :value => '2'}
+            
+    %li._dob
+      ._section
+        .input-container._inline
+          %label._full-input
+            %input.required._date._age{:data => { 'rule' => '0' },:type => 'text', :name => 'patient[date_of_birth]', :placeholder => 'D.O.B', :tabindex => "2", :value => (@patient.date_of_birth rescue nil)} 
+            .form-helper
+              dd/mm/yyyy             
+            
+    %li._address
+      ._section            
+        .input-container._inline
+          %label._full-input
+            %input.required{:type => 'text', :name => 'patient[address]', :placeholder => 'Address', :tabindex => "2", :value => (@patient.address rescue nil)}   
+            .form-helper
+              Please enter the patient's address.             
+    %li._save
+      = link_to 'Save', '#', :class => "action _fill _submit", :id => 'set_patient', :tabindex => "2"        
+      
+      
+- if @patient && @patient.errors.any?
+  .row
+    .col-md-12
+      #notice._msg
+        - @patient.errors.full_messages.each do |msg|
+          %div
+            = msg
+        

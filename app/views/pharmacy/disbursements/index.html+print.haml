@@ -1,0 +1,95 @@
+- content_for :page_title do
+  View Disbursements
+   
+- content_for :client_class, '_showing-full-width' 
+
+.row
+  - @disbursements.each do |dp|
+    .col-md-6.col-xs-6
+      .row
+        .col-md-12
+          .prescription-view
+            ._header
+              .row
+                .col-md-6.col-xs-6
+                  ._title
+                    RX # #{ dp.prescription.identifier }
+                .col-md-6.col-xs-6
+                  ._sub-title
+                    = dp.prescription.ordinal_date   
+
+            ._content
+              .row
+                .col-md-12
+                  .profile-info.section._no-margin
+                    ._section
+                      %span.name
+                        = dp.patient.name
+                    ._section.pull-right                    
+                      %span
+                        %span._age
+                          = dp.patient.age
+                          %span
+                            Y/O
+                        %span.bump._gender 
+                          = dp.patient.gender_abbrev
+                    .row
+                      .col-md-12
+                        ._body.focused
+                          .row
+                            .col-md-12
+                              %div
+                                = dp.patient.address_street_1
+                            .col-md-12
+                              %div
+                                = dp.patient.phone_primary
+                              %div
+                                = dp.patient.email_primary
+                                  
+              .row
+                .col-md-12
+                  .section
+                    ._body             
+                      %table.table.table-item
+                        %tbody
+                          %tr
+                            %td
+                              - unless dp.prescript.free_flow?
+                                #{dp.prescript.strfrx}
+                                - unless dp.prescript.free_flow_details.blank?
+                                  \- #{dp.prescript.free_flow_details}                                  
+                              - else 
+                                #{dp.prescript.free_flow_details}  
+                              - unless dp.prescript.repeating?
+                                %strong 
+                                  Repeat: 
+                                  = dp.prescript.repeat_max
+                                
+                                %div
+                                  = dp.annotation
+                                  %br
+                                  %span.italic-txt
+                                    #{dp.created_at.strftime('%d/%m/%Y')} by #{dp.pharmacist.name} (#{ dp.pharmacy.name })                                                         
+
+              .row
+                .col-md-12
+                  ._title Physician:
+                  .section
+                    ._fc-wrap
+                      %h4
+                        Dr. #{dp.physician.name}
+                      %div
+                        reg # #{dp.physician.reg_num}                        
+
+                .col-md-12
+                  .section
+                    .focused._no-margin
+                      .row                       
+                        .col-md-12
+                          %div
+                            #{ dp.physician.phone_primary }
+                          %div
+                            #{ dp.physician.email_primary }
+
+                                
+  

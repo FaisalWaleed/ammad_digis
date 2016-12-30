@@ -1,0 +1,2 @@
+module Technician::MessagesHelper
+end

@@ -1,0 +1,2 @@
+module Technician::ProfileHelper
+end

@@ -1,0 +1,2 @@
+module Technician::DiagnosticsHelper
+end

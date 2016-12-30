@@ -1,0 +1,42 @@
+!!!
+%html
+  %head
+    %script{:src => "https://use.typekit.net/ddt7bah.js"}
+    :javascript
+      try{Typekit.load({ async: true });}catch(e){}  
+    %title
+      Digiscripts | #{yield :page_title}
+      
+    = stylesheet_link_tag    'application', media: 'screen', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'theme/css/print', media: 'print', 'data-turbolinks-track' => true     
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    /[if lt IE 9]  
+      = javascript_include_tag 'lib_ie/svg', 'data-turbolinks-track' => true       
+      = javascript_include_tag 'lib_ie/html5shiv-printshiv', 'data-turbolinks-track' => true 
+      = javascript_include_tag 'lib_ie/respond', 'data-turbolinks-track' => true          
+    = csrf_meta_tags
+  %body.dg
+    = render :partial => 'partials/no_script'   
+    #auth-ui{:class => (yield :client_class)}        
+      #auth-header                      
+        #auth-heading
+      #auth-body
+        #auth-content
+          .content-wrap              
+            = yield
+            
+        = yield :append_body                         
+    = yield :after_body
+    /[if lt IE 9]
+      = javascript_include_tag 'lib_ie/rem.min'   
+    /[if lt IE 10]      
+      = javascript_include_tag 'lib_ie/placeholder' 
+    :javascript
+      (function($) {
+        $(document).ready(function(){
+          window.print();
+        });
+      })(jQuery);      
+
+  
+

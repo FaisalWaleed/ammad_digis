@@ -100,19 +100,15 @@
                     %li
                       = link_to 'Profile', profile_patient_dashboard_index_path
                     %li
-                      %a{:href => "javascript:;"}
-                        %span.badge.bg-red.pull-right 50%
-                        %span Settings
-                    %li
-                      %a{:href => "javascript:;"} Help
+                      = link_to 'Profile', permissions_patient_dashboard_index_path
                     %li
                       = link_to patient_logout_path do
                         %i.fa.fa-sign-out.pull-right
                         Log Out
                 %li.dropdown{:role => "presentation"}
-                  %a.dropdown-toggle.info-number{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "javascript:;"}
-                    %i.fa.fa-envelope-o
-                    %span.badge.bg-green 6
+                  / %a.dropdown-toggle.info-number{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "javascript:;"}
+                  /   %i.fa.fa-envelope-o
+                  /   %span.badge.bg-green 6
                   %ul#menu1.dropdown-menu.list-unstyled.msg_list.animated.fadeInDown{:role => "menu"}
                     %li
                       %a
